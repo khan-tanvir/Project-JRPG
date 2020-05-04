@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class scriptAudioManager : MonoBehaviour
 {
-    // TODO: Make this in to a singleton class or something similar so that it could be used through all scenes
+    public AudioMixer audioMixer;
+
+    public void SetMasterVolume (float volume)
+    {
+        audioMixer.SetFloat("Master Volume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("Music Volume", volume);
+    }
 
     // Hold reference to this object
     public scriptAudioManager audioManager;
@@ -25,6 +35,7 @@ public class scriptAudioManager : MonoBehaviour
         foreach (scriptSound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
+            sound.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups(sound.audioType)[0];
             sound.source.clip = sound.clip;
             sound.source.name = sound.name;
             sound.source.volume = sound.volume;
