@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 
 public class scriptGameData : MonoBehaviour
@@ -12,7 +11,7 @@ public class scriptGameData : MonoBehaviour
     public static scriptGameData gameData;
 
     // Variables to save
-    public float name;
+    public float playerName;
     public float health;
     public float experience;
     public float[] position = new float[3];

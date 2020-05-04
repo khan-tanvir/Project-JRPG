@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioManager: {fileID: 0}
   sounds:
-  - clip: {fileID: 0}
-    name: 
-    volume: 0
+  - clip: {fileID: 8300000, guid: 776d10120bc5e8a4ab51405a59c8d43f, type: 3}
+    name: Theme
+    volume: 0.183
     mute: 0
     source: {fileID: 0}
