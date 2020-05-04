@@ -11,7 +11,7 @@ public class scriptPlayer : MonoBehaviour
 
     public Animator animator;
 
-    Vector2 position;
+    Vector2 direction;
 
     void Start()
     {
@@ -21,18 +21,17 @@ public class scriptPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        position.x = Input.GetAxisRaw("Horizontal");
-        position.y = Input.GetAxisRaw("Vertical");
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.y = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("Horizontal", position.x);
-        animator.SetFloat("Vertical", position.y);
-        animator.SetFloat("Speed", position.sqrMagnitude);
+        animator.SetFloat("Horizontal", direction.x);
+        animator.SetFloat("Vertical", direction.y);
+        animator.SetFloat("Speed", direction.sqrMagnitude);
     }
 
     // Separate physics from update func
     void FixedUpdate()
     {
-        
-        rigidBody2D.MovePosition(rigidBody2D.position + (Time.fixedDeltaTime * movementSpeed * position));
+        rigidBody2D.MovePosition(rigidBody2D.position + (Time.fixedDeltaTime * movementSpeed * direction));
     }
 }
