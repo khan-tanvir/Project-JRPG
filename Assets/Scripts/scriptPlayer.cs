@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class scriptPlayer : MonoBehaviour
 {
@@ -11,15 +8,15 @@ public class scriptPlayer : MonoBehaviour
 
     public Animator animator;
 
-    Vector2 direction;
+    private Vector2 direction;
 
-    void Start()
+    private void Start()
     {
         // Blank because not needed
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
@@ -30,7 +27,7 @@ public class scriptPlayer : MonoBehaviour
     }
 
     // Separate physics from update func
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         rigidBody2D.MovePosition(rigidBody2D.position + (Time.fixedDeltaTime * movementSpeed * direction));
     }

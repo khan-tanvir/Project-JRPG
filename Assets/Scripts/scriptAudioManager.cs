@@ -1,12 +1,18 @@
-﻿using UnityEngine.Audio;
-using System;
+﻿using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class scriptAudioManager : MonoBehaviour
 {
+    // TODO: Fade-In and Fade-Out
+    // TODO: Sound Effects
+    
     public AudioMixer audioMixer;
 
-    public void SetMasterVolume (float volume)
+    // Store which music is playing
+    public string currentMusic;
+
+    public void SetMasterVolume(float volume)
     {
         audioMixer.SetFloat("Master Volume", volume);
     }
@@ -31,7 +37,7 @@ public class scriptAudioManager : MonoBehaviour
         }
         else if (audioManager != null)
             Destroy(audioManager);
-        
+
         foreach (scriptSound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -49,9 +55,17 @@ public class scriptAudioManager : MonoBehaviour
         return soundToFind;
     }
 
-    public void Play(string name)
+    public void PlayMusic(string name)
     {
-        Find(name).source.Play();
+        if (!IsPlaying(name))
+        {
+            // Stop the current music before playing requested music
+            if (!string.IsNullOrEmpty(currentMusic))
+                StopMusic(currentMusic);
+
+            Find(name).source.Play();
+            currentMusic = name;
+        }
     }
 
     public bool IsPlaying(string name)
@@ -62,20 +76,31 @@ public class scriptAudioManager : MonoBehaviour
             return false;
     }
 
-    public void ToggleLoop(string name)
+    public void EnableMusicLoop()
+    {
+        Find(currentMusic).source.loop = true;
+    }
+
+    public void DisableMusicLoop()
+    {
+        Find(currentMusic).source.loop = false;
+    }
+
+    public void StopMusic(string name)
     {
         if (Find(name).source != null)
         {
-            Find(name).source.loop = !Find(name).source.loop;
+            if (Find(name).source.isPlaying)
+            {
+                Find(name).source.Stop();
+                currentMusic = "";
+            }
         }
     }
 
-    public void Stop(string name)
+    public void StopCurrentMusic()
     {
-        if (Find(name).source != null)
-        { 
-            if (Find(name).source.isPlaying)
-                Find(name).source.Stop();
-        }
+        if (Find(currentMusic).source.isPlaying)
+            Find(currentMusic).source.Stop();
     }
 }
