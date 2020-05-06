@@ -3,6 +3,7 @@
 public class InventoryUI : MonoBehaviour
 {
     public Transform itemParents;
+    public GameObject inventoryUI;
 
     Inventory inventory;
 
@@ -16,6 +17,14 @@ public class InventoryUI : MonoBehaviour
         Slots = itemParents.GetComponentsInChildren<InventorySlot>();
     }
     // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetButtonDown("Inventory"))
+        {
+            inventoryUI.SetActive(!inventoryUI.activeSelf);
+        }
+        
+    }
     void UpdateUI()
     {
         for (int i = 0; i<Slots.Length; i++)

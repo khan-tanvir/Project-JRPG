@@ -7,4 +7,9 @@ public class Item : ScriptableObject
     new public string name = "New Item"; // This will allow you to give it a name
     public Sprite Icon = null; // give it an icon 
     public bool isDefaultItme = false;
+
+    public virtual void Use()
+    {
+        Debug.Log("Using " + name);
+    }
 }
