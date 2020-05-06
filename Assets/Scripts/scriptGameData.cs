@@ -80,8 +80,8 @@ public class scriptGameData : MonoBehaviour
         else if (gameData != this)
             Destroy(gameObject);
 
-        if (SceneManager.GetActiveScene().path == SceneManager.GetSceneByBuildIndex(0).path)
-            CheckAllFiles();
+        //if (SceneManager.GetActiveScene().path == SceneManager.GetSceneByBuildIndex(0).path)
+        //    CheckAllFiles();
     }
 
     private void Start()
