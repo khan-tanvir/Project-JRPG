@@ -1,5 +1,4 @@
-﻿using UnityEngine.Audio;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class scriptSound
@@ -11,7 +10,7 @@ public class scriptSound
     public string name;
 
     [Range(0.0f, 1.0f)]
-    public float volume = 1.0f;
+    public float volume;
 
     public string audioType;
 
