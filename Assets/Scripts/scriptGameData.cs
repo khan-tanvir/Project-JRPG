@@ -59,6 +59,16 @@ public class scriptGameData : MonoBehaviour
         get { return _existingSaveFiles; }
     }
 
+    public float MasterVolume
+    {
+        get { return PlayerPrefs.GetFloat("Master Volume"); }
+    }
+
+    public float MusicVolume
+    {
+        get { return PlayerPrefs.GetFloat("Music Volume"); }
+    }
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -70,7 +80,17 @@ public class scriptGameData : MonoBehaviour
         else if (gameData != this)
             Destroy(gameObject);
 
-        CheckAllFiles();
+        if (SceneManager.GetActiveScene().path == SceneManager.GetSceneByBuildIndex(0).path)
+            CheckAllFiles();
+    }
+
+    private void Start()
+    {
+        if (PlayerPrefs.GetFloat("Master Volume", 0.8f) < 0.0001f || float.IsNaN(PlayerPrefs.GetFloat("Master Volume")))
+            PlayerPrefs.SetFloat("Master Volume", 0.8f);
+
+        if (PlayerPrefs.GetFloat("Music Volume", 0.8f) < 0.0001f || float.IsNaN(PlayerPrefs.GetFloat("Music Volume")))
+            PlayerPrefs.SetFloat("Music Volume", 0.8f);
     }
 
     public void CreateData(int pos)
@@ -135,7 +155,10 @@ public class scriptGameData : MonoBehaviour
 
         Debug.Log("Loading Save File " + pos);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // Stop music before changing scenes
+        FindObjectOfType<scriptAudioManager>().StopCurrentMusic();
+
+        FindObjectOfType<scriptSceneManager>().SceneToGoTo("Game");
     }
 
     public void ButtonPressed()
@@ -230,14 +253,13 @@ public class scriptGameData : MonoBehaviour
             if (File.Exists(Application.persistentDataPath + "/playerInfo" + i + ".dat"))
             {
                 _existingSaveFiles[i] = 1;
-                GameObject.Find("FileMenu").transform.Find("SaveFile" + (i + 1) + "Name").GetComponent<TMP_Text>().text = DisplayName(i);
+                GameObject.Find("Canvas").transform.Find("FileMenu").transform.Find("SaveFile" + (i + 1) + "Name").GetComponent<TMP_Text>().text = DisplayName(i);
             }
             else
             {
                 _existingSaveFiles[i] = 0;
                 GameObject.Find("FileMenu").transform.Find("SaveFile" + (i + 1) + "Name").GetComponent<TMP_Text>().text = "[BLANK]";
-            }
-                
+            }   
         }
 
         _currentSaveFile = -1;
@@ -256,6 +278,27 @@ public class scriptGameData : MonoBehaviour
 
         // Load the variables
         return data.PlayerName;
+    }
+
+    public void ClearData()
+    {
+        // This function will be called when the player goes back to main menu from the game scene
+        PlayerName = "";
+        PlayerPosition = new float[2];
+        PlayerQuestProgress = 0;
+        _currentSaveFile = -1;
+    }
+
+    public void SaveMasterVolumeValue(float value)
+    {
+        // Called everytime the user changes the master volume slider
+        PlayerPrefs.SetFloat("Master Volume", value);
+    }
+
+    public void SaveMusicVolumeValue(float value)
+    {
+        // Called everytime the user changes the master volume slider
+        PlayerPrefs.SetFloat("Music Volume", value);
     }
 }
 

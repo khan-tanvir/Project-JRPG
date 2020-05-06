@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class scriptAudioManager : MonoBehaviour
 {
@@ -10,23 +11,22 @@ public class scriptAudioManager : MonoBehaviour
     public AudioMixer audioMixer;
 
     // Store which music is playing
-    public string currentMusic;
+    [SerializeField]
+    private string currentMusic;
 
-    public void SetMasterVolume(float volume)
-    {
-        audioMixer.SetFloat("Master Volume", volume);
-    }
+    [SerializeField]
+    private Slider _masterSlider;
 
-    public void SetMusicVolume(float volume)
-    {
-        audioMixer.SetFloat("Music Volume", volume);
-    }
+    [SerializeField]
+    private Slider _musicSlider;
 
     // Hold reference to this object
-    public scriptAudioManager audioManager;
+    public static scriptAudioManager audioManager;
 
     // Array that stores all sounds
     public scriptSound[] sounds;
+
+    public bool _isInitialised = false;
 
     private void Awake()
     {
@@ -47,6 +47,27 @@ public class scriptAudioManager : MonoBehaviour
             sound.source.volume = sound.volume;
             sound.source.mute = sound.mute;
         }
+
+        // Countering a bug that changes the name to the 2nd element of sounds
+        gameObject.name = "AudioManager";
+
+    }
+
+    public void Start()
+    {
+        _masterSlider.value = FindObjectOfType<scriptGameData>().MasterVolume;
+        _musicSlider.value = FindObjectOfType<scriptGameData>().MusicVolume;
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        // Using log10 for a better slider
+        audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20.0f);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("Music Volume", Mathf.Log10(volume) * 20.0f);
     }
 
     public scriptSound Find(string name)
