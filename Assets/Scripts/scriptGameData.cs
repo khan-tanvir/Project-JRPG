@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -6,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using ReadOnlyAttribute = Unity.Collections.ReadOnlyAttribute;
 
 public class scriptGameData : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class scriptGameData : MonoBehaviour
     // Variables to save
     private string _playerName;
 
-    private float[] _position;
+    private float[] _position = new float[2];
 
     // TODO: Revisit this if we are not going with linear progression
     private int _questProgress;
@@ -66,7 +68,7 @@ public class scriptGameData : MonoBehaviour
             gameData = this;
         }
         else if (gameData != this)
-            Destroy(gameData);
+            Destroy(gameObject);
 
         CheckAllFiles();
     }
@@ -105,6 +107,8 @@ public class scriptGameData : MonoBehaviour
         binaryFormatter.Serialize(fileStream, playerData);
 
         fileStream.Close();
+
+        Debug.Log("Player data has been saved");
     }
 
     public void LoadData(int pos)

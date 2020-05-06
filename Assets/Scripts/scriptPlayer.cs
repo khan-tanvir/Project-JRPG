@@ -24,6 +24,10 @@ public class scriptPlayer : MonoBehaviour
         animator.SetFloat("Horizontal", direction.x);
         animator.SetFloat("Vertical", direction.y);
         animator.SetFloat("Speed", direction.sqrMagnitude);
+
+        string h = FindObjectOfType<scriptGameData>().PlayerName;
+        Debug.Log("Your name is " + FindObjectOfType<scriptGameData>().PlayerName);
+        
     }
 
     // Separate physics from update func

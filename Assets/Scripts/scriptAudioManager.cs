@@ -36,7 +36,7 @@ public class scriptAudioManager : MonoBehaviour
             audioManager = this;
         }
         else if (audioManager != null)
-            Destroy(audioManager);
+            Destroy(gameObject);
 
         foreach (scriptSound sound in sounds)
         {
