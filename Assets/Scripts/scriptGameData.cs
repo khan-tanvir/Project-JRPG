@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -163,16 +164,17 @@ public class scriptGameData : MonoBehaviour
 
     public void ButtonPressed()
     {
-        switch (EventSystem.current.currentSelectedGameObject.name)
+        GameObject buttonObject = EventSystem.current.currentSelectedGameObject;
+        GameObject fileMenu = GameObject.Find("Canvas").transform.Find("File Menu").gameObject;
+        GameObject fileCreationMenu = GameObject.Find("Canvas").transform.Find("File Creation Menu").gameObject;
+
+        switch (buttonObject.name)
         {
-            case "File1Button":
+            case "File 1 Button":
                 if (_existingSaveFiles[0] == 0)
                 {
-                    // FileMenu GameObject
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
-
-                    // FileCreationMenu GameObject
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.transform.parent.Find("FileCreationMenu").gameObject.SetActive(true);
+                    fileMenu.SetActive(false);
+                    fileCreationMenu.SetActive(true);
 
                     //Track the save file
                     _currentSaveFile = 0;
@@ -181,14 +183,11 @@ public class scriptGameData : MonoBehaviour
                     LoadData(0);
                 break;
 
-            case "File2Button":
+            case "File 2 Button":
                 if (_existingSaveFiles[1] == 0)
                 {
-                    // FileMenu GameObject
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
-
-                    // FileCreationMenu GameObject
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.transform.parent.Find("FileCreationMenu").gameObject.SetActive(true);
+                    fileMenu.SetActive(false);
+                    fileCreationMenu.SetActive(true);
 
                     //Track the save file
                     _currentSaveFile = 1;
@@ -197,14 +196,11 @@ public class scriptGameData : MonoBehaviour
                     LoadData(1);
                 break;
 
-            case "File3Button":
+            case "File 3 Button":
                 if (_existingSaveFiles[2] == 0)
                 {
-                    // FileMenu GameObject
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
-
-                    // FileCreationMenu GameObject
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.transform.parent.Find("FileCreationMenu").gameObject.SetActive(true);
+                    fileMenu.SetActive(false);
+                    fileCreationMenu.SetActive(true);
 
                     //Track the save file
                     _currentSaveFile = 2;
@@ -212,9 +208,28 @@ public class scriptGameData : MonoBehaviour
                 else
                     LoadData(2);
                 break;
-
-            case "ConfirmButton":
-                string input = EventSystem.current.currentSelectedGameObject.transform.parent.GetComponentInChildren<TMP_InputField>().text;
+            // TODO: Find a better way to do this
+            case "Delete File 1 Button":
+                if (_existingSaveFiles[0] == 1)
+                {
+                    DeleteData(0);
+                }
+                break;
+            case "Delete File 2 Button":
+                if (_existingSaveFiles[1] == 1)
+                {
+                    DeleteData(1);
+                }
+                break;
+            case "Delete File 3 Button":
+                if (_existingSaveFiles[2] == 1)
+                {
+                    DeleteData(2);
+                }
+                break;
+            case "Confirm Button":
+                // Get text component of File Creation Menu's InputField child
+                string input = fileCreationMenu.GetComponentInChildren<TMP_InputField>().text;
                 // Input Validation
                 if (string.IsNullOrEmpty(input))
                 {
@@ -234,9 +249,8 @@ public class scriptGameData : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Hello " + input);
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.transform.parent.Find("FileMenu").gameObject.SetActive(true);
-                    EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
+                    fileMenu.SetActive(true);
+                    fileCreationMenu.SetActive(false);
                     _playerName = input;
                     Debug.Log("Player name is " + _playerName);
 
@@ -248,17 +262,22 @@ public class scriptGameData : MonoBehaviour
 
     public void CheckAllFiles()
     {
+        // Small Optimisation
+        Transform fileMenu = GameObject.Find("File Menu").transform;
+
         for (int i = 0; i < 3; i++)
         {
+            TMP_Text temp = fileMenu.Find("File " + (i + 1) + " Text").GetComponent<TMP_Text>();
+
             if (File.Exists(Application.persistentDataPath + "/playerInfo" + i + ".dat"))
             {
                 _existingSaveFiles[i] = 1;
-                GameObject.Find("Canvas").transform.Find("FileMenu").transform.Find("SaveFile" + (i + 1) + "Name").GetComponent<TMP_Text>().text = DisplayName(i);
+                temp.text = DisplayName(i);
             }
             else
             {
                 _existingSaveFiles[i] = 0;
-                GameObject.Find("FileMenu").transform.Find("SaveFile" + (i + 1) + "Name").GetComponent<TMP_Text>().text = "[BLANK]";
+                temp.text = "[BLANK]";
             }   
         }
 
@@ -287,6 +306,12 @@ public class scriptGameData : MonoBehaviour
         PlayerPosition = new float[2];
         PlayerQuestProgress = 0;
         _currentSaveFile = -1;
+    }
+
+    public void  DeleteData(int pos)
+    {
+        File.Delete(Application.persistentDataPath + "/playerInfo" + pos + ".dat");
+        CheckAllFiles();
     }
 
     public void SaveMasterVolumeValue(float value)
