@@ -18,19 +18,25 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
-    public int space = 20;
+    public delegate void OnItemChange();
+    public OnItemChange onItemChangeCallback;
+
+    public int space = 20; // number of slot avaible in Inventory
 
     public List<Item> items = new List<Item>();
     public bool Add (Item item)
     {
         if (!item.isDefaultItme)
         {
-            if (items.Count >= space)
+            if (items.Count >= space) // checks if the number within the list more than or eqaul the same as the space varaible 
             {
-                Debug.Log("Not enough room");
+                Debug.Log("Not enough room"); // if so the player can't add items 
                 return false; 
             }
-            items.Add(item);
+            items.Add(item); // else this will allow the item to be added
+            
+            if (onItemChangeCallback != null)
+            onItemChangeCallback.Invoke();
         }
         return true;
     }
@@ -38,5 +44,8 @@ public class Inventory : MonoBehaviour
     public void Removed(Item item)
     {
         items.Remove(item);
+
+        if (onItemChangeCallback != null)
+            onItemChangeCallback.Invoke();  
     }
 }

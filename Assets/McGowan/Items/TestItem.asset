@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb24e45d1155984c988207538c370d1, type: 3}
   m_Name: TestItem
   m_EditorClassIdentifier: 
-  name: Helemt
+  name: Sword
   Icon: {fileID: 0}
   isDefaultItme: 0
