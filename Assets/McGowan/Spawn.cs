@@ -14,7 +14,7 @@ public class Spawn : MonoBehaviour
 
     public void SpawnDroppedItem()
     {
-        Vector2 playerPos = new Vector2(Player.position.x , Player.position.y + 1);
+        Vector2 playerPos = new Vector2(Player.position.x + Random.Range(-1, 1), Player.position.y + Random.Range(-1, 1));
         Instantiate(item, playerPos, Quaternion.identity);
     }
 }
