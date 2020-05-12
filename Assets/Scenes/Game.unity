@@ -3195,10 +3195,11 @@ MonoBehaviour:
     _target: {fileID: 0}
     _information: 
   deliverObjectives:
-  - _item: Hentai
+  - _item: Tesco
     _targetName: John
     _targetRB: {fileID: 0}
-  activateObjectives: []
+  activateObjectives:
+  - _information: You need to do something
   searchObjectives: []
 --- !u!1 &1890210791
 GameObject:
