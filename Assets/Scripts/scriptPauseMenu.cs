@@ -47,6 +47,6 @@ public class scriptPauseMenu : MonoBehaviour
 
     void SavePlayerProgress()
     {
-        FindObjectOfType<scriptGameData>().SaveData();
+        scriptGameData.gameData.SaveData();
     }
 }

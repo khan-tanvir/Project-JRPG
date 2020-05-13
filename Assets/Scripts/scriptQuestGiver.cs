@@ -49,7 +49,7 @@ public class scriptQuestGiver : MonoBehaviour
         {
             for (int i = 0; i < gatherObjectives.Count; i++)
             {
-                CreateDefaultDescription(gatherObjectives[i]);
+                _questManager.UpdateDescription(gatherObjectives[i]);
                 quest.Objectives.Add(gatherObjectives[i]);
             }
         }
@@ -58,7 +58,7 @@ public class scriptQuestGiver : MonoBehaviour
         {
             for (int i = 0; i < escortObjectives.Count; i++)
             {
-                CreateDefaultDescription(escortObjectives[i]);
+                _questManager.UpdateDescription(escortObjectives[i]);
                 quest.Objectives.Add(escortObjectives[i]);
             }
         }
@@ -67,7 +67,7 @@ public class scriptQuestGiver : MonoBehaviour
         {
             for (int i = 0; i < deliverObjectives.Count; i++)
             {
-                CreateDefaultDescription(deliverObjectives[i]);
+                _questManager.UpdateDescription(deliverObjectives[i]);
                 quest.Objectives.Add(deliverObjectives[i]);
             }
         }
@@ -76,7 +76,6 @@ public class scriptQuestGiver : MonoBehaviour
         {
             for (int i = 0; i < activateObjectives.Count; i++)
             {
-                CreateDefaultDescription(activateObjectives[i]);
                 quest.Objectives.Add(activateObjectives[i]);
             }
         }
@@ -85,43 +84,8 @@ public class scriptQuestGiver : MonoBehaviour
         {
             for (int i = 0; i < searchObjectives.Count; i++)
             {
-                CreateDefaultDescription(searchObjectives[i]);
                 quest.Objectives.Add(searchObjectives[i]);
             }
         }
-    }
-
-    private void CreateDefaultDescription(scriptsObjective objective)
-    {
-        if (objective.Information != "")
-            return;
-
-        // If a description is not set in the inspector
-        switch (objective.ObjectiveType)
-            {
-                // Cast the objective as it's type and then work from that stored variable
-                case GoalType.GATHER:
-                    var gatherCast = (GatherObjective)objective;
-                    gatherCast.Information = "Gather [" + gatherCast.Type + "]  " + gatherCast.CurrentAmount.ToString() + "/" + gatherCast.RequiredAmount.ToString(); 
-                    break;
-                case GoalType.ESCORT:
-                    var escortCast = (EscortObjective)objective;
-                    escortCast.Information = "Escort [" + escortCast.FollowerName + "] to [" + escortCast.TargetName + "]"; 
-                    break;
-                case GoalType.DELIVER:
-                    var deliverCast = (DeliverObjective)objective;
-                    deliverCast.Information = "Take [" + deliverCast.Item + "] to [" + deliverCast.TargetName + "]";
-                    break;
-                // The following two types should have a custom description
-                case GoalType.ACTIVATE:
-                Debug.LogError("You haven't set a description for " + objective);
-                    break;
-                case GoalType.SEARCH:
-                Debug.LogError("You haven't set a description for " + objective);
-                    break;
-                default:
-                Debug.LogError("Objective doesn't have a type.");
-                    break;
-            }
     }
 }

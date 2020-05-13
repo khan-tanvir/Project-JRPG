@@ -157,9 +157,9 @@ public class scriptGameData : MonoBehaviour
         Debug.Log("Loading Save File " + pos);
 
         // Stop music before changing scenes
-        FindObjectOfType<scriptAudioManager>().StopCurrentMusic();
+        scriptAudioManager.audioManager.StopCurrentMusic();
 
-        FindObjectOfType<scriptSceneManager>().SceneToGoTo("Game");
+        SceneManager.LoadScene(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/Game.unity"));
     }
 
     public void ButtonPressed()

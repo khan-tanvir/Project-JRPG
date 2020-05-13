@@ -55,8 +55,8 @@ public class scriptAudioManager : MonoBehaviour
 
     public void Start()
     {
-        _masterSlider.value = FindObjectOfType<scriptGameData>().MasterVolume;
-        _musicSlider.value = FindObjectOfType<scriptGameData>().MusicVolume;
+        _masterSlider.value = scriptGameData.gameData.MasterVolume;
+        _musicSlider.value = scriptGameData.gameData.MusicVolume;
     }
 
     public void SetMasterVolume(float volume)
@@ -92,7 +92,9 @@ public class scriptAudioManager : MonoBehaviour
     public bool IsPlaying(string name)
     {
         if (Find(name).source.isPlaying)
+        {
             return true;
+        }
         else
             return false;
     }

@@ -28,7 +28,7 @@ public class scriptQuestMB : MonoBehaviour
     public void OnClick()
     {
         GetComponent<TMP_Text>().color = Color.yellow;
-        FindObjectOfType<scriptQuestManager>().ShowDescription(Quest);
+        scriptQuestManager._questManager.ShowDescription(Quest);
     }
 
     public void OnDeselect()

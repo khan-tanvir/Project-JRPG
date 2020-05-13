@@ -40,10 +40,15 @@ public class scriptQuestManager : MonoBehaviour
         temp.Quest = quest;
 
         questObject.GetComponent<TMP_Text>().text = quest.Title;
+
+        SubscribeToEvent(quest);
     }
 
     public void ShowDescription(scriptQuest quest)
     {
+        if (quest == null)
+            return;
+
         if (currentSelectedQuest != null && currentSelectedQuest != quest)
         {
             currentSelectedQuest.QuestMB.OnDeselect();
@@ -63,5 +68,48 @@ public class scriptQuestManager : MonoBehaviour
         string textToDisplay = string.Format("{0}\n\n<size=25>{1}</size><size=20>{2}</size>", currentSelectedQuest.Title, currentSelectedQuest.Description, objectives);
 
         _descriptionPanel.text = textToDisplay;
+    }
+
+    public void SubscribeToEvent(scriptQuest quest)
+    {
+        foreach (GatherObjective gather in quest.Objectives)
+        {
+            scriptGameEvents._gameEvents.onGatherObjectiveChange += gather.UpdateCurrentAmount;
+            scriptGameEvents._gameEvents.GatherObjectiveChange(gather.Type);
+            UpdateDescription(gather);
+        }
+    }
+
+    public void UpdateDescription(scriptsObjective objective)
+    {
+        // If a description is not set in the inspector
+        switch (objective.ObjectiveType)
+        {
+            // Cast the objective as it's type and then work from that stored variable
+            case GoalType.GATHER:
+                var gatherCast = (GatherObjective)objective;
+                gatherCast.Information = "Gather [" + gatherCast.Type + "]  " + gatherCast.CurrentAmount.ToString() + "/" + gatherCast.RequiredAmount.ToString();
+                break;
+            case GoalType.ESCORT:
+                var escortCast = (EscortObjective)objective;
+                escortCast.Information = "Escort [" + escortCast.FollowerName + "] to [" + escortCast.TargetName + "]";
+                break;
+            case GoalType.DELIVER:
+                var deliverCast = (DeliverObjective)objective;
+                deliverCast.Information = "Take [" + deliverCast.Item + "] to [" + deliverCast.TargetName + "]";
+                break;
+            // The following two types should have a custom description
+            case GoalType.ACTIVATE:
+                Debug.LogError("You haven't set a description for " + objective);
+                break;
+            case GoalType.SEARCH:
+                Debug.LogError("You haven't set a description for " + objective);
+                break;
+            default:
+                Debug.LogError("Objective doesn't have a type.");
+                break;
+        }
+
+        ShowDescription(currentSelectedQuest);
     }
 }

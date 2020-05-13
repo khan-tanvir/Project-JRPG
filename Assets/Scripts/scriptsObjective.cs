@@ -90,8 +90,17 @@ public class GatherObjective : scriptsObjective
         set { _requiredAmount = value; }
     }
 
-    public override bool Evaluate()
+    public void UpdateCurrentAmount(string item)
     {
+        if (string.Equals(item, _type, StringComparison.OrdinalIgnoreCase))
+        {
+            _currentAmount = scriptInventory._inventory.GetItemCount(_type);
+            scriptQuestManager._questManager.UpdateDescription(this);
+        }
+    }
+
+    public override bool Evaluate()
+    {   
         return (_currentAmount >= _requiredAmount);
     }
 
