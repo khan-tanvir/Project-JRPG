@@ -9,21 +9,38 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> lines;
 
+    private string[] previousLines;
+
     public Text nameText;
 
     public Text dialogueText;
 
+    public Image sprite;
+
+    private int lineCount;
+
+    private int prevLineCount;
+
+    private Dialogue tempDialogueCheck;
+
     // Start is called before the first frame update
     void Start()
     {
+        lineCount = 0;
         lines = new Queue<string>();
     }
 
     public void StartConversation(Dialogue dialogue)
     {
-        animator.SetBool("isActive",true);
+        tempDialogueCheck = dialogue;
+
+        animator.SetBool("isActive", true);
 
         nameText.text = dialogue.name;
+
+        lineCount = 0;
+
+        sprite.sprite = dialogue.sprite[lineCount];
 
         lines.Clear();
 
@@ -31,17 +48,57 @@ public class DialogueManager : MonoBehaviour
         {
             lines.Enqueue(line);
         }
+        previousLines = new string[lines.Count];
         DisplayText();
+    }
+
+    public void PreviousText()
+    {
+        if (prevLineCount == 0)
+        {
+            return;
+        }
+        else
+        {
+            prevLineCount -= 1;
+            sprite.sprite = tempDialogueCheck.sprite[prevLineCount];
+            dialogueText.text = previousLines[prevLineCount];
+            dialogueText.color = Color.blue;
+        }
+    }
+
+    public void ForwardText()
+    {
+        if (prevLineCount+1 == lineCount)
+        {
+            dialogueText.color = Color.black;
+            return;
+        }
+        else
+        {
+            prevLineCount += 1;
+            sprite.sprite = tempDialogueCheck.sprite[prevLineCount];
+            dialogueText.text = previousLines[prevLineCount];
+            dialogueText.color = Color.blue;
+        }
     }
 
     public void DisplayText()
     {
-        if(lines.Count==0)
+        if (lines.Count==0)
         {
+            lineCount = 0;
             EndDialogue();
             return;
         }
+        else
+        {
+            sprite.sprite = tempDialogueCheck.sprite[lineCount];
+            lineCount +=1;
+            prevLineCount = lineCount-1;
+        }
         string line = lines.Dequeue();
+        previousLines[lineCount-1] = line;
         StopAllCoroutines();
         StartCoroutine(TypeLine(line));
     }
@@ -52,6 +109,7 @@ public class DialogueManager : MonoBehaviour
         foreach(char letter in line.ToCharArray())
         {
             dialogueText.text += letter;
+            dialogueText.color = Color.black;
             yield return null;
         }
     }
