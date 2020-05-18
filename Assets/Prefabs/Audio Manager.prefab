@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e014120cbf5a17a43853450ab46203c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: d28eac0885b914e45945bed1a7447c82, type: 2}
-  currentMusic: 
+  _audioMixer: {fileID: 24100000, guid: d28eac0885b914e45945bed1a7447c82, type: 2}
   _masterSlider: {fileID: 0}
   _musicSlider: {fileID: 0}
   sounds:

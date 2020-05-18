@@ -13,31 +13,25 @@ public class scriptPauseMenu : MonoBehaviour
         get { return _isPaused; }
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            // If game is paused then unpaused it once esc key is pressed
-            if (_isPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    // If game is paused then unpaused it once esc key is pressed
+        //    if (_isPaused)
+        //    {
+        //        Resume();
+        //    }
+        //    else
+        //    {
+        //        Pause();
+        //    }
+        //}
     }
 
-    void Resume()
-    {
-        _pauseMenu.SetActive(false);
-        Time.timeScale = 1.0f;
-        _isPaused = false;
-    }
-
-    void Pause()
+    public void Pause()
     {
         _pauseMenu.SetActive(true);
         // Freeze the game
@@ -45,8 +39,37 @@ public class scriptPauseMenu : MonoBehaviour
         _isPaused = true;
     }
 
-    void SavePlayerProgress()
+    public void Resume()
     {
-        scriptGameData.gameData.SaveData();
+        _pauseMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+        _isPaused = false;
+    }
+
+    public void Toggle()
+    {
+        if (_isPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
+    public void SavePlayerProgress()
+    {
+        // Before saving make sure you have loaded a file first
+
+        // Store the position
+        scriptGameData.GameDataManager.PlayerPosition[0] = FindObjectOfType<scriptPlayer>().rigidBody2D.position.x;
+        scriptGameData.GameDataManager.PlayerPosition[1] = FindObjectOfType<scriptPlayer>().rigidBody2D.position.y;
+
+        Debug.Log("X: " + scriptGameData.GameDataManager.PlayerPosition[0] + " Y: " + scriptGameData.GameDataManager.PlayerPosition[1]);
+
+        scriptInventory.Inventory.SaveInventory();
+
+        scriptGameData.GameDataManager.SaveData();
     }
 }

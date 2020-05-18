@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scriptFileSelection : MonoBehaviour
+public class scriptFileMenu : MonoBehaviour
 {
     // Start is called before the first frame update
-    void OnEnable()
+    private void OnEnable()
     {
         scriptAudioManager.audioManager.PlayMusic("FileSelection");
         scriptAudioManager.audioManager.EnableMusicLoop();

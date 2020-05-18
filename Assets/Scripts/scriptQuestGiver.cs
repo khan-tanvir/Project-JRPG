@@ -8,84 +8,100 @@ public class scriptQuestGiver : MonoBehaviour
 {
     // Reference to the quest manager
     [SerializeField]
-    public scriptQuestManager _questManager;
+    private scriptQuestManager _questManager;
 
     [SerializeField]
-    private List<scriptQuest> quest;
+    private List<scriptQuest> _quests = new List<scriptQuest>();
 
     [SerializeField]
     private GameObject _questPrefab;
 
+    [SerializeField]
+    private GameObject _questGiverPanel;
+
     private bool _questCreated;
 
-    // TODO: I wish I could find a better way to do this but empty array declaration does not take up much memory
-    [SerializeField]
-    private List<GatherObjective> gatherObjectives;
+    private List<scriptsObjective> _objectives = new List<scriptsObjective>();
 
-    [SerializeField]
-    private List<EscortObjective> escortObjectives;
-
-    [SerializeField]
-    private List<DeliverObjective> deliverObjectives;
-
-    [SerializeField]
-    private List<ActivateObjective> activateObjectives;
-
-    [SerializeField]
-    private List<SearchObjective> searchObjectives;
-
+    public List<scriptQuest> Quests
+    {
+        get { return _quests; }
+    }
 
     private void Awake()
     {
-        // DEBUGGING
-        CreateQuest(quest[0]);
-        _questManager.AddQuestToJournal(_questPrefab, quest[0]);
+        foreach (scriptQuest quest in _quests)
+        {
+            AddAllObjectives(quest);
+            CreateQuest(quest);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _questGiverPanel.SetActive(true);
+            _questGiverPanel.GetComponent<scriptQuestGiverPanel>().ShowQuests(this);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _questGiverPanel.SetActive(false);
+        }
+    }
+
+    private void AddAllObjectives(scriptQuest quest)
+    {
+        foreach (GatherObjective obj in quest._gatherObjectives)
+        {
+            _objectives.Add(obj);
+        }
+
+        foreach (EscortObjective obj in quest._escortObjectives)
+        {
+            _objectives.Add(obj);
+        }
+
+        foreach (DeliverObjective obj in quest._deliverObjectives)
+        {
+            _objectives.Add(obj);
+        }
+
+        foreach (ActivateObjective obj in quest._activateObjectives)
+        {
+            _objectives.Add(obj);
+        }
+
+        foreach (SearchObjective obj in quest._searchObjectives)
+        {
+            obj.AssignTrigger();
+            _objectives.Add(obj);
+        }
+
+        ClearObjectives(quest);
     }
 
     public void CreateQuest(scriptQuest quest)
     {
-        // TODO: turn this in to a list
-        if (gatherObjectives != null)
+        foreach (scriptsObjective objective in _objectives)
         {
-            for (int i = 0; i < gatherObjectives.Count; i++)
-            {
-                _questManager.UpdateDescription(gatherObjectives[i]);
-                quest.Objectives.Add(gatherObjectives[i]);
-            }
+            _questManager.UpdateDescription(objective);
         }
 
-        if (escortObjectives != null)
-        {
-            for (int i = 0; i < escortObjectives.Count; i++)
-            {
-                _questManager.UpdateDescription(escortObjectives[i]);
-                quest.Objectives.Add(escortObjectives[i]);
-            }
-        }
+        quest.Objectives.AddRange(_objectives);
+        _objectives.Clear();
+    }
 
-        if (deliverObjectives != null)
-        {
-            for (int i = 0; i < deliverObjectives.Count; i++)
-            {
-                _questManager.UpdateDescription(deliverObjectives[i]);
-                quest.Objectives.Add(deliverObjectives[i]);
-            }
-        }
-
-        if (activateObjectives != null)
-        {
-            for (int i = 0; i < activateObjectives.Count; i++)
-            {
-                quest.Objectives.Add(activateObjectives[i]);
-            }
-        }
-
-        if (searchObjectives != null)
-        {
-            for (int i = 0; i < searchObjectives.Count; i++)
-            {
-                quest.Objectives.Add(searchObjectives[i]);
-            }
-        }
+    private void ClearObjectives(scriptQuest quest)
+    {
+        quest._gatherObjectives = null;
+        quest._activateObjectives = null;
+        quest._searchObjectives = null;
+        quest._escortObjectives = null;
+        quest._deliverObjectives = null;
     }
 }

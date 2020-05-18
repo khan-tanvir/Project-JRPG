@@ -43,3 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd3dc47cfb97f347928beef74b2e927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfInventorySlots: 25
+  playerData:
+    _playerName: 
+    _position:
+    - 0
+    - 0
+    _questProgress: 0
+  _invSlots: []
+  _currentSaveFile: 0

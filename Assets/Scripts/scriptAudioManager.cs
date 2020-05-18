@@ -7,12 +7,12 @@ public class scriptAudioManager : MonoBehaviour
 {
     // TODO: Fade-In and Fade-Out
     // TODO: Sound Effects
-    
-    public AudioMixer audioMixer;
+
+    [SerializeField]
+    private AudioMixer _audioMixer;
 
     // Store which music is playing
-    [SerializeField]
-    private string currentMusic;
+    private string _currentMusic;
 
     [SerializeField]
     private Slider _masterSlider;
@@ -41,7 +41,7 @@ public class scriptAudioManager : MonoBehaviour
         foreach (scriptSound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
-            sound.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups(sound.audioType)[0];
+            sound.source.outputAudioMixerGroup = _audioMixer.FindMatchingGroups(sound.audioType)[0];
             sound.source.clip = sound.clip;
             sound.source.name = sound.name;
             sound.source.volume = sound.volume;
@@ -50,24 +50,26 @@ public class scriptAudioManager : MonoBehaviour
 
         // Countering a bug that changes the name to the 2nd element of sounds
         gameObject.name = "AudioManager";
-
     }
 
     public void Start()
     {
-        _masterSlider.value = scriptGameData.gameData.MasterVolume;
-        _musicSlider.value = scriptGameData.gameData.MusicVolume;
+        if (_masterSlider != null && _musicSlider != null)
+        {
+            _masterSlider.value = scriptGameData.GameDataManager.MasterVolume;
+            _musicSlider.value = scriptGameData.GameDataManager.MusicVolume;
+        }
     }
 
     public void SetMasterVolume(float volume)
     {
         // Using log10 for a better slider
-        audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20.0f);
+        _audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20.0f);
     }
 
     public void SetMusicVolume(float volume)
     {
-        audioMixer.SetFloat("Music Volume", Mathf.Log10(volume) * 20.0f);
+        _audioMixer.SetFloat("Music Volume", Mathf.Log10(volume) * 20.0f);
     }
 
     public scriptSound Find(string name)
@@ -81,11 +83,11 @@ public class scriptAudioManager : MonoBehaviour
         if (!IsPlaying(name))
         {
             // Stop the current music before playing requested music
-            if (!string.IsNullOrEmpty(currentMusic))
-                StopMusic(currentMusic);
+            if (!string.IsNullOrEmpty(_currentMusic))
+                StopMusic(_currentMusic);
 
             Find(name).source.Play();
-            currentMusic = name;
+            _currentMusic = name;
         }
     }
 
@@ -101,12 +103,12 @@ public class scriptAudioManager : MonoBehaviour
 
     public void EnableMusicLoop()
     {
-        Find(currentMusic).source.loop = true;
+        Find(_currentMusic).source.loop = true;
     }
 
     public void DisableMusicLoop()
     {
-        Find(currentMusic).source.loop = false;
+        Find(_currentMusic).source.loop = false;
     }
 
     public void StopMusic(string name)
@@ -116,14 +118,14 @@ public class scriptAudioManager : MonoBehaviour
             if (Find(name).source.isPlaying)
             {
                 Find(name).source.Stop();
-                currentMusic = "";
+                _currentMusic = "";
             }
         }
     }
 
     public void StopCurrentMusic()
     {
-        if (Find(currentMusic).source.isPlaying)
-            Find(currentMusic).source.Stop();
+        if (Find(_currentMusic).source.isPlaying)
+            Find(_currentMusic).source.Stop();
     }
 }

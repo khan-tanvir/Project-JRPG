@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -12,52 +13,61 @@ using ReadOnlyAttribute = Unity.Collections.ReadOnlyAttribute;
 
 public class scriptGameData : MonoBehaviour
 {
-    // Saving and Loading Data
-    // Singleton Class
 
     // Hold reference to this object
-    public static scriptGameData gameData;
+    private static scriptGameData gameData;
 
-    // Variables to save
-    private string _playerName;
+    [SerializeField]
+    private int numberOfInventorySlots = 25;
 
-    private float[] _position = new float[2];
-
-    // TODO: Revisit this if we are not going with linear progression
-    private int _questProgress;
+    [SerializeField]
+    private PlayerData _playerData = null;
 
     // Track if save file exists
     private int[] _existingSaveFiles = { 0, 0, 0 };
 
     // Track current save file
-    private int _currentSaveFile = -1;
+    [SerializeField]
+    private int _currentSaveFile;
+
+    public static scriptGameData GameDataManager
+    {
+        get { return gameData; }
+    }
 
     public int CurrentSaveFile
     {
         get { return _currentSaveFile; }
+        set { _currentSaveFile = value; }
     }
 
     public string PlayerName
     {
-        get { return _playerName; }
-        set { _playerName = value; }
+        get { return _playerData.PlayerName; }
+        set { _playerData.PlayerName = value; }
     }
 
     public float[] PlayerPosition
     {
-        get { return _position; }
-        set { _position = value; }
+        get { return _playerData.PlayerPosition; }
+        set { _playerData.PlayerPosition = value; }
     }
 
     public int PlayerQuestProgress
     {
-        get { return _questProgress; }
-        set { _questProgress = value; }
+        get { return _playerData.PlayerQuestProgress; }
+        set { _playerData.PlayerQuestProgress = value; }
     }
 
     public int[] ExistingSaveFiles
     {
         get { return _existingSaveFiles; }
+    }
+
+    public List<InventoryItem> InventoryItems
+    {
+        get { return _playerData.InventoryItems; }
+        set { _playerData.InventoryItems = value; }
     }
 
     public float MasterVolume
@@ -81,8 +91,7 @@ public class scriptGameData : MonoBehaviour
         else if (gameData != this)
             Destroy(gameObject);
 
-        //if (SceneManager.GetActiveScene().path == SceneManager.GetSceneByBuildIndex(0).path)
-        //    CheckAllFiles();
+        ClearData();
     }
 
     private void Start()
@@ -94,17 +103,17 @@ public class scriptGameData : MonoBehaviour
             PlayerPrefs.SetFloat("Music Volume", 0.8f);
     }
 
-    public void CreateData(int pos)
+    public void CreateData(string name)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream fileStream = File.Create(Application.persistentDataPath + "/playerInfo" + pos + ".dat");
+        FileStream fileStream = File.Create(Application.persistentDataPath + "/playerInfo" + _currentSaveFile + ".dat");
 
         // Only storing the name because this is called once after every save file creation
-        PlayerData playerData = new PlayerData();
-        playerData.PlayerName = PlayerName;
+        PlayerData temp = new PlayerData();
+        temp.PlayerName = name;
 
         // Serialise the data
-        binaryFormatter.Serialize(fileStream, playerData);
+        binaryFormatter.Serialize(fileStream, temp);
 
         fileStream.Close();
 
@@ -118,14 +127,12 @@ public class scriptGameData : MonoBehaviour
         // This stores it within the appdata folder
         FileStream fileStream = File.Create(Application.persistentDataPath + "/playerInfo" + _currentSaveFile + ".dat");
 
-        // Store the data to the PlayerData class
-        PlayerData playerData = new PlayerData();
-        playerData.PlayerName = PlayerName;
-        playerData.PlayerPosition = PlayerPosition;
-        playerData.PlayerQuestProgress = PlayerQuestProgress;
+        Debug.Log("SAVING " + PlayerName);
+        Debug.Log("SAVING " + PlayerPosition);
+        Debug.Log("SAVING " + PlayerQuestProgress);
 
         // Serialise the data
-        binaryFormatter.Serialize(fileStream, playerData);
+        binaryFormatter.Serialize(fileStream, _playerData);
 
         fileStream.Close();
 
@@ -134,6 +141,8 @@ public class scriptGameData : MonoBehaviour
 
     public void LoadData(int pos)
     {
+        ClearData();
+        
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream fileStream = File.Open(Application.persistentDataPath + "/playerInfo" + pos + ".dat", FileMode.Open);
 
@@ -143,127 +152,26 @@ public class scriptGameData : MonoBehaviour
         fileStream.Close();
 
         // Load the variables
-        PlayerName = data.PlayerName;
-
-        // If we call LoadData after CreateData then we'll need to deal with the player position var being null
-        if (data.PlayerPosition != null)
-            PlayerPosition = data.PlayerPosition;
-
-        PlayerQuestProgress = data.PlayerQuestProgress;
+        _playerData = data;
 
         //Track the save file
         _currentSaveFile = pos;
 
+        Debug.Log("LOADING " + PlayerName);
+        Debug.Log("LOADING " + PlayerPosition);
+        Debug.Log("LOADING " + PlayerQuestProgress);
+
         Debug.Log("Loading Save File " + pos);
 
-        // Stop music before changing scenes
-        scriptAudioManager.audioManager.StopCurrentMusic();
+        //GameObject.Find("Canvas").gameObject.SetActive(false);
 
         SceneManager.LoadScene(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/Game.unity"));
-    }
-
-    public void ButtonPressed()
-    {
-        GameObject buttonObject = EventSystem.current.currentSelectedGameObject;
-        GameObject fileMenu = GameObject.Find("Canvas").transform.Find("File Menu").gameObject;
-        GameObject fileCreationMenu = GameObject.Find("Canvas").transform.Find("File Creation Menu").gameObject;
-
-        switch (buttonObject.name)
-        {
-            case "File 1 Button":
-                if (_existingSaveFiles[0] == 0)
-                {
-                    fileMenu.SetActive(false);
-                    fileCreationMenu.SetActive(true);
-
-                    //Track the save file
-                    _currentSaveFile = 0;
-                }
-                else
-                    LoadData(0);
-                break;
-
-            case "File 2 Button":
-                if (_existingSaveFiles[1] == 0)
-                {
-                    fileMenu.SetActive(false);
-                    fileCreationMenu.SetActive(true);
-
-                    //Track the save file
-                    _currentSaveFile = 1;
-                }
-                else
-                    LoadData(1);
-                break;
-
-            case "File 3 Button":
-                if (_existingSaveFiles[2] == 0)
-                {
-                    fileMenu.SetActive(false);
-                    fileCreationMenu.SetActive(true);
-
-                    //Track the save file
-                    _currentSaveFile = 2;
-                }
-                else
-                    LoadData(2);
-                break;
-            // TODO: Find a better way to do this
-            case "Delete File 1 Button":
-                if (_existingSaveFiles[0] == 1)
-                {
-                    DeleteData(0);
-                }
-                break;
-            case "Delete File 2 Button":
-                if (_existingSaveFiles[1] == 1)
-                {
-                    DeleteData(1);
-                }
-                break;
-            case "Delete File 3 Button":
-                if (_existingSaveFiles[2] == 1)
-                {
-                    DeleteData(2);
-                }
-                break;
-            case "Confirm Button":
-                // Get text component of File Creation Menu's InputField child
-                string input = fileCreationMenu.GetComponentInChildren<TMP_InputField>().text;
-                // Input Validation
-                if (string.IsNullOrEmpty(input))
-                {
-                    // Do something
-                    Debug.Log("Empty name input");
-                    break;
-                }
-                else if (!(input.All(Char.IsLetter)))
-                {
-                    Debug.Log("Invalid input");
-                    break;
-                }
-                else if (input.Length > 11 || input.Length < 3)
-                {
-                    Debug.Log("Input is either too long or too short");
-                    break;
-                }
-                else
-                {
-                    fileMenu.SetActive(true);
-                    fileCreationMenu.SetActive(false);
-                    _playerName = input;
-                    Debug.Log("Player name is " + _playerName);
-
-                    CreateData(_currentSaveFile);
-                    break;
-                }
-        }
+        scriptAudioManager.audioManager.StopCurrentMusic();
     }
 
     public void CheckAllFiles()
     {
-        // Small Optimisation
-        Transform fileMenu = GameObject.Find("File Menu").transform;
+        Transform fileMenu = GameObject.Find("Canvas").transform.Find("File Menu").transform;
 
         for (int i = 0; i < 3; i++)
         {
@@ -280,8 +188,6 @@ public class scriptGameData : MonoBehaviour
                 temp.text = "[BLANK]";
             }   
         }
-
-        _currentSaveFile = -1;
     }
 
     private string DisplayName(int pos)
@@ -295,17 +201,14 @@ public class scriptGameData : MonoBehaviour
 
         fileStream.Close();
 
-        // Load the variables
-        return data.PlayerName;
+        string nameToReturn = data.PlayerName;
+        return nameToReturn;
     }
 
     public void ClearData()
     {
         // This function will be called when the player goes back to main menu from the game scene
-        PlayerName = "";
-        PlayerPosition = new float[2];
-        PlayerQuestProgress = 0;
-        _currentSaveFile = -1;
+        _playerData = null;
     }
 
     public void  DeleteData(int pos)
@@ -328,11 +231,18 @@ public class scriptGameData : MonoBehaviour
 }
 
 [Serializable]
-internal class PlayerData
+public class PlayerData
 {
+    [SerializeField]
     private string _playerName;
-    private float[] _position;
+
+    [SerializeField]
+    private float[] _position = { -999.0f, -999.0f };
+
+    [SerializeField]
     private int _questProgress;
+
+    private List<InventoryItem> _inventoryItems = null;
 
     public string PlayerName
     {
@@ -350,5 +260,37 @@ internal class PlayerData
     {
         get { return _questProgress; }
         set { _questProgress = value; }
+    }
+
+    public List<InventoryItem> InventoryItems
+    {
+        get { return _inventoryItems; }
+        set { _inventoryItems = value; }
+    }
+}
+
+[Serializable]
+public class InventoryItem
+{
+    private int _itemID;
+
+    private int _position;
+
+    public int itemID
+    {
+        get { return _itemID; }
+        set { _itemID = value; }
+    }
+
+    public int Position
+    {
+        get { return _position; }
+        set { _position = value; }
+    }
+
+    public InventoryItem(int ID, int position)
+    {
+        _itemID = ID;
+        _position = position;
     }
 }

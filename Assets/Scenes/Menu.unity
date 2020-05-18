@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &130022516 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7224573994153392752, guid: 0c4255d548f14e84e8c317ca1b4d3084,
+    type: 3}
+  m_PrefabInstance: {fileID: 7224573995413111494}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e014120cbf5a17a43853450ab46203c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &179401675 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1122220171636964598, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
@@ -216,6 +228,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1207429227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1122220170184336964, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052166017}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1207429229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207429227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef31f9cae725e4459a5c4d68c98e661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1655963180 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1122220170492345195, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
@@ -452,6 +482,16 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4408969228572955149, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+        type: 3}
+      propertyPath: Functions.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 130022516}
+    - target: {fileID: 4408969228572955149, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+        type: 3}
+      propertyPath: Functions.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 130022516}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9, type: 3}
 --- !u!1 &2057095117
@@ -606,6 +646,12 @@ PrefabInstance:
       propertyPath: _musicSlider
       value: 
       objectReference: {fileID: 1655963180}
+    - target: {fileID: 7224573994153392752, guid: 0c4255d548f14e84e8c317ca1b4d3084,
+        type: 3}
+      propertyPath: _audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: d28eac0885b914e45945bed1a7447c82,
+        type: 2}
     - target: {fileID: 7224573994153392753, guid: 0c4255d548f14e84e8c317ca1b4d3084,
         type: 3}
       propertyPath: m_LocalPosition.x

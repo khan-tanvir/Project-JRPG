@@ -17,6 +17,8 @@ public enum GoalType
 [System.Serializable]
 public abstract class scriptsObjective
 {
+    private scriptQuest _parent = null;
+
     public abstract GoalType ObjectiveType
     {
         get;
@@ -29,17 +31,22 @@ public abstract class scriptsObjective
     }
 
     // Returns true if the objective is met
-    public abstract bool Evaluate();
+    public abstract bool Evaluate
+    {
+        get;
+    }
 
-    // Executes after the target is met
-    public abstract void Complete();
+    public scriptQuest Parent
+    {
+        get { return _parent; }
+        set { _parent = value; }
+    }
 }
 
 // Gather x items to complete
 [System.Serializable]
 public class GatherObjective : scriptsObjective
 {
-    // pointer to inventory
 
     [SerializeField]
     private string _information;
@@ -55,23 +62,13 @@ public class GatherObjective : scriptsObjective
         set { _information = value; }
     }
 
-    // Object to gather
     [SerializeField]
     private string _type;
 
-[SerializeField]
+    [SerializeField]
     private int _currentAmount;
     [SerializeField]
     private int _requiredAmount;
-
-    public GatherObjective(string itemToGather, int amountRequired, string information)
-    {
-        _type = itemToGather;
-        _requiredAmount = amountRequired;
-        _information = information;
-
-        // pointer to inventory item
-    }
 
     public string Type
     {
@@ -81,39 +78,31 @@ public class GatherObjective : scriptsObjective
     public int CurrentAmount
     {
         get { return _currentAmount; }
-        set { _currentAmount = value; }
     }
 
     public int RequiredAmount
     {
         get { return _requiredAmount; }
-        set { _requiredAmount = value; }
     }
 
     public void UpdateCurrentAmount(string item)
     {
         if (string.Equals(item, _type, StringComparison.OrdinalIgnoreCase))
         {
-            _currentAmount = scriptInventory._inventory.GetItemCount(_type);
+            _currentAmount = scriptInventory.Inventory.GetItemCount(_type);
             scriptQuestManager._questManager.UpdateDescription(this);
+            scriptQuestManager._questManager.EvaluateQuest(Parent);
         }
     }
 
-    public override bool Evaluate()
+    public override bool Evaluate
     {   
-        return (_currentAmount >= _requiredAmount);
-    }
-
-    public override void Complete()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (string.Equals(other.tag, _type))
+        get
         {
-            // Handle picking up object
+            if (_currentAmount >= _requiredAmount)
+                return true;
+            else 
+                return false;
         }
     }
 }
@@ -134,6 +123,7 @@ public class EscortObjective : scriptsObjective
 
     [SerializeField]
     private string _information;
+
     public override GoalType ObjectiveType
     {
         get { return GoalType.ESCORT; }
@@ -165,18 +155,16 @@ public class EscortObjective : scriptsObjective
         get { return _targetName; }
     }
 
-    public override bool Evaluate()
+    public override bool Evaluate
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Complete()
-    {
-        throw new System.NotImplementedException();
+        get
+        {
+            return false;
+        }
     }
 }
 
-// Deliever an item from one point to another
+// Deliver an item from one point to another
 [System.Serializable]
 public class DeliverObjective : scriptsObjective
 {
@@ -217,14 +205,12 @@ public class DeliverObjective : scriptsObjective
     {
         get { return _targetRB; }
     }
-    public override bool Evaluate()
+    public override bool Evaluate
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Complete()
-    {
-        throw new System.NotImplementedException();
+        get
+        {
+            return false;
+        }
     }
 }
 
@@ -246,14 +232,12 @@ public class ActivateObjective : scriptsObjective
         set { _information = value; }
     }
 
-    public override bool Evaluate()
+    public override bool Evaluate
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Complete()
-    {
-        throw new System.NotImplementedException();
+        get
+        {
+            return false;
+        }
     }
 }
 
@@ -263,6 +247,11 @@ public class SearchObjective : scriptsObjective
 {
     [SerializeField]
     private string _information;
+
+    private bool _objectiveFound = false;
+
+    [SerializeField]
+    private scriptOnTriggerEnter _collider;
 
     public override GoalType ObjectiveType
     {
@@ -275,13 +264,32 @@ public class SearchObjective : scriptsObjective
         set { _information = value; }
     }
 
-    public override bool Evaluate()
+    public scriptOnTriggerEnter ColliderObject
     {
-        throw new System.NotImplementedException();
+        get { return _collider; }
+        set { _collider = value; }
     }
 
-    public override void Complete()
+    public void AssignTrigger()
     {
-        throw new System.NotImplementedException();
+        _collider.SearchObjective = this;
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _objectiveFound = true;
+            scriptQuestManager._questManager.EvaluateQuest(Parent);
+            _collider = null;
+        }
+    }
+
+    public override bool Evaluate
+    {
+        get
+        {
+            return _objectiveFound;
+        }
     }
 }

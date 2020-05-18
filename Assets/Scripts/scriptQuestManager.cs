@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,8 +17,16 @@ public class scriptQuestManager : MonoBehaviour
 
     private scriptQuest currentSelectedQuest;
 
+    private List<scriptQuest> _quests = new List<scriptQuest>();
+
+    [SerializeField]
+    private TMP_Text _numberOfQuests;
+
     [SerializeField]
     private TMP_Text _descriptionPanel;
+
+    [SerializeField]
+    private GameObject _questPrefab;
 
     private void Awake()
     {
@@ -30,9 +39,9 @@ public class scriptQuestManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void AddQuestToJournal(GameObject questObjectPrefab, scriptQuest quest)
+    public void AddQuestToJournal(scriptQuest quest)
     {
-        GameObject questObject = Instantiate(questObjectPrefab, _listTransform);
+        GameObject questObject = Instantiate(_questPrefab, _listTransform);
 
         // Both questscript and non mb version need to have reference of each other
         scriptQuestMB temp = questObject.GetComponent<scriptQuestMB>();
@@ -41,7 +50,16 @@ public class scriptQuestManager : MonoBehaviour
 
         questObject.GetComponent<TMP_Text>().text = quest.Title;
 
-        SubscribeToEvent(quest);
+        foreach(scriptsObjective objective in quest.Objectives)
+        {
+            objective.Parent = quest;
+            SubscribeToEvent(objective);
+        }
+
+        _quests.Add(quest);
+        UpdateQuestsCapacity();
+
+        Debug.Log("Added quest to journal");
     }
 
     public void ShowDescription(scriptQuest quest)
@@ -57,12 +75,9 @@ public class scriptQuestManager : MonoBehaviour
         currentSelectedQuest = quest;
         string objectives = "\n";
 
-        for (int i = 0; i < currentSelectedQuest.Objectives.Count; i++)
+        foreach (scriptsObjective objective in currentSelectedQuest.Objectives)
         {
-            if (currentSelectedQuest.Objectives[i] != null)
-            {
-                objectives += currentSelectedQuest.Objectives[i].Information + "\n";
-            }
+            objectives += objective.Information + "\n";
         }
 
         string textToDisplay = string.Format("{0}\n\n<size=25>{1}</size><size=20>{2}</size>", currentSelectedQuest.Title, currentSelectedQuest.Description, objectives);
@@ -70,13 +85,58 @@ public class scriptQuestManager : MonoBehaviour
         _descriptionPanel.text = textToDisplay;
     }
 
-    public void SubscribeToEvent(scriptQuest quest)
+    private void UpdateQuestsCapacity()
     {
-        foreach (GatherObjective gather in quest.Objectives)
+        _numberOfQuests.text = _quests.Count.ToString() + "/-";
+    }
+
+    private void SubscribeToEvent(scriptsObjective objective)
+    {
+        switch (objective.ObjectiveType)
         {
-            scriptGameEvents._gameEvents.onGatherObjectiveChange += gather.UpdateCurrentAmount;
-            scriptGameEvents._gameEvents.GatherObjectiveChange(gather.Type);
-            UpdateDescription(gather);
+            case GoalType.GATHER:
+                var gatherCast = (GatherObjective)objective;
+                scriptGameEvents._gameEvents.onGatherObjectiveChange += gatherCast.UpdateCurrentAmount;
+                scriptGameEvents._gameEvents.GatherObjectiveChange(gatherCast.Type);
+                break;
+            case GoalType.ESCORT:
+                
+                break;
+            case GoalType.DELIVER:
+                
+                break;
+            case GoalType.ACTIVATE:
+                
+                break;
+            case GoalType.SEARCH:
+                
+                break;
+            default:
+                break;
+        }
+    }
+    public void UnSubscribeToEvent(scriptsObjective objective)
+    {
+        switch (objective.ObjectiveType)
+        {
+            case GoalType.GATHER:
+                var gatherCast = (GatherObjective)objective;
+                scriptGameEvents._gameEvents.onGatherObjectiveChange -= gatherCast.UpdateCurrentAmount;
+                break;
+            case GoalType.ESCORT:
+
+                break;
+            case GoalType.DELIVER:
+
+                break;
+            case GoalType.ACTIVATE:
+
+                break;
+            case GoalType.SEARCH:
+
+                break;
+            default:
+                break;
         }
     }
 
@@ -98,18 +158,23 @@ public class scriptQuestManager : MonoBehaviour
                 var deliverCast = (DeliverObjective)objective;
                 deliverCast.Information = "Take [" + deliverCast.Item + "] to [" + deliverCast.TargetName + "]";
                 break;
-            // The following two types should have a custom description
-            case GoalType.ACTIVATE:
-                Debug.LogError("You haven't set a description for " + objective);
-                break;
-            case GoalType.SEARCH:
-                Debug.LogError("You haven't set a description for " + objective);
-                break;
             default:
-                Debug.LogError("Objective doesn't have a type.");
+                if (objective.Information == null)
+                    Debug.LogError("You haven't set a description for " + objective);
                 break;
         }
 
         ShowDescription(currentSelectedQuest);
+    }
+
+    public void EvaluateQuest(scriptQuest quest)
+    {   
+        if (quest.ObjectivesComplete)
+        {
+            Debug.Log("Quest: " + quest.Title + " is Complete");
+
+            foreach (scriptsObjective objective in quest.Objectives)
+                UnSubscribeToEvent(objective);
+        }
     }
 }

@@ -3,28 +3,22 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class scriptQuestMB : MonoBehaviour
+public class scriptUnacceptedQuestScript : MonoBehaviour
 {
-    // Get reference to non-MB 
     public scriptQuest Quest
     {
         get;
         set;
     }
-
+    
+    // Start is called before the first frame update
     public void OnClick()
     {
-        scriptQuestManager._questManager.ShowDescription(Quest);
-        GetComponent<TMP_Text>().color = Color.yellow;
+        scriptQuestGiverPanel.QuestGiverPanel.ShowDescription(Quest);
     }
 
     public void OnDeselect()
     {
         GetComponent<TMP_Text>().color = Color.white;
-    }
-
-    public bool EvaluateAllObjectives()
-    {
-        return Quest.ObjectivesComplete;
     }
 }
