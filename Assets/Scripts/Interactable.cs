@@ -17,6 +17,7 @@ public interface IInteractable
         get;
     }
 
+    // Is it a one use object?
     bool InfiniteUses
     {
         get;

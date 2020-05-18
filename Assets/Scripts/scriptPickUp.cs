@@ -24,7 +24,6 @@ public class scriptPickUp : IInteractable, MonoBehaviour
         }
     }
 
-
     private void OnTriggerStay2D(Collider2D other)
     {
         // Pick up if player is within collision radius and if the player is pressing the E key
@@ -60,4 +59,6 @@ public class scriptPickUp : IInteractable, MonoBehaviour
             }
         }
     }
+
+    
 }
