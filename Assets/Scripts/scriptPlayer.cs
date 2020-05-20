@@ -13,11 +13,21 @@ public class scriptPlayer : MonoBehaviour
 
     public Animator animator;
 
-    private UnityEngine.Vector2 direction;
+    public UnityEngine.Vector2 direction
+    {
+        get;
+        internal set;
+    }
 
     private PlayerInputActions _inputAction;
 
+    [SerializeField]
+    private PlayerRaycast _playerRaycast;
+
     private bool _isGamePaused;
+
+    [SerializeField]
+    private LayerMask _layerMask;
 
     public bool InventoryOpened
     {
@@ -42,7 +52,8 @@ public class scriptPlayer : MonoBehaviour
         _inputAction.PlayerControls.Move.performed += ctx => direction = ctx.ReadValue<UnityEngine.Vector2>();
         _inputAction.PlayerControls.Inventory.performed += ctx => ToggleInventory();
         _inputAction.PlayerControls.Journal.performed += ctx => ToggleJournal();
-        _inputAction.PlayerControls.Pause.performed += _ => ToggleGame();
+        _inputAction.PlayerControls.Pause.performed += ctx => ToggleGame();
+        _inputAction.PlayerControls.Interact.performed += ctx => Interact();
 
         _isGamePaused = false;
     }
@@ -75,16 +86,21 @@ public class scriptPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         rigidBody2D.MovePosition(rigidBody2D.position + (Time.fixedDeltaTime * movementSpeed * direction));
+
+        _playerRaycast.PlayerPosition = transform.position;
+        _playerRaycast.Raycast();
     }
 
     private void OnEnable()
     {
-        _inputAction.Enable();
+        if (_inputAction != null)
+            _inputAction.Enable();
     }
 
     private void OnDisable()
     {
-        _inputAction.Disable();
+        if (_inputAction != null)
+            _inputAction.Disable();
     }
 
     private void ToggleInventory()
@@ -106,5 +122,11 @@ public class scriptPlayer : MonoBehaviour
     private void ToggleGame()
     {
         GameObject.Find("Canvas").GetComponent<scriptPauseMenu>().Toggle();
+    }
+
+    private void Interact()
+    {
+        if (_playerRaycast.InteractableObject)
+            _playerRaycast.CallInteract();
     }
 }

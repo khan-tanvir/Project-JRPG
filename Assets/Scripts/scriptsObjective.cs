@@ -85,6 +85,15 @@ public class GatherObjective : scriptsObjective
         get { return _requiredAmount; }
     }
 
+    public GatherObjective() {; }
+
+    public GatherObjective(string desc, string type, int required)
+    {
+        this._information = desc;
+        this._requiredAmount = required;
+        this._type = type;
+    }
+
     public void UpdateCurrentAmount(string item)
     {
         if (string.Equals(item, _type, StringComparison.OrdinalIgnoreCase))
@@ -250,8 +259,11 @@ public class SearchObjective : scriptsObjective
 
     private bool _objectiveFound = false;
 
-    [SerializeField]
-    private scriptOnTriggerEnter _collider;
+    public string Location
+    {
+        get;
+        set;
+    }
 
     public override GoalType ObjectiveType
     {
@@ -264,27 +276,19 @@ public class SearchObjective : scriptsObjective
         set { _information = value; }
     }
 
-    public scriptOnTriggerEnter ColliderObject
+    public void LocationEntered(string place)
     {
-        get { return _collider; }
-        set { _collider = value; }
-    }
-
-    public void AssignTrigger()
-    {
-        _collider.SearchObjective = this;
-    }
-
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        if (_objectiveFound != true)
         {
-            _objectiveFound = true;
-            scriptQuestManager._questManager.EvaluateQuest(Parent);
-            _collider = null;
+            if (place == Location)
+            {
+                _objectiveFound = true;
+                scriptQuestManager._questManager.EvaluateQuest(Parent);
+            }
+            else
+                return;
         }
     }
-
     public override bool Evaluate
     {
         get

@@ -6,15 +6,16 @@ using UnityEngine.InputSystem;
 public interface IInteractable
 {
     // Max range for interactable
-    float Range
-    {
-        get;
-    }
+    //float Range
+    //{
+    //    get;
+    //}
     
     // Can player interact with object
-    bool EnableInteraction
+    bool EnabledInteraction
     {
         get;
+        set;
     }
 
     // Is it a one use object?

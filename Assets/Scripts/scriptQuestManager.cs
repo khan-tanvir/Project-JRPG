@@ -28,6 +28,9 @@ public class scriptQuestManager : MonoBehaviour
     [SerializeField]
     private GameObject _questPrefab;
 
+    [SerializeField]
+    private TextAsset _jsonFile;
+
     private void Awake()
     {
         if (_questManager == null)
@@ -37,6 +40,10 @@ public class scriptQuestManager : MonoBehaviour
         }
         else if (_questManager != null)
             Destroy(gameObject);
+
+        QuestsDatabase questsDatabase = new QuestsDatabase();
+        questsDatabase.FileToRead = _jsonFile;
+        questsDatabase.ReadDatabase();
     }
 
     public void AddQuestToJournal(scriptQuest quest)
@@ -109,7 +116,8 @@ public class scriptQuestManager : MonoBehaviour
                 
                 break;
             case GoalType.SEARCH:
-                
+                var searchCast = (SearchObjective)objective;
+                scriptGameEvents._gameEvents.onLocationEntered += searchCast.LocationEntered; 
                 break;
             default:
                 break;

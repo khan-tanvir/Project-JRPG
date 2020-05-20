@@ -29,6 +29,10 @@ public class scriptQuest
 
     private List<scriptsObjective> _objectives = new List<scriptsObjective>();
 
+    private bool _questComplete;
+
+    private string _nameOfQuestGiver;
+
     public scriptQuestMB QuestMB
     {
         get;
@@ -53,6 +57,17 @@ public class scriptQuest
         set { _objectives = value; }
     }
 
+    public bool QuestComplete
+    {
+        get { return _questComplete; }
+    }
+
+    public string QuestGiverName
+    {
+        get { return _nameOfQuestGiver; }
+        set {_nameOfQuestGiver = value; }
+    }
+
     public bool ObjectivesComplete
     {
         get
@@ -69,7 +84,11 @@ public class scriptQuest
                 }
             }
             if (i == _objectives.Count)
+            {
+                _questComplete = true;
                 return true;
+            }
+                
             else
                 return false;
         }

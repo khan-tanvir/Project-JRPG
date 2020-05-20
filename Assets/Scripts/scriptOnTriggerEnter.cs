@@ -14,7 +14,8 @@ public class scriptOnTriggerEnter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        _searchObjective.OnTriggerEnter2D(other);
-        Destroy(this);
+        // DEBUG
+
+        scriptGameEvents._gameEvents.LocationEntered("Cave");
     }
 }
