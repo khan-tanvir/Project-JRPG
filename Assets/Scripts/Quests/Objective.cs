@@ -26,7 +26,7 @@ public abstract class Objective
     public abstract string Information
     {
         get;
-        set;
+        internal set;
     }
 
     // Returns true if the objective is met
@@ -40,16 +40,18 @@ public abstract class Objective
         get { return _parent; }
         set { _parent = value; }
     }
+
+    public bool Complete
+    {
+        get;
+        set;
+    }
 }
 
 // Gather x items to complete
 [System.Serializable]
 public class GatherObjective : Objective
 {
-
-    [SerializeField]
-    private string _information;
-
     public override GoalType ObjectiveType
     {
         get { return GoalType.GATHER; }
@@ -57,47 +59,43 @@ public class GatherObjective : Objective
 
     public override string Information
     {
-        get { return _information; }
-        set { _information = value; }
+        get;
+        internal set;
     }
-
-    [SerializeField]
-    private string _type;
-
-    [SerializeField]
-    private int _currentAmount;
-    [SerializeField]
-    private int _requiredAmount;
 
     public string Type
     {
-        get { return _type; }
+        get;
+        internal set;
     }
 
     public int CurrentAmount
     {
-        get { return _currentAmount; }
+        get;
+        internal set;
     }
 
     public int RequiredAmount
     {
-        get { return _requiredAmount; }
+        get;
+        internal set;
     }
 
     public GatherObjective() {; }
 
-    public GatherObjective(string desc, string type, int required)
+    public GatherObjective(string desc, string type, int required, int current)
     {
-        this._information = desc;
-        this._requiredAmount = required;
-        this._type = type;
+        Information = desc;
+        RequiredAmount = required;
+        CurrentAmount = current;
+        Type = type;
     }
 
     public void UpdateCurrentAmount(string item)
     {
-        if (string.Equals(item, _type, StringComparison.OrdinalIgnoreCase))
+        if (string.Equals(item, Type, StringComparison.OrdinalIgnoreCase))
         {
-            _currentAmount = Inventory.Instance.GetItemCount(_type);
+            CurrentAmount = Inventory.Instance.GetItemCount(Type);
             QuestManager.Instance.UpdateDescription(this);
             QuestManager.Instance.EvaluateQuest(Parent);
         }
@@ -107,7 +105,7 @@ public class GatherObjective : Objective
     {   
         get
         {
-            if (_currentAmount >= _requiredAmount)
+            if (CurrentAmount >= RequiredAmount)
                 return true;
             else 
                 return false;
@@ -120,17 +118,10 @@ public class GatherObjective : Objective
 public class EscortObjective : Objective
 {
     [SerializeField]
-    private string _followerName;
-    [SerializeField]
     private Rigidbody2D _follower;
 
     [SerializeField]
-    private string _targetName;
-    [SerializeField]
     private Rigidbody2D _target;
-
-    [SerializeField]
-    private string _information;
 
     public override GoalType ObjectiveType
     {
@@ -139,8 +130,8 @@ public class EscortObjective : Objective
 
     public override string Information
     {
-        get { return _information; }
-        set { _information = value; }
+        get;
+        internal set;
     }
 
     public Rigidbody2D FollowerRB
@@ -155,12 +146,23 @@ public class EscortObjective : Objective
 
     public string FollowerName
     {
-        get { return _followerName; }
+        get;
+        internal set;
     }
 
     public string TargetName
     {
-        get { return _targetName; }
+        get;
+        internal set;
+    }
+
+    public EscortObjective() {; }
+
+    public  EscortObjective(string desc, string followerName, string targetLocation)
+    {
+        Information = desc;
+        FollowerName = followerName;
+        TargetName = targetLocation;
     }
 
     public override bool Evaluate
@@ -176,16 +178,9 @@ public class EscortObjective : Objective
 [System.Serializable]
 public class DeliverObjective : Objective
 {
-    [SerializeField]
-    private string _item;
-
-    [SerializeField]
-    private string _targetName;
 
     [SerializeField]
     private Rigidbody2D _targetRB;
-
-    private string _information;
 
     public override GoalType ObjectiveType
     {
@@ -194,25 +189,36 @@ public class DeliverObjective : Objective
 
     public override string Information
     {
-        get { return _information; }
-        set { _information = value; }
+        get;
+        internal set;
     }
 
     public string Item
-    { 
-        get { return _item; } 
-        set { _item = value; }
+    {
+        get;
+        internal set;
     }
 
     public string TargetName
     {
-        get { return _targetName; }
+        get;
+        internal set;
     }
 
     public Rigidbody2D TargetRB
     {
         get { return _targetRB; }
     }
+
+    public DeliverObjective() {; }
+
+    public DeliverObjective(string desc, string item, string target)
+    {
+        Information = desc;
+        Item = item;
+        TargetName = target;
+    }
+
     public override bool Evaluate
     {
         get
@@ -226,8 +232,8 @@ public class DeliverObjective : Objective
 [System.Serializable]
 public class ActivateObjective : Objective
 {
-    [SerializeField]
-    private string _information;
+
+    private bool _hasInteracted = false;
 
     public override GoalType ObjectiveType
     {
@@ -236,32 +242,50 @@ public class ActivateObjective : Objective
 
     public override string Information
     {
-        get { return _information; }
-        set { _information = value; }
+        get;
+        internal set;
+    }
+
+    public string ObjectToInteractWith
+    {
+        get;
+        internal set;
+    }
+
+    public ActivateObjective() {; }
+
+    public ActivateObjective(string desc, string objectToInteract)
+    {
+        Information = desc;
+        ObjectToInteractWith = objectToInteract;
+    }
+
+    public void CheckInteractedItem(string item)
+    {
+        if (ObjectToInteractWith == item)
+        {
+            _hasInteracted = true;
+            QuestManager.Instance.EvaluateQuest(Parent);
+        }
     }
 
     public override bool Evaluate
     {
-        get
-        {
-            return false;
-        }
+        get { return _hasInteracted; }
     }
 }
 
 // Discover an area
 [System.Serializable]
 public class SearchObjective : Objective
-{
-    [SerializeField]
-    private string _information;
+{ 
 
     private bool _objectiveFound = false;
 
     public string Location
     {
         get;
-        set;
+        internal set;
     }
 
     public override GoalType ObjectiveType
@@ -271,28 +295,31 @@ public class SearchObjective : Objective
 
     public override string Information
     {
-        get { return _information; }
-        set { _information = value; }
+        get;
+        internal set;
     }
 
     public void LocationEntered(string place)
     {
-        if (_objectiveFound != true)
+        if (Location == place)
         {
-            if (place == Location)
-            {
-                _objectiveFound = true;
-                QuestManager.Instance.EvaluateQuest(Parent);
-            }
-            else
-                return;
-        }
+            QuestManager.Instance.EvaluateQuest(Parent);
+        }    
     }
+
+    public SearchObjective() {; }
+
+    public SearchObjective(string desc, string location)
+    {
+        Information = desc;
+        Location = location;
+    }
+
     public override bool Evaluate
     {
         get
         {
-            return _objectiveFound;
+            return Complete;
         }
     }
 }

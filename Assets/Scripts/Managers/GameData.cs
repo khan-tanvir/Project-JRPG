@@ -106,6 +106,10 @@ public class GameData : MonoBehaviour
 
         fileStream.Close();
 
+        QuestsDatabase database = new QuestsDatabase();
+
+        database.SaveToDatabase(CurrentSaveFile, QuestManager.Instance.Quests);
+
         Debug.Log("Player data has been saved");
     }
 

@@ -1,23 +1,18 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-
-[System.Serializable]
-public struct DataEntry
-{
-    public string FirstEntry;
-    public string SecondEntry;
-}
 
 [System.Serializable]
 public struct ObjectivesEntry
 {
+    public bool Complete;
+
     public string Type;
     public string Description;
-
-    public List<DataEntry> DataEntry;
+    public string FirstEntry;
+    public string SecondEntry;
+    public string ThirdEntry;
 }
 
 [System.Serializable]
@@ -29,7 +24,7 @@ public struct QuestEntry
     public string Description;
     public string Giver;
 
-    public bool IsComplete;
+    public int Status;
 
     public List<ObjectivesEntry> ObjectivesEntry;
 }
@@ -41,19 +36,37 @@ public class QuestList
 
 public class QuestsDatabase
 {
-    public QuestList _questList = new QuestList();
+    //public QuestList _questList = new QuestList();
 
-    public TextAsset FileToRead
+    private void CloneDatabase(int saveFileID)
     {
-        internal get;
-        set;
+        // Clone original database as fileName
+        var clonedDatabase = Resources.Load<TextAsset>("Databases/ExampleQuestDatabase");
+
+        if (clonedDatabase != null)
+        {
+            File.WriteAllText(Application.persistentDataPath + "/playerQuestDB" + saveFileID + ".json", clonedDatabase.text);
+        }
     }
 
-    public void ReadDatabase()
+    private string GetPlayerQuestDatabase(int saveFileID)
     {
-        _questList = JsonUtility.FromJson<QuestList>(FileToRead.text);
-        
-        foreach(QuestEntry quest in _questList.QuestEntry)
+        if (!File.Exists(Application.persistentDataPath + "/playerQuestDB" + saveFileID + ".json"))
+        {
+            CloneDatabase(saveFileID);
+        }
+
+
+        return File.ReadAllText(Application.persistentDataPath + "/playerQuestDB" + saveFileID + ".json");
+    }
+
+    public void ReadDatabase(int saveFileID)
+    {
+        QuestList _questList = new QuestList();
+
+        _questList = JsonUtility.FromJson<QuestList>(GetPlayerQuestDatabase(saveFileID));
+
+        foreach (QuestEntry quest in _questList.QuestEntry)
         {
             Quest loadedQuest = new Quest();
 
@@ -61,31 +74,102 @@ public class QuestsDatabase
             loadedQuest.Description = quest.Description;
             loadedQuest.QuestGiverName = quest.Giver;
 
-            loadedQuest.QuestComplete = quest.IsComplete;
+            loadedQuest.Objectives = ReadObjectives(quest, loadedQuest);
 
-            loadedQuest.Objectives = ReadObjectives(quest);
-
-            if (loadedQuest.QuestComplete)
-                GiveQuestToJournal(loadedQuest);
-            else
-                CallGiveQuestToQuestGiver(loadedQuest);
+            switch (quest.Status)
+            {
+                case 0:
+                    // Quest has not been added to journal
+                    loadedQuest.Status = QuestStatus.NOTACCEPTED;
+                    QuestManager.Instance.GiveQuestToQuestGiver(loadedQuest);
+                    break;
+                case 1:
+                    // Quest has been accepted but is not completed
+                    loadedQuest.Status = QuestStatus.GIVEN;
+                    QuestManager.Instance.AddQuestToJournal(loadedQuest);
+                    break;
+                case 2:
+                    // Quest has been accepted and completed
+                    loadedQuest.Status = QuestStatus.COMPLETE;
+                    QuestManager.Instance.AddQuestToJournal(loadedQuest);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    private void GiveQuestToJournal(Quest quest)
+    public void SaveToDatabase(int saveFileID, List<Quest> quests)
     {
-        QuestManager.Instance.AddQuestToJournal(quest);
+        QuestList _questList = new QuestList();
+
+        foreach (Quest quest in quests)
+        {
+            QuestEntry entry = new QuestEntry();
+            entry.Title = quest.Title;
+            entry.Description = quest.Description;
+            entry.Giver = quest.QuestGiverName;
+
+            entry.Status = (int)quest.Status;
+
+            entry.ObjectivesEntry = WriteObjectives(quest);
+
+            _questList.QuestEntry.Add(entry);
+        }
+
+        File.Delete(Application.persistentDataPath + "/playerQuestDB" + saveFileID + ".json");
+        File.WriteAllText(Application.persistentDataPath + "/playerQuestDB" + saveFileID + ".json", JsonUtility.ToJson(_questList));
     }
 
-    private void CallGiveQuestToQuestGiver(Quest quest)
+    private List<ObjectivesEntry> WriteObjectives(Quest quest)
     {
-        // Find NPC with the quest name
-        //Object.FindObjectOfType<scriptQuestGiver>();
-        QuestManager.Instance.GiveQuestToQuestGiver(quest);
+        List<ObjectivesEntry> objectivesEntries = new List<ObjectivesEntry>();
 
+        foreach (Objective objective in quest.Objectives)
+        {
+            ObjectivesEntry entry = new ObjectivesEntry();
+
+            entry.Description = objective.Information;
+
+            switch (objective.ObjectiveType)
+            {
+                case GoalType.GATHER:
+                    var gatherCast = (GatherObjective)objective;
+                    entry.FirstEntry = gatherCast.Type;
+                    entry.SecondEntry = gatherCast.RequiredAmount.ToString();
+                    entry.ThirdEntry = gatherCast.CurrentAmount.ToString();
+                    break;
+                case GoalType.ESCORT:
+                    var escortCast = (EscortObjective)objective;
+                    entry.FirstEntry = escortCast.FollowerName;
+                    entry.SecondEntry = escortCast.TargetName;
+                    break;
+                case GoalType.DELIVER:
+                    var deliverCast = (DeliverObjective)objective;
+                    entry.FirstEntry = deliverCast.Item;
+                    entry.SecondEntry = deliverCast.TargetName;
+                    break;
+                case GoalType.ACTIVATE:
+                    var activateCast = (ActivateObjective)objective;
+                    entry.FirstEntry = activateCast.ObjectToInteractWith;
+                    break;
+                case GoalType.SEARCH:
+                    var searchCast = (SearchObjective)objective;
+                    entry.FirstEntry = searchCast.Location;
+                    break;
+                default:
+                    break;
+            }
+
+            entry.Type = Enum.GetName(typeof(GoalType), objective.ObjectiveType);
+
+            objectivesEntries.Add(entry);
+        }
+
+        return objectivesEntries;
     }
 
-    private List<Objective> ReadObjectives(QuestEntry quest)
+    private List<Objective> ReadObjectives(QuestEntry quest, Quest parent)
     {
         List<Objective> loadedObjectives = new List<Objective>();
 
@@ -94,27 +178,40 @@ public class QuestsDatabase
             Objective temp = null;
             switch (objective.Type)
             {
-                case "Gather":
-                    temp = new GatherObjective(objective.Description, objective.DataEntry[0].FirstEntry, int.Parse(objective.DataEntry[0].SecondEntry));
+                case "GATHER":
+                    temp = new GatherObjective(objective.Description, objective.FirstEntry, int.Parse(objective.SecondEntry), int.Parse(objective.ThirdEntry));
                     break;
-                case "Escort":
+                case "ESCORT":
+                    temp = new EscortObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
                     break;
-                case "Search":
+                case "SEARCH":
+                    temp = new SearchObjective(objective.Description, objective.FirstEntry);
                     break;
-                case "Activate":
+                case "ACTIVATE":
+                    temp = new ActivateObjective(objective.Description, objective.FirstEntry);
                     break;
-                case "Deliver":
+                case "DELIVER":
+                    temp = new DeliverObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
                     break;
                 default:
                     break;
             }
+
             if (temp != null)
+            {
+                temp.Complete = objective.Complete;
+
+                if (!temp.Complete)
+                {
+                    temp.Parent = parent;
+                }
+
                 loadedObjectives.Add(temp);
+            }
         }
 
         return loadedObjectives;
     }
-
 }
 
 

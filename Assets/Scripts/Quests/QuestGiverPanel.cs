@@ -98,6 +98,8 @@ public class QuestGiverPanel : MonoBehaviour
     {
         if (_currentSelectedQuest != null)
         {
+            _currentSelectedQuest.Status = QuestStatus.GIVEN;
+
             QuestManager.Instance.AddQuestToJournal(_currentSelectedQuest);
 
             foreach (Transform child in _questArea)

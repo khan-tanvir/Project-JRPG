@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
 {
-    // All items that exist in the game will be stored in this database
+    // All items that exist in the game will be stored in this database 
+    // Items should be referenced as their prefab
    public List<Item> Items
     {
         get;
@@ -30,7 +31,8 @@ public class ItemDatabase : MonoBehaviour
         // All items need to be hardcoded
         Items = new List<Item>()
         {
-            new Item(1, "Test", "Test")
+            new Item(1, "Test", "Test"),
+            new Item(2, "Arrow", "An arrow")
         };
     }
 

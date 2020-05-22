@@ -17,25 +17,22 @@ public class EventsManager : MonoBehaviour
         Instance = this;
     }
 
-    public event Action<string> onGatherObjectiveChange;
-    public event Action<string> onInteraction;
-    public event Action<string> onLocationEntered;
+    public event Action<string> OnGatherObjectiveChange;
+    public event Action<string> OnInteractionWithItem;
+    public event Action<string> OnLocationEntered;
 
     public void GatherObjectiveChange(string item)
     {
-        if (onGatherObjectiveChange != null)
-            onGatherObjectiveChange(item);
+        OnGatherObjectiveChange?.Invoke(item);
     }
 
-    public void Interaction(string interactable)
+    public void InteractionWithItem(string interactable)
     {
-        if (onInteraction != null)
-            onInteraction(interactable);
+        OnInteractionWithItem?.Invoke(interactable);
     }
 
     public void LocationEntered(string location)
     {
-        if (onLocationEntered != null)
-            onLocationEntered(location);
+        OnLocationEntered?.Invoke(location);
     }
 }

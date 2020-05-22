@@ -4,13 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public interface IInteractable
-{
-    // Max range for interactable
-    //float Range
-    //{
-    //    get;
-    //}
-    
+{   
     // Can player interact with object
     bool EnabledInteraction
     {

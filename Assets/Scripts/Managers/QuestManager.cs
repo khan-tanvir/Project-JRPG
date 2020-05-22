@@ -22,10 +22,11 @@ public class QuestManager : MonoBehaviour
     [SerializeField]
     private GameObject _questPrefab;
 
-    [SerializeField]
-    private TextAsset _jsonFile;
-
-    private List<Quest> _quests;
+    public List<Quest> Quests
+    {
+        get;
+        internal set;
+    }
 
     public static QuestManager Instance
     {
@@ -39,14 +40,16 @@ public class QuestManager : MonoBehaviour
     {
         Instance = this;
 
-        _quests = new List<Quest>();
+        Quests = new List<Quest>();
+
+
+        LoadQuestDatabase();
     }
 
-    private void OnEnable()
+    private void LoadQuestDatabase()
     {
-        QuestsDatabase questsDatabase = new QuestsDatabase();
-        questsDatabase.FileToRead = _jsonFile;
-        questsDatabase.ReadDatabase();
+        QuestsDatabase database = new QuestsDatabase();
+        database.ReadDatabase(GameData.Instance.CurrentSaveFile);
     }
 
     public void AddQuestToJournal(Quest quest)
@@ -60,12 +63,19 @@ public class QuestManager : MonoBehaviour
 
         questObject.GetComponent<TMP_Text>().text = quest.Title;
 
-        foreach(Objective objective in quest.Objectives)
+        if (quest.Status == QuestStatus.GIVEN)
         {
-            SubscribeToEvent(objective);
+            foreach (Objective objective in quest.Objectives)
+            {
+                if (!objective.Complete)
+                {
+                    UpdateDescription(objective);
+                    SubscribeToEvent(objective);
+                }
+            }
         }
 
-        _quests.Add(quest);
+        Quests.Add(quest);
         UpdateQuestsCapacity();
 
         Debug.Log("Added quest to journal");
@@ -76,7 +86,10 @@ public class QuestManager : MonoBehaviour
         foreach (QuestGiver questGiver in FindObjectsOfType<QuestGiver>())
         {
             if (questGiver.NPCName == quest.QuestGiverName)
+            {
                 questGiver.CreateQuest(quest);
+            }
+            Quests.Add(quest);
         }
     }
 
@@ -105,7 +118,7 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateQuestsCapacity()
     {
-        _numberOfQuests.text = _quests.Count.ToString() + "/-";
+        _numberOfQuests.text = Quests.Count.ToString() + "/-";
     }
 
     private void SubscribeToEvent(Objective objective)
@@ -114,7 +127,7 @@ public class QuestManager : MonoBehaviour
         {
             case GoalType.GATHER:
                 var gatherCast = (GatherObjective)objective;
-                EventsManager.Instance.onGatherObjectiveChange += gatherCast.UpdateCurrentAmount;
+                EventsManager.Instance.OnGatherObjectiveChange += gatherCast.UpdateCurrentAmount;
                 EventsManager.Instance.GatherObjectiveChange(gatherCast.Type);
                 break;
             case GoalType.ESCORT:
@@ -124,11 +137,12 @@ public class QuestManager : MonoBehaviour
                 
                 break;
             case GoalType.ACTIVATE:
-                
+                var activateCast = (ActivateObjective)objective;
+                EventsManager.Instance.OnInteractionWithItem += activateCast.CheckInteractedItem;
                 break;
             case GoalType.SEARCH:
                 var searchCast = (SearchObjective)objective;
-                EventsManager.Instance.onLocationEntered += searchCast.LocationEntered; 
+                EventsManager.Instance.OnLocationEntered += searchCast.LocationEntered; 
                 break;
             default:
                 break;
@@ -140,7 +154,7 @@ public class QuestManager : MonoBehaviour
         {
             case GoalType.GATHER:
                 var gatherCast = (GatherObjective)objective;
-                EventsManager.Instance.onGatherObjectiveChange -= gatherCast.UpdateCurrentAmount;
+                EventsManager.Instance.OnGatherObjectiveChange -= gatherCast.UpdateCurrentAmount;
                 break;
             case GoalType.ESCORT:
 

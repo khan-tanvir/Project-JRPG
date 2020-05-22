@@ -1,0 +1,82 @@
+{
+  "QuestEntry": [
+    {
+      "ID": 1,
+      "Title": "IsthisUpdating",
+      "Description": "Description",
+      "Giver": "NPC_NAME",
+      "IsComplete": false,
+      "ObjectivesEntry": [
+        {
+          "Type": "Gather",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "2"
+        },
+        {
+          "Type": "Escort",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        },
+        {
+          "Type": "Search",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        },
+        {
+          "Type": "Activate",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        },
+        {
+          "Type": "Deliver",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        }
+      ]
+    },
+    {
+      "ID": 2,
+      "Title": "Second",
+      "Description": "Description",
+      "Giver": "NPC_NAME",
+      "IsComplete": false,
+      "ObjectivesEntry": [
+        {
+          "Type": "Gather",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "a",
+          "SecondEntry": "3"
+        },
+        {
+          "Type": "Escort",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        },
+        {
+          "Type": "Search",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        },
+        {
+          "Type": "Activate",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        },
+        {
+          "Type": "Deliver",
+          "Description": "DESCRIPTION",
+          "FirstEntry": "FIRSTENTRY",
+          "SecondEntry": "SECONDENTRY"
+        }
+      ]
+    }
+  ]
+}

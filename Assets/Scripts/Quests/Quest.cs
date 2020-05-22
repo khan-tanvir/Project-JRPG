@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+public enum QuestStatus
+{
+    NOTACCEPTED,
+    GIVEN,
+    COMPLETE
+}
+
 [System.Serializable]
 public class Quest
 {
@@ -25,7 +32,7 @@ public class Quest
         set;
     }
 
-    public bool QuestComplete
+    public QuestStatus Status
     {
         get;
         set;
@@ -51,16 +58,17 @@ public class Quest
 
             foreach (Objective obj in Objectives)
             {
-                if (obj.Evaluate)
+                if (obj.Evaluate && !obj.Complete)
                 {
                     i++;
                     QuestManager.Instance.UnSubscribeToEvent(obj);
+                    obj.Complete =  true;
                     Debug.Log("An objective is complete");
                 }
 
                 if (i == Objectives.Count)
                 {
-                    QuestComplete = true;
+                    Status = QuestStatus.COMPLETE;
                     return true;
                 }
             }

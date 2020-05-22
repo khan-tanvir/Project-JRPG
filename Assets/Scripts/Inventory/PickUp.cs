@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PickUp : MonoBehaviour, IInteractable
 {
-    // Attach this to any object that should/can be stored in the inventory
+    // TODO: Turn this in to an interface
 
     [SerializeField]
     private string _itemName;
@@ -14,24 +14,30 @@ public class PickUp : MonoBehaviour, IInteractable
     [SerializeField]
     private Material interactionMat;
 
+    private Material _defaultMat;
+
     [SerializeField]
-    private Material defaultMat;
+    private bool _enablePickup;
 
     public string ItemName
     {
         get { return _itemName; }
     }
 
+    public bool EnablePickup
+    {
+        get { return _enablePickup; }
+        set { _enablePickup = value; }
+    }
+
     public bool EnabledInteraction
     {
-        // check this
         get;
         set;
     }
 
     public bool InfiniteUses
     {
-        // check this
         get
         {
             return true;
@@ -40,12 +46,9 @@ public class PickUp : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        if (ItemDatabase.Instance.GetItemByName(_itemName) == null)
-        {
-            Destroy(gameObject);
-        }
-
         EnabledInteraction = true;
+
+        _defaultMat = GetComponent<SpriteRenderer>().material;
     }
     
     public void Focus()
@@ -56,18 +59,25 @@ public class PickUp : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        AddItemToInventory();
+        if (_enablePickup)
+        {
+            AddItemToInventory();
+        }
+        else if (EnabledInteraction)
+        {
+            EventsManager.Instance.InteractionWithItem(ItemName);
+        }
     }
 
     public void UnFocus()
     {
         if (EnabledInteraction)
-            gameObject.GetComponent<Renderer>().material = defaultMat;
+            gameObject.GetComponent<Renderer>().material = _defaultMat;
     }
 
-    private void AddItemToInventory()
+    public void AddItemToInventory()
     {
-
+        
         for (int i = 0; i < Inventory.Instance.Slots.Count; i++)
         {
             if (Inventory.Instance.Slots[i].InvItem == null)
