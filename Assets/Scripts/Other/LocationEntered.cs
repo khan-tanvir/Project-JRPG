@@ -9,6 +9,6 @@ public class LocationEntered : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // DEBUG
-        EventsManager.Instance.LocationEntered(other.name);
+        EventsManager.Instance.LocationEntered(gameObject.name);
     }
 }

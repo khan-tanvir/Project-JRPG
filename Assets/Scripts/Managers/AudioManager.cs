@@ -40,27 +40,10 @@ public class AudioManager : MonoBehaviour
         get { return _sounds; }
     }
 
-    public Sound[] sounds;
-
     private void Awake()
     {
-        if (Instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
-        else if (Instance != null)
-            Destroy(gameObject);
-
-        foreach (Sound sound in sounds)
-        {
-            sound.source = gameObject.AddComponent<AudioSource>();
-
-            sound.source.outputAudioMixerGroup = _audioMixer.FindMatchingGroups(Enum.GetName(typeof(SoundType), sound.Type))[0];
-            sound.source.clip = sound.Clip;
-            sound.source.name = sound.Name;
-            sound.source.volume = sound.volume;
-        }
+        CreateInstance();
+        LoadSounds();
 
         // Countering a bug that changes the name to the 2nd element of sounds
         gameObject.name = "Audio Manager";
@@ -72,6 +55,32 @@ public class AudioManager : MonoBehaviour
         {
             _masterSlider.value = GameData.Instance.MasterVolume;
             _musicSlider.value = GameData.Instance.MusicVolume;
+        }
+    }
+
+    private void CreateInstance()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void LoadSounds()
+    {
+        foreach (Sound sound in _sounds)
+        {
+            sound.source = gameObject.AddComponent<AudioSource>();
+
+            sound.source.outputAudioMixerGroup = _audioMixer.FindMatchingGroups(Enum.GetName(typeof(SoundType), sound.Type))[0];
+            sound.source.clip = sound.Clip;
+            sound.source.name = sound.Name;
+            sound.source.volume = sound.volume;
         }
     }
 
@@ -88,7 +97,7 @@ public class AudioManager : MonoBehaviour
 
     public Sound Find(string name)
     {
-        Sound soundToFind = Array.Find(sounds, clip => clip.Name == name);
+        Sound soundToFind = Array.Find(_sounds, clip => clip.Name == name);
         return soundToFind;
     }
 

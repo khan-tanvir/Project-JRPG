@@ -1,21 +1,69 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using ReadOnlyAttribute = Unity.Collections.ReadOnlyAttribute;
+
+[System.Serializable]
+public class PlayerData
+{
+    [SerializeField]
+    private float[] _position = { -999.0f, -999.0f };
+
+    [SerializeField]
+    private int _questProgress;
+
+    private List<InventoryItem> _inventoryItems = null;
+
+    public string PlayerName
+    {
+        get;
+        set;
+    }
+
+    public float[] PlayerPosition
+    {
+        get { return _position; }
+        set { _position = value; }
+    }
+
+    public int PlayerQuestProgress
+    {
+        get { return _questProgress; }
+        set { _questProgress = value; }
+    }
+
+    public List<InventoryItem> InventoryItems
+    {
+        get;
+        set;
+    }
+}
+
+[System.Serializable]
+public class InventoryItem
+{
+    public int ID
+    {
+        get;
+        internal set;
+    }
+
+    public int Position
+    {
+        get;
+        internal set;
+    }
+
+    public InventoryItem(int itemID, int pos)
+    {
+        ID = itemID;
+        Position = pos;
+    }
+}
 
 public class GameData : MonoBehaviour
 {
-    [SerializeField]
-    private int _numberOfInventorySlots = 25;
-
     public PlayerData PlayerData
     {
         get;
@@ -53,14 +101,7 @@ public class GameData : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        if (Instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
-        else if (Instance != this)
-            Destroy(gameObject);
-
+        CreateInstance();
         ClearData();
 
         ExistingSaveFiles = new int[3];
@@ -73,6 +114,19 @@ public class GameData : MonoBehaviour
 
         if (PlayerPrefs.GetFloat("Music Volume", 0.8f) < 0.0001f || float.IsNaN(PlayerPrefs.GetFloat("Music Volume")))
             PlayerPrefs.SetFloat("Music Volume", 0.8f);
+    }
+
+    private void CreateInstance()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void CreateData(string name)
@@ -193,70 +247,5 @@ public class GameData : MonoBehaviour
     {
         // Called everytime the user changes the master volume slider
         PlayerPrefs.SetFloat("Music Volume", value);
-    }
-}
-
-[Serializable]
-public class PlayerData
-{
-    [SerializeField]
-    private string _playerName;
-
-    [SerializeField]
-    private float[] _position = { -999.0f, -999.0f };
-
-    [SerializeField]
-    private int _questProgress;
-
-    private List<InventoryItem> _inventoryItems = null;
-
-    public string PlayerName
-    {
-        get { return _playerName; }
-        set { _playerName = value; }
-    }
-
-    public float[] PlayerPosition
-    {
-        get { return _position; }
-        set { _position = value; }
-    }
-
-    public int PlayerQuestProgress
-    {
-        get { return _questProgress; }
-        set { _questProgress = value; }
-    }
-
-    public List<InventoryItem> InventoryItems
-    {
-        get { return _inventoryItems; }
-        set { _inventoryItems = value; }
-    }
-}
-
-[Serializable]
-public class InventoryItem
-{
-    private int _itemID;
-
-    private int _position;
-
-    public int itemID
-    {
-        get { return _itemID; }
-        set { _itemID = value; }
-    }
-
-    public int Position
-    {
-        get { return _position; }
-        set { _position = value; }
-    }
-
-    public InventoryItem(int ID, int position)
-    {
-        _itemID = ID;
-        _position = position;
     }
 }

@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     private float _movementSpeed;
 
     private PlayerInteraction _playerInteraction;
+
+    private GameObject _journal;
+    private GameObject _inventory;
     
     public Rigidbody2D RigidBody
     {
@@ -30,18 +33,6 @@ public class Player : MonoBehaviour
     }
 
     public UnityEngine.Vector2 Direction
-    {
-        get;
-        internal set;
-    }
-
-    public bool InventoryOpened
-    {
-        get;
-        internal set;
-    }
-
-    public bool JournalOpened
     {
         get;
         internal set;
@@ -74,6 +65,9 @@ public class Player : MonoBehaviour
         RigidBody = gameObject.GetComponent<Rigidbody2D>();
         Animator = gameObject.GetComponent<Animator>();
         _playerInteraction = gameObject.GetComponent<PlayerInteraction>();
+
+        _inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+        _journal = GameObject.Find("Canvas").transform.Find("Journal").gameObject;
     }
 
     private void InitialiseInput()
@@ -132,17 +126,17 @@ public class Player : MonoBehaviour
 
     private void ToggleInventory()
     {
-        if (!JournalOpened && Time.timeScale != 0.0f)
+        if (Time.timeScale != 0.0f && !_journal.activeInHierarchy)
         {
-            InventoryOpened = GameObject.Find("Canvas").transform.Find("Inventory").GetComponent<ToggleGameObject>().ToggleObject();
+            _inventory.SetActive(!_inventory.activeInHierarchy);
         }
     }
 
     private void ToggleJournal()
     {
-        if (!InventoryOpened && Time.timeScale != 0.0f)
+        if (Time.timeScale != 0.0f && !_inventory.activeInHierarchy)
         {
-            JournalOpened = GameObject.Find("Canvas").transform.Find("Journal").GetComponent<ToggleGameObject>().ToggleObject();
+            _journal.SetActive(!_journal.activeInHierarchy);
         }
     }
 

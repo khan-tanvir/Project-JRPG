@@ -8,9 +8,6 @@ using UnityEngine.UI;
 public class QuestManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _journalMenu;
-
-    [SerializeField]
     private Transform _listTransform;
 
     [SerializeField]
@@ -42,7 +39,6 @@ public class QuestManager : MonoBehaviour
 
         Quests = new List<Quest>();
 
-
         LoadQuestDatabase();
     }
 
@@ -61,8 +57,10 @@ public class QuestManager : MonoBehaviour
         quest.QuestMB = temp;
         temp.Quest = quest;
 
-        questObject.GetComponent<TMP_Text>().text = quest.Title;
+        quest.QuestMB.UpdateColor();
 
+        questObject.GetComponent<TMP_Text>().text = quest.Title;
+        
         if (quest.Status == QuestStatus.GIVEN)
         {
             foreach (Objective objective in quest.Objectives)
@@ -75,10 +73,12 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        Quests.Add(quest);
-        UpdateQuestsCapacity();
+        if (!Quests.Contains(quest))
+        {
+            Quests.Add(quest);
+        }
 
-        Debug.Log("Added quest to journal");
+        UpdateQuestsCapacity();
     }
 
     public void GiveQuestToQuestGiver(Quest quest)
@@ -89,7 +89,10 @@ public class QuestManager : MonoBehaviour
             {
                 questGiver.CreateQuest(quest);
             }
-            Quests.Add(quest);
+            if (!Quests.Contains(quest))
+            {
+                Quests.Add(quest);
+            }
         }
     }
 
@@ -98,9 +101,9 @@ public class QuestManager : MonoBehaviour
         if (quest == null)
             return;
 
-        if (_currentSelectedQuest != null && _currentSelectedQuest != quest)
+        if (_currentSelectedQuest != quest)
         {
-            _currentSelectedQuest.QuestMB.OnDeselect();
+            ClearCurrentQuest();
         }
 
         _currentSelectedQuest = quest;
@@ -108,7 +111,14 @@ public class QuestManager : MonoBehaviour
 
         foreach (Objective objective in _currentSelectedQuest.Objectives)
         {
-            objectives += objective.Information + "\n";
+            if (objective.Complete)
+            {
+                objectives += "<color=green>" + objective.Information + "</color> \n";
+            }
+            else
+            {
+                objectives += objective.Information + "\n";
+            }
         }
 
         string textToDisplay = string.Format("{0}\n\n<size=25>{1}</size><size=20>{2}</size>", _currentSelectedQuest.Title, _currentSelectedQuest.Description, objectives);
@@ -119,6 +129,17 @@ public class QuestManager : MonoBehaviour
     private void UpdateQuestsCapacity()
     {
         _numberOfQuests.text = Quests.Count.ToString() + "/-";
+    }
+
+    public void ClearCurrentQuest()
+    {
+        if (_currentSelectedQuest != null)
+        {
+            _currentSelectedQuest.QuestMB.OnDeselect();
+            _currentSelectedQuest.QuestMB.UpdateColor();
+
+            _descriptionPanel.text = "";
+        }
     }
 
     private void SubscribeToEvent(Objective objective)
@@ -144,8 +165,6 @@ public class QuestManager : MonoBehaviour
                 var searchCast = (SearchObjective)objective;
                 EventsManager.Instance.OnLocationEntered += searchCast.LocationEntered; 
                 break;
-            default:
-                break;
         }
     }
     public void UnSubscribeToEvent(Objective objective)
@@ -163,12 +182,12 @@ public class QuestManager : MonoBehaviour
 
                 break;
             case GoalType.ACTIVATE:
-
+                var activateCast = (ActivateObjective)objective;
+                EventsManager.Instance.OnInteractionWithItem -= activateCast.CheckInteractedItem;
                 break;
             case GoalType.SEARCH:
-
-                break;
-            default:
+                var searchCast = (SearchObjective)objective;
+                EventsManager.Instance.OnLocationEntered -= searchCast.LocationEntered;
                 break;
         }
     }
@@ -205,6 +224,7 @@ public class QuestManager : MonoBehaviour
         if (quest.EvaluateObjectives)
         {
             Debug.Log("Quest: " + quest.Title + " is Complete");
+            quest.QuestMB.UpdateColor();
         }
     }
 }

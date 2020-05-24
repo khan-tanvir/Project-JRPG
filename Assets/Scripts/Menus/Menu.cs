@@ -10,4 +10,10 @@ public class Menu : MonoBehaviour
         AudioManager.Instance.PlayMusic("MainMenu");
         AudioManager.Instance.EnableMusicLoop();
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Application quit");
+    }
 }

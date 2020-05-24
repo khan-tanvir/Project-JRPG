@@ -278,9 +278,8 @@ public class ActivateObjective : Objective
 // Discover an area
 [System.Serializable]
 public class SearchObjective : Objective
-{ 
-
-    private bool _objectiveFound = false;
+{
+    private bool _locationEntered;
 
     public string Location
     {
@@ -303,6 +302,7 @@ public class SearchObjective : Objective
     {
         if (Location == place)
         {
+            _locationEntered = true;
             QuestManager.Instance.EvaluateQuest(Parent);
         }    
     }
@@ -319,7 +319,7 @@ public class SearchObjective : Objective
     {
         get
         {
-            return Complete;
+            return _locationEntered;
         }
     }
 }

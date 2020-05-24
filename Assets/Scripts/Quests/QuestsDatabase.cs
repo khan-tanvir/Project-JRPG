@@ -24,6 +24,7 @@ public struct QuestEntry
     public string Description;
     public string Giver;
 
+    // JSON doesn't support enum data types
     public int Status;
 
     public List<ObjectivesEntry> ObjectivesEntry;
@@ -66,6 +67,11 @@ public class QuestsDatabase
 
         _questList = JsonUtility.FromJson<QuestList>(GetPlayerQuestDatabase(saveFileID));
 
+        if (_questList.QuestEntry.Count == 0)
+        {
+            Debug.LogError("There are no quests in the database.");
+        }
+
         foreach (QuestEntry quest in _questList.QuestEntry)
         {
             Quest loadedQuest = new Quest();
@@ -73,6 +79,11 @@ public class QuestsDatabase
             loadedQuest.Title = quest.Title;
             loadedQuest.Description = quest.Description;
             loadedQuest.QuestGiverName = quest.Giver;
+
+            if (quest.ObjectivesEntry.Count == 0)
+            {
+                Debug.LogError("Quest: " + loadedQuest.Title + " has no objectives.");
+            }
 
             loadedQuest.Objectives = ReadObjectives(quest, loadedQuest);
 
@@ -129,6 +140,7 @@ public class QuestsDatabase
         {
             ObjectivesEntry entry = new ObjectivesEntry();
 
+            entry.Complete = objective.Complete;
             entry.Description = objective.Information;
 
             switch (objective.ObjectiveType)
@@ -179,21 +191,25 @@ public class QuestsDatabase
             switch (objective.Type)
             {
                 case "GATHER":
+                    // first entry is item to gather followed by, required amount and current amount
                     temp = new GatherObjective(objective.Description, objective.FirstEntry, int.Parse(objective.SecondEntry), int.Parse(objective.ThirdEntry));
                     break;
                 case "ESCORT":
+                    // first entry is npc to escort, second is target location
+                    // TODO: make third entry a bool whether to escort target
                     temp = new EscortObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
                     break;
                 case "SEARCH":
+                    // First entry is place to find
                     temp = new SearchObjective(objective.Description, objective.FirstEntry);
                     break;
                 case "ACTIVATE":
+                    // First entry is item / npc to interact with
+                    // TODO: Make second entry a bool whether first entry is an npc
                     temp = new ActivateObjective(objective.Description, objective.FirstEntry);
                     break;
                 case "DELIVER":
                     temp = new DeliverObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
-                    break;
-                default:
                     break;
             }
 

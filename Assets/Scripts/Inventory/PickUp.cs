@@ -77,7 +77,6 @@ public class PickUp : MonoBehaviour, IInteractable
 
     public void AddItemToInventory()
     {
-        
         for (int i = 0; i < Inventory.Instance.Slots.Count; i++)
         {
             if (Inventory.Instance.Slots[i].InvItem == null)

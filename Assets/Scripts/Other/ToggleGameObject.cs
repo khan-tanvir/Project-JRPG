@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class ToggleGameObject : MonoBehaviour
 {
-   public bool ToggleObject()
+   public bool SetActive
     {
-        gameObject.SetActive(!gameObject.activeInHierarchy);
-
-        return gameObject.activeInHierarchy;
+        get { return gameObject.activeInHierarchy; }
+        set { gameObject.SetActive(value); }
     }
 }

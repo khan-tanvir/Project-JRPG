@@ -63,8 +63,9 @@ public class Quest
                     i++;
                     QuestManager.Instance.UnSubscribeToEvent(obj);
                     obj.Complete =  true;
-                    Debug.Log("An objective is complete");
                 }
+
+                if (obj.Complete)
 
                 if (i == Objectives.Count)
                 {

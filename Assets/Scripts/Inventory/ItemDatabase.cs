@@ -46,10 +46,10 @@ public class ItemDatabase : MonoBehaviour
         return Items.Find(item => item.Name == name);
     }
 
-    public UnityEngine.Object GetItemPrefab(int id)
+    public Object GetItemPrefab(int id)
     {
         Item temp = GetItemByID(id);
-        UnityEngine.Object loadedObject = null;
+        Object loadedObject = null;
 
         if (temp != null)
             loadedObject = Resources.Load("Items/" + temp.Name, typeof(GameObject));

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
-    private int _numberOfSlots = 0;
+    private int _numberOfSlots;
 
     [SerializeField]
     private GameObject _slotObject;
@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
 
         CreateInventorySlots();
 
-        if (GameData.Instance.PlayerData != null && GameData.Instance.PlayerData.InventoryItems != null)
+        if (GameData.Instance.PlayerData?.InventoryItems != null)
         {
             LoadInventory();
         }
@@ -51,22 +51,26 @@ public class Inventory : MonoBehaviour
 
     public void LoadInventory()
     {
-        InventoryItem item = null;
-
         for (int i = 0; i < GameData.Instance.PlayerData.InventoryItems.Count; i++)
         {
-            item = GameData.Instance.PlayerData.InventoryItems[i];
+            InventoryItem item = GameData.Instance.PlayerData.InventoryItems[i];
 
-            var loadedObject = ItemDatabase.Instance.GetItemPrefab(item.itemID);
+            var loadedObject = ItemDatabase.Instance.GetItemPrefab(item.ID);
 
+            if (loadedObject == null)
+            {
+                Debug.LogError("loadedObject is null, check the item ID");
+                return;
+            }
+                
             GameObject createdGameObject = Instantiate(loadedObject, Slots[item.Position].transform, false) as GameObject;
 
-            createdGameObject.transform.localScale = new UnityEngine.Vector3(1.0f, 1.0f, 1.0f);
+            createdGameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             createdGameObject.gameObject.GetComponent<Image>().enabled = true;
             createdGameObject.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
-            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.itemID));
+            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.ID));
         }
     }
 

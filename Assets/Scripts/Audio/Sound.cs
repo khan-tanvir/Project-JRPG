@@ -2,11 +2,10 @@
 
 public enum SoundType
 {
-    Music,
-    Effect,
-    UI
+    Music = 0,
+    Effect = 1,
+    UI = 2
 }
-
 
 [System.Serializable]
 public class Sound
@@ -22,6 +21,9 @@ public class Sound
 
     [Range(0.0f, 1.0f)]
     public float volume;
+
+    [HideInInspector]
+    public AudioSource source;
 
     // Reference to the audio file
     public AudioClip Clip
@@ -39,7 +41,4 @@ public class Sound
     {
         get { return _type; }
     }
-
-    [HideInInspector]
-    public AudioSource source;
 }
