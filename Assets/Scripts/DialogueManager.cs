@@ -36,7 +36,7 @@ public class DialogueManager : MonoBehaviour
 
         animator.SetBool("isActive", true);
 
-        nameText.text = dialogue.name;
+       // nameText.text = dialogue.name;
 
         lineCount = 0;
 

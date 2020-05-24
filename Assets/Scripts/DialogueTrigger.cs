@@ -8,6 +8,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
+        dialogue.assignLines();
         FindObjectOfType<DialogueManager>().StartConversation(dialogue);
     }
 }
