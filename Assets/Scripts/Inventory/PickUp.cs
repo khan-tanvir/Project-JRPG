@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PickUp : MonoBehaviour, IInteractable
+public class PickUp : MonoBehaviour, IInteractable, IStoreable
 {
     // TODO: Turn this in to an interface
 
@@ -42,6 +42,12 @@ public class PickUp : MonoBehaviour, IInteractable
         {
             return true;
         }
+    }
+
+    public bool CanPickUp
+    {
+        get;
+        set;
     }
 
     private void Start()
