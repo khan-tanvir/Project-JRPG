@@ -65,6 +65,11 @@ public class Inventory : MonoBehaviour
                 
             GameObject createdGameObject = Instantiate(loadedObject, Slots[item.Position].transform, false) as GameObject;
 
+            if (createdGameObject.GetComponent<ItemMB>().Item == null)
+            {
+                createdGameObject.GetComponent<ItemMB>().Item = new Item(ItemDatabase.Instance.GetItemByID(item.ID));
+            }
+
             createdGameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             createdGameObject.gameObject.GetComponent<Image>().enabled = true;
