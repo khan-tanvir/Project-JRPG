@@ -10,6 +10,8 @@ public class Dialogue
 {
     public string script;
 
+    public string[] name;
+
     public Sprite[] sprite;
 
     [TextArea(3,10)]
@@ -30,12 +32,14 @@ public class Dialogue
             {
                 var oneString = oneDict.Elements("string");
                 XElement element = oneString.ElementAt(i);
+                int index = element.ToString().IndexOf(":");
                 Debug.Log(element);
-                string line = element.ToString().Replace("<string>", "").Replace("</string>", "");
+                string characterName = element.ToString().Substring(0, index).Replace("<string>", "").Replace(":","");
+                string line = element.ToString().Replace("<string>", "").Replace("</string>", "").Replace(characterName + ":", "");
 
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("script" + i, line);
-
+                dic.Add("name" + i, characterName);
                 i += 1;
 
                 allTextDic.Add(dic);
@@ -57,6 +61,7 @@ public class Dialogue
         {
             Dictionary<string, string> dic = allTextDic[i];
             lines[i] = dic["script"+i];
+            name[i] = dic["name" + i];
         }
     }
 }
