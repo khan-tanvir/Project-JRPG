@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <script>
 	<penny>
-		<string>Hey there!</string>
-		<string>I'm penny</string>
-		<string>It's a pleasure to meet you</string>
-		<string>Goodbye!</string>
+		<string>Penny:Hey there!</string>
+		<string>Kevin:I'm penny</string>
+		<string>Lenny:It's a pleasure to meet you</string>
+		<string>Terry:Goodbye!</string>
 	</penny>
 	<Kyle>
-		<string>yoyoyo!</string>
-		<string>I'm DJ kyle</string>
-		<string>I'm about to drop the biggest beat you've ever seen</string>
-		<string>Boom!</string>
+		<string>Kyle:yoyoyo!</string>
+		<string>Kyle:I'm DJ kyle</string>
+		<string>Kyle:I'm about to drop the biggest beat you've ever seen</string>
+		<string>Kyle:Boom!</string>
 	</Kyle>
+	<intro>
+		<string>Sam:In the beginning there was an explosion</string>
+		<string>Sam:An explosion so big it shook the very fabric of society</string>
+		<string>Host:Anyway enough of that back to our original programming</string>
+	</intro>
 </script>

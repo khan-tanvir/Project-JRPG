@@ -904,17 +904,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    script: Kyle
+    script: intro
+    name:
+    - 
+    - 
+    - 
     sprite:
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
     - {fileID: 21300000, guid: 8d495247644fb40b5972c92de8b601e9, type: 3}
-    - {fileID: 21300000, guid: eef3b797d962d47419f4db6cf5144059, type: 3}
     lines:
     - yoyoyo
     - 'i''m kyle '
     - the ultimate rapper
-    - yeah.... woo
 --- !u!114 &353995794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,7 +1951,7 @@ PrefabInstance:
     - target: {fileID: 3622407477822368182, guid: 44dbe76e61db1734fa0f827bf66c7cac,
         type: 3}
       propertyPath: m_Text
-      value: 
+      value: name
       objectReference: {fileID: 0}
     - target: {fileID: 3622407477955727872, guid: 44dbe76e61db1734fa0f827bf66c7cac,
         type: 3}
@@ -2197,6 +2199,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     script: penny
+    name:
+    - 
+    - 
+    - 
+    - 
     sprite:
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
