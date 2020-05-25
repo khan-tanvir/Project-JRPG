@@ -904,7 +904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: Kyle
+    script: Kyle
     sprite:
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
@@ -1946,6 +1946,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -168.97989
       objectReference: {fileID: 0}
+    - target: {fileID: 3622407477822368182, guid: 44dbe76e61db1734fa0f827bf66c7cac,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3622407477955727872, guid: 44dbe76e61db1734fa0f827bf66c7cac,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2191,7 +2196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: penny
+    script: penny
     sprite:
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
     - {fileID: 21300000, guid: d3fc86e87ed624cd4b99f41839d07872, type: 3}
@@ -2200,8 +2205,8 @@ MonoBehaviour:
     lines:
     - Hey there, I'm Steve the pirate.
     - I'm the best theif in the galaxy.
-    - no one has anything on me.
-    - I'm so cool.
+    - I'm the best theif in the galaxy.
+    - I'm the best theif in the galaxy.
 --- !u!114 &1436735090
 MonoBehaviour:
   m_ObjectHideFlags: 0

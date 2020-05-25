@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<script>
+	<penny>
+		<string>Hey there!</string>
+		<string>I'm penny</string>
+		<string>It's a pleasure to meet you</string>
+		<string>Goodbye!</string>
+	</penny>
+	<Kyle>
+		<string>yoyoyo!</string>
+		<string>I'm DJ kyle</string>
+		<string>I'm about to drop the biggest beat you've ever seen</string>
+		<string>Boom!</string>
+	</Kyle>
+</script>
