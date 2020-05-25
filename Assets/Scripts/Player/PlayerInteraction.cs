@@ -53,8 +53,6 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Raycast()
     {
-        //Collider2D detection = Physics2D.OverlapCircle(this.PlayerPosition, 1.0f, _layerMask);
-
         if (FindClosestObject())
         {
             IInteractable interactable = FindClosestObject().GetComponent<IInteractable>();

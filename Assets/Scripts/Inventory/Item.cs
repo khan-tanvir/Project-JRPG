@@ -1,5 +1,9 @@
-﻿public class Item
+﻿[System.Serializable]
+public class Item
 {
+    [UnityEngine.HideInInspector]
+    private ItemMB _itemMB;
+    
     public int ID
     {
         get;
@@ -20,8 +24,8 @@
 
     public ItemMB ItemMB
     {
-        get;
-        set;
+        get { return _itemMB; }
+        set { _itemMB = value; }
     }
 
     public Item(int id, string name, string description)

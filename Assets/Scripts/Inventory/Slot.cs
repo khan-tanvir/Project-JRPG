@@ -8,53 +8,63 @@ public class Slot : MonoBehaviour
 {
     public Item InvItem
     {
-        get;
-        internal set;
+        get 
+        {
+            try
+            {
+                return GetComponentInChildren<ItemMB>().Item;
+            }
+            catch (System.NullReferenceException e)
+            {
+                return null;
+            }
+        }
     }
 
     public void StoreItem(Item item)
     {
-        InvItem = item;
+
+        if (InvItem.ItemMB == null)
+        {
+            InvItem.ItemMB = item.ItemMB;
+        }
 
         foreach (Transform child in transform)
         {
-            if (child.name != "Cross") child.name = InvItem.Name;
+            if (child.name != "Cross")
+            {
+                child.name = InvItem.Name;
+            }
         }
-    }
-
-    public void DisablePickUp()
-    {
-        GetComponentInChildren<PickUp>().enabled = false;
     }
 
     public void DropItem()
     {
-        if (InvItem != null)
+        if (InvItem?.ItemMB != null)
         {
+            if (transform.GetComponentInChildren<IDroppable>()?.EnableDrop != true)
+            {
+                return;
+            }
+
             Vector2 playerPos = FindObjectOfType<Player>().GetComponent<Rigidbody2D>().transform.position;
 
             // Set the range for dropping them item and the z value has to be -1 so it can be seen from the main camera
             Vector3 dropPos = new Vector3(playerPos.x + Random.Range(-1.5f, 1.5f), playerPos.y + Random.Range(-1.5f, 1.5f), -1.0f);
 
-            Transform child = transform.GetComponentInChildren<PickUp>().gameObject.transform;
+            Transform child = transform.GetComponentInChildren<ItemMB>().gameObject.transform;
 
             // Store it in temp after creating it so that it can be referenced
             GameObject temp = Instantiate(child.gameObject, dropPos, Quaternion.identity);
 
-            // Adjust the instaniated object
-            temp.transform.localScale = new Vector2(1.0f, 1.0f);
+            if (temp.GetComponent<ItemMB>()?.Item == null)
+            {
+                temp.GetComponent<ItemMB>().Item = InvItem;
+            }
 
-            // Toggle components that are needed and not needed
-            temp.gameObject.GetComponent<UnityEngine.UI.Image>().enabled = false;
-            temp.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            temp.gameObject.GetComponent<PickUp>().enabled = true;
+            temp.GetComponentInChildren<IDroppable>().ItemDropped();
 
-            GameObject.Destroy(child.gameObject);
-
-            InvItem = null;
-
-            // Calls the Gather Objective Change Event
-            EventsManager.Instance.GatherObjectiveChange(temp.GetComponent<PickUp>().ItemName);
+            Destroy(child.gameObject);
         }
     }
 }

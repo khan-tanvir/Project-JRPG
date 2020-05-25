@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 501204988629294660}
   - component: {fileID: 501204988629294667}
   - component: {fileID: 501204988629294666}
-  - component: {fileID: 501204988629294665}
   - component: {fileID: 501204988629294662}
+  - component: {fileID: 8728067686578027251}
   m_Layer: 8
   m_Name: Arrow
   m_TagString: Untagged
@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 501204988629294664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.5237943, y: 0.5237943, z: 0.5237943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -127,21 +127,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &501204988629294665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501204988629294664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9245f4416d37919469007ccd9f56794a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemName: Arrow
-  interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
-  _enablePickup: 0
 --- !u!58 &501204988629294662
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -158,3 +143,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.59375
+--- !u!114 &8728067686578027251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501204988629294664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4316215d6402d4dbeb804d9b23b718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
+  defaultMat: {fileID: 0}
+  _itemID: 2
+  _enableInteraction: 1
+  _infiniteUses: 1
+  _enablePickUp: 1
+  _enableDrop: 1

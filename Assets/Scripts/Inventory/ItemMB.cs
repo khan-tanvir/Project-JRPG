@@ -1,53 +1,99 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine;
 
-public class ItemMB : MonoBehaviour
+[System.Serializable]
+public abstract class ItemMB : MonoBehaviour, IInteractable
 {
-    // Every item in the game world will have this class
     [SerializeField]
-    private int _itemID;
+    protected Material interactionMat;
 
+    [HideInInspector]
+    public Material defaultMat;
+
+    [SerializeField]
+    protected int _itemID;
+
+    protected bool _canInteract;
+
+    public abstract Item Item
+    {
+        get;
+        set;
+    }
+    public abstract bool EnabledInteraction
+    {
+        get;
+        set;
+    }
+
+    public abstract bool InfiniteUses
+    {
+        get;
+        set;
+    }
     public Image ImageComp
     {
-        get;
-        internal set;
+        get { return gameObject.GetComponent<Image>(); }
     }
 
-   public SpriteRenderer SpriteRendererComp
+    public SpriteRenderer SpriteRendererComp
     {
-        get;
-        internal set;
+        get { return gameObject.GetComponent<SpriteRenderer>(); }
     }
 
-    public Item Item
-    {
-        get;
-        internal set;
-    }
-
-    public Sprite Sprite
-    {
-        get;
-        internal set;
-    }
-
-    public void Start()
+    public virtual void Start()
     {
         Item = new Item(ItemDatabase.Instance.GetItemByID(_itemID));
         Item.ItemMB = this;
+        
+        defaultMat = gameObject.GetComponent<Renderer>().material;
 
-        SetupComponents();
+        _canInteract = true;
+
     }
 
-    private void SetupComponents()
+    public virtual void Focus()
     {
-        ImageComp = gameObject.AddComponent(typeof(Image)) as Image;
-        SpriteRendererComp = gameObject.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+        if (!_canInteract)
+        {
+            return;
+        }
 
-        _ = ImageComp.sprite;
-        _ = SpriteRendererComp.sprite;
-        
+        if (EnabledInteraction)
+        {
+            gameObject.GetComponent<Renderer>().material = interactionMat;
+        }
+    }
+
+    public virtual void OnInteract()
+    {
+        if (!_canInteract)
+        {
+            return;
+        }
+
+        if (EnabledInteraction)
+        {
+            EventsManager.Instance.InteractionWithItem(Item.Name);
+        }
+    }
+
+    public virtual void UnFocus()
+    {
+        if (!_canInteract)
+        {
+            return;
+        }
+
+        if (EnabledInteraction)
+        {
+            gameObject.GetComponent<Renderer>().material = defaultMat;
+        }
+    }
+
+    public void CallItemChangeEvent()
+    {
+        // Calls the Gather Objective Change Event
+        EventsManager.Instance.GatherObjectiveChange(Item.Name);
     }
 }
