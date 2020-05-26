@@ -13,20 +13,37 @@ TagManager:
   - UI
   - 
   - 
-  - Interactable
-  - Collision
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Tilemap
-    uniqueID: 1494210737
-    locked: 0
-  - name: Items
-    uniqueID: 2140049083
-    locked: 0
-  - name: Player
-    uniqueID: 919961275
   - name: Signs
     uniqueID: 340544567
+    locked: 0
+  - name: Player
+    uniqueID: 757223279
     locked: 0
