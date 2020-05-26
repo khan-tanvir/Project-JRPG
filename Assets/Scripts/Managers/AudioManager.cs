@@ -17,6 +17,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private Slider _musicSlider;
 
+    [SerializeField]
+    private Slider _effectSlider;
+
     // Array that stores all sounds
     [SerializeField]
     private Sound[] _sounds;
@@ -51,10 +54,11 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
-        if (_masterSlider != null && _musicSlider != null)
+        if (_masterSlider != null && _musicSlider != null && _effectSlider != null)
         {
             _masterSlider.value = GameData.Instance.MasterVolume;
             _musicSlider.value = GameData.Instance.MusicVolume;
+            _effectSlider.value = GameData.Instance.EffectVolume;
         }
     }
 
@@ -88,11 +92,22 @@ public class AudioManager : MonoBehaviour
     {
         // Using log10 for a better slider
         _audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20.0f);
+
+        PlayerPrefs.SetFloat("Master Volume", volume);
     }
 
     public void SetMusicVolume(float volume)
     {
         _audioMixer.SetFloat("Music Volume", Mathf.Log10(volume) * 20.0f);
+
+        PlayerPrefs.SetFloat("Music Volume", volume);
+    }
+
+    public void SetEffectsVolume(float volume)
+    {
+        _audioMixer.SetFloat("Effects Volume", Mathf.Log10(volume) * 20.0f);
+
+        PlayerPrefs.SetFloat("Effects Volume", volume);
     }
 
     public Sound Find(string name)
@@ -119,6 +134,14 @@ public class AudioManager : MonoBehaviour
                 Find(name).source.Play();
                 CurrentMusic = name;
             }
+        }
+    }
+
+    public void PlayEffect(string name)
+    {
+        if (Find(name) != null)
+        {
+            Find(name).source.Play();
         }
     }
 

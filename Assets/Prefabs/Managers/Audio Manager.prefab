@@ -46,6 +46,7 @@ MonoBehaviour:
   _audioMixer: {fileID: 24100000, guid: d28eac0885b914e45945bed1a7447c82, type: 2}
   _masterSlider: {fileID: 0}
   _musicSlider: {fileID: 0}
+  _effectSlider: {fileID: 0}
   _sounds:
   - _clip: {fileID: 8300000, guid: 776d10120bc5e8a4ab51405a59c8d43f, type: 3}
     _name: MainMenu

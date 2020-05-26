@@ -92,6 +92,11 @@ public class GameData : MonoBehaviour
         get { return PlayerPrefs.GetFloat("Music Volume", 0.18f); }
     }
 
+    public float EffectVolume
+    {
+        get { return PlayerPrefs.GetFloat("Effects Volume", 0.3f); }
+    }
+
     public static GameData Instance
     {
         get;
@@ -227,17 +232,5 @@ public class GameData : MonoBehaviour
     {
         File.Delete(Application.persistentDataPath + "/playerInfo" + pos + ".dat");
         CheckAllFiles();
-    }
-
-    public void SaveMasterVolumeValue(float value)
-    {
-        // Called everytime the user changes the master volume slider
-        PlayerPrefs.SetFloat("Master Volume", value);
-    }
-
-    public void SaveMusicVolumeValue(float value)
-    {
-        // Called everytime the user changes the master volume slider
-        PlayerPrefs.SetFloat("Music Volume", value);
     }
 }
