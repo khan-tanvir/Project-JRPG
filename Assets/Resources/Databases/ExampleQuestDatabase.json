@@ -1,80 +1,86 @@
 {
   "QuestEntry": [
     {
-      "ID": 1,
-      "Title": "IsthisUpdating",
-      "Description": "Description",
+      "ID": 0,
+      "Title": "Gather Test",
+      "Description": "Test Saving",
       "Giver": "NPC_NAME",
-      "IsComplete": false,
+      "Status": 0,
       "ObjectivesEntry": [
         {
-          "Type": "Gather",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "2"
-        },
-        {
-          "Type": "Escort",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
-        },
-        {
-          "Type": "Search",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
-        },
-        {
-          "Type": "Activate",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
-        },
-        {
-          "Type": "Deliver",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
+          "Complete": false,
+          "Type": "GATHER",
+          "Description": "Gather [Test]  0/4",
+          "FirstEntry": "Test",
+          "SecondEntry": "4"
         }
       ]
     },
     {
-      "ID": 2,
-      "Title": "Second",
-      "Description": "Description",
+      "ID": 0,
+      "Title": "Activate Test",
+      "Description": "DESCRIPTION",
       "Giver": "NPC_NAME",
-      "IsComplete": false,
+      "Status": 0,
       "ObjectivesEntry": [
         {
-          "Type": "Gather",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "a",
-          "SecondEntry": "3"
-        },
+          "Complete": false,
+          "Type": "ACTIVATE",
+          "Description": "Interact with the ARROW on the ground",
+          "FirstEntry": "Arrow",
+          "SecondEntry": "",
+          "ThirdEntry": ""
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Escort Test",
+      "Description": "Test Saving",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
         {
-          "Type": "Escort",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
-        },
+          "Complete": false,
+          "Type": "ESCORT",
+          "Description": "Escort [Test] to [4]",
+          "FirstEntry": "Test",
+          "SecondEntry": "4",
+          "ThirdEntry": ""
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Search Test",
+      "Description": "Test Saving",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
         {
-          "Type": "Search",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
-        },
+          "Complete": false,
+          "Type": "SEARCH",
+          "Description": "Walk to the entrance of the cave",
+          "FirstEntry": "Cave",
+          "SecondEntry": "",
+          "ThirdEntry": ""
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Deliver Test",
+      "Description": "Test Saving",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
         {
-          "Type": "Activate",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
-        },
-        {
-          "Type": "Deliver",
-          "Description": "DESCRIPTION",
-          "FirstEntry": "FIRSTENTRY",
-          "SecondEntry": "SECONDENTRY"
+          "Complete": false,
+          "Type": "DELIVER",
+          "Description": "Take [Test] to [4]",
+          "FirstEntry": "Test",
+          "SecondEntry": "4",
+          "ThirdEntry": ""
         }
       ]
     }

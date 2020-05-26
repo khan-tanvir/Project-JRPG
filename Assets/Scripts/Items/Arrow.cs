@@ -60,8 +60,6 @@ public class Arrow : ItemMB, IStoreable, IDroppable
 
         if (IsItemStored)
         {
-            
-            _canInteract = false;
             Destroy(gameObject);
         }
         else
@@ -92,5 +90,9 @@ public class Arrow : ItemMB, IStoreable, IDroppable
         }
 
         base.OnInteract();
+        if (IsItemStored)
+        {
+            _canInteract = false;
+        }
     }
 }

@@ -84,12 +84,12 @@ public class GameData : MonoBehaviour
 
     public float MasterVolume
     {
-        get { return PlayerPrefs.GetFloat("Master Volume"); }
+        get { return PlayerPrefs.GetFloat("Master Volume", 0.42f); }
     }
 
     public float MusicVolume
     {
-        get { return PlayerPrefs.GetFloat("Music Volume"); }
+        get { return PlayerPrefs.GetFloat("Music Volume", 0.18f); }
     }
 
     public static GameData Instance
@@ -107,14 +107,6 @@ public class GameData : MonoBehaviour
         ExistingSaveFiles = new int[3];
     }
 
-    private void Start()
-    {
-        if (PlayerPrefs.GetFloat("Master Volume", 0.8f) < 0.0001f || float.IsNaN(PlayerPrefs.GetFloat("Master Volume")))
-            PlayerPrefs.SetFloat("Master Volume", 0.8f);
-
-        if (PlayerPrefs.GetFloat("Music Volume", 0.8f) < 0.0001f || float.IsNaN(PlayerPrefs.GetFloat("Music Volume")))
-            PlayerPrefs.SetFloat("Music Volume", 0.8f);
-    }
 
     private void CreateInstance()
     {

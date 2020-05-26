@@ -81,13 +81,10 @@ public class GatherObjective : Objective
         internal set;
     }
 
-    public GatherObjective() {; }
-
-    public GatherObjective(string desc, string type, int required, int current)
+    public GatherObjective(string desc, string type, int required)
     {
         Information = desc;
         RequiredAmount = required;
-        CurrentAmount = current;
         Type = type;
     }
 
@@ -105,10 +102,7 @@ public class GatherObjective : Objective
     {   
         get
         {
-            if (CurrentAmount >= RequiredAmount)
-                return true;
-            else 
-                return false;
+            return CurrentAmount >= RequiredAmount;
         }
     }
 }

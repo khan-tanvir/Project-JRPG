@@ -192,7 +192,7 @@ public class QuestsDatabase
             {
                 case "GATHER":
                     // first entry is item to gather followed by, required amount and current amount
-                    temp = new GatherObjective(objective.Description, objective.FirstEntry, int.Parse(objective.SecondEntry), int.Parse(objective.ThirdEntry));
+                    temp = new GatherObjective(objective.Description, objective.FirstEntry, int.Parse(objective.SecondEntry));
                     break;
                 case "ESCORT":
                     // first entry is npc to escort, second is target location
