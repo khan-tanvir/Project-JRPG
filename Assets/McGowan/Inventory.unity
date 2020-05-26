@@ -743,6 +743,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: backyard_71 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2414451589556235769, guid: da3cdd770b7c2644484e5e1ab84dcc9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2414451589556235773, guid: da3cdd770b7c2644484e5e1ab84dcc9f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1020,6 +1025,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: backyard_12 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1750367985164338231, guid: 2d1a260a43b11e347a291629dbc2589b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1a260a43b11e347a291629dbc2589b, type: 3}
@@ -2669,6 +2679,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727347244}
   m_CullTransparentMesh: 0
+--- !u!1 &1887727884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1887727885}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1887727885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887727884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.85987884, y: 0.17831635, z: -115.82255}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1964662620
 GameObject:
   m_ObjectHideFlags: 0
