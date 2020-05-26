@@ -7,16 +7,14 @@ public class NPCDialogue : MonoBehaviour
 {
 
     public GameObject dialogBox;
-    public DialogueManager dialogueManager;
     public bool playerInRange;
+    public Dialogue dialogue;
 
     // Start is called before the first frame update
     void Start()
     {
 
     }
-
-    public Dialogue dialogue;
 
     public void TriggerDialogue()
     {
@@ -39,6 +37,7 @@ public class NPCDialogue : MonoBehaviour
             //    dialogBox.SetActive(true);
             //    TriggerDialogue();
             //}
+
             TriggerDialogue();
         }
     }
