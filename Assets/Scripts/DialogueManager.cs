@@ -36,7 +36,7 @@ public class DialogueManager : MonoBehaviour
 
         animator.SetBool("isActive", true);
 
-        // nameText.text = dialogue.name;
+        nameText.text = dialogue.name[lineCount];
 
         lineCount = 0;
 
@@ -61,6 +61,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             prevLineCount -= 1;
+            nameText.text = tempDialogueCheck.name[prevLineCount];
             sprite.sprite = tempDialogueCheck.sprite[prevLineCount];
             dialogueText.text = previousLines[prevLineCount];
             dialogueText.color = Color.blue;
@@ -77,6 +78,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             prevLineCount += 1;
+            nameText.text = tempDialogueCheck.name[prevLineCount];
             sprite.sprite = tempDialogueCheck.sprite[prevLineCount];
             dialogueText.text = previousLines[prevLineCount];
             dialogueText.color = Color.blue;
@@ -93,6 +95,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            nameText.text = tempDialogueCheck.name[lineCount];
             sprite.sprite = tempDialogueCheck.sprite[lineCount];
             lineCount +=1;
             prevLineCount = lineCount-1;
