@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         PlayerInput.PlayerControls.Journal.performed += ctx => ToggleJournal();
         PlayerInput.PlayerControls.Pause.performed += ctx => ToggleGame();
         PlayerInput.PlayerControls.Interact.performed += ctx => Interact();
+        PlayerInput.PlayerControls.ToggleFollower.performed += ctx => ToggleFollower();
     }
 
     private void LoadPlayerPosition()
@@ -149,5 +150,10 @@ public class Player : MonoBehaviour
     {
         if (_playerInteraction.InteractableObject)
             _playerInteraction.CallInteract();
+    }
+
+    private void ToggleFollower()
+    {
+
     }
 }

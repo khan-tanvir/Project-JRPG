@@ -36,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(this.PlayerPosition, radius, _layerMask);
 
-        float minSqrDistance = Mathf.Infinity;
+        const float minSqrDistance = Mathf.Infinity;
 
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -57,7 +57,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             IInteractable interactable = FindClosestObject().GetComponent<IInteractable>();
 
-            if (interactable != null && interactable.EnabledInteraction)
+            if (interactable?.EnabledInteraction == true)
             {
                 if (interactable == _currentInteractable)
                 {

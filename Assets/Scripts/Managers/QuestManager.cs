@@ -107,6 +107,7 @@ public class QuestManager : MonoBehaviour
         }
 
         _currentSelectedQuest = quest;
+
         string objectives = "\n";
 
         foreach (Objective objective in _currentSelectedQuest.Objectives)
@@ -142,6 +143,20 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    private void SetupEscortObjective(EscortObjective objective)
+    {
+        AIController[] temp = FindObjectsOfType<AIController>();
+        AIController npcAI;
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            if (temp[i].NPCName == objective.FollowerName)
+            {
+                
+            }
+        }
+    }
+
     private void SubscribeToEvent(Objective objective)
     {
         switch (objective.ObjectiveType)
@@ -152,7 +167,8 @@ public class QuestManager : MonoBehaviour
                 EventsManager.Instance.GatherObjectiveChange(gatherCast.Type);
                 break;
             case GoalType.ESCORT:
-                
+                var escortCast = (EscortObjective)objective;
+                EventsManager.Instance.OnLocationEntered += escortCast.ValidateLocation;
                 break;
             case GoalType.DELIVER:
                 
@@ -167,6 +183,7 @@ public class QuestManager : MonoBehaviour
                 break;
         }
     }
+
     public void UnSubscribeToEvent(Objective objective)
     {
         switch (objective.ObjectiveType)
@@ -176,7 +193,8 @@ public class QuestManager : MonoBehaviour
                 EventsManager.Instance.OnGatherObjectiveChange -= gatherCast.UpdateCurrentAmount;
                 break;
             case GoalType.ESCORT:
-
+                var escortCast = (EscortObjective)objective;
+                EventsManager.Instance.OnLocationEntered -= escortCast.ValidateLocation;
                 break;
             case GoalType.DELIVER:
 
@@ -204,7 +222,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case GoalType.ESCORT:
                 var escortCast = (EscortObjective)objective;
-                escortCast.Information = "Escort [" + escortCast.FollowerName + "] to [" + escortCast.TargetName + "]";
+                escortCast.Information = "Escort [" + escortCast.FollowerName + "] to [" + escortCast.Location + "]";
                 break;
             case GoalType.DELIVER:
                 var deliverCast = (DeliverObjective)objective;

@@ -20,6 +20,7 @@ public class EventsManager : MonoBehaviour
     public event Action<string> OnGatherObjectiveChange;
     public event Action<string> OnInteractionWithItem;
     public event Action<string> OnLocationEntered;
+    public event Action OnToggleFollower;
 
     public void GatherObjectiveChange(string item)
     {
@@ -34,5 +35,10 @@ public class EventsManager : MonoBehaviour
     public void LocationEntered(string location)
     {
         OnLocationEntered?.Invoke(location);
+    }
+
+    public void ToggleFollower()
+    {
+        OnToggleFollower?.Invoke();
     }
 }

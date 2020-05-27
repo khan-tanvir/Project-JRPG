@@ -104,8 +104,6 @@ public class QuestsDatabase
                     loadedQuest.Status = QuestStatus.COMPLETE;
                     QuestManager.Instance.AddQuestToJournal(loadedQuest);
                     break;
-                default:
-                    break;
             }
         }
     }
@@ -154,7 +152,7 @@ public class QuestsDatabase
                 case GoalType.ESCORT:
                     var escortCast = (EscortObjective)objective;
                     entry.FirstEntry = escortCast.FollowerName;
-                    entry.SecondEntry = escortCast.TargetName;
+                    entry.SecondEntry = escortCast.Location;
                     break;
                 case GoalType.DELIVER:
                     var deliverCast = (DeliverObjective)objective;

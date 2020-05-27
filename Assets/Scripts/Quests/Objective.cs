@@ -111,11 +111,19 @@ public class GatherObjective : Objective
 [System.Serializable]
 public class EscortObjective : Objective
 {
-    [SerializeField]
-    private Rigidbody2D _follower;
+    private bool _locationEntered;
+    
+    public bool IsFollowing
+    {
+        get;
+        set;
+    }
 
-    [SerializeField]
-    private Rigidbody2D _target;
+    public string Location
+    {
+        get;
+        internal set;
+    }
 
     public override GoalType ObjectiveType
     {
@@ -128,42 +136,38 @@ public class EscortObjective : Objective
         internal set;
     }
 
-    public Rigidbody2D FollowerRB
-    {
-        get { return _follower; }
-    }
-
-    public Rigidbody2D TargetRB
-    {
-        get { return _target; }
-    }
-
     public string FollowerName
     {
         get;
         internal set;
     }
 
-    public string TargetName
-    {
-        get;
-        internal set;
-    }
-
-    public EscortObjective() {; }
-
-    public  EscortObjective(string desc, string followerName, string targetLocation)
+    public EscortObjective(string desc, string followerName, string targetLocation)
     {
         Information = desc;
         FollowerName = followerName;
-        TargetName = targetLocation;
+        Location = targetLocation;
+    }
+
+    public void ValidateLocation(string place)
+    {
+        if (!IsFollowing)
+        {
+            return;
+        }
+
+        if (Location == place)
+        {
+            _locationEntered = true;
+            QuestManager.Instance.EvaluateQuest(Parent);
+        }
     }
 
     public override bool Evaluate
     {
         get
         {
-            return false;
+            return _locationEntered;
         }
     }
 }

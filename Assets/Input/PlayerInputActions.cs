@@ -57,6 +57,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""ToggleFollower"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d5fc0fb-ce0a-420f-93d4-4b9ceda232cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -180,6 +188,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d80b621d-9101-4c0c-83a5-2c21ac96f5a0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ToggleFollower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -204,6 +223,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_PlayerControls_Journal = m_PlayerControls.FindAction("Journal", throwIfNotFound: true);
         m_PlayerControls_Inventory = m_PlayerControls.FindAction("Inventory", throwIfNotFound: true);
         m_PlayerControls_Interact = m_PlayerControls.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerControls_ToggleFollower = m_PlayerControls.FindAction("ToggleFollower", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -258,6 +278,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_Journal;
     private readonly InputAction m_PlayerControls_Inventory;
     private readonly InputAction m_PlayerControls_Interact;
+    private readonly InputAction m_PlayerControls_ToggleFollower;
     public struct PlayerControlsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -267,6 +288,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Journal => m_Wrapper.m_PlayerControls_Journal;
         public InputAction @Inventory => m_Wrapper.m_PlayerControls_Inventory;
         public InputAction @Interact => m_Wrapper.m_PlayerControls_Interact;
+        public InputAction @ToggleFollower => m_Wrapper.m_PlayerControls_ToggleFollower;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -291,6 +313,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
+                @ToggleFollower.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnToggleFollower;
+                @ToggleFollower.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnToggleFollower;
+                @ToggleFollower.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnToggleFollower;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -310,6 +335,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ToggleFollower.started += instance.OnToggleFollower;
+                @ToggleFollower.performed += instance.OnToggleFollower;
+                @ToggleFollower.canceled += instance.OnToggleFollower;
             }
         }
     }
@@ -339,5 +367,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnJournal(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnToggleFollower(InputAction.CallbackContext context);
     }
 }
