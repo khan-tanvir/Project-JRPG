@@ -20,7 +20,7 @@ public class Graphics : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string Resolutions = resolutions[i].width + " " + "X" + " " + resolutions[i].height;
+            string Resolutions = resolutions[i].width + "X" + resolutions[i].height;
             Resolution.Add(Resolutions);
 
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
