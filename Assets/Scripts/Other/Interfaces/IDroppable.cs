@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public interface IDroppable
+﻿public interface IDroppable
 {
+    #region Public Properties
+
     bool EnableDrop
     {
         get;
         set;
     }
 
+    #endregion Public Properties
+
+    #region Public Methods
+
     void ItemDropped();
+
+    #endregion Public Methods
 }

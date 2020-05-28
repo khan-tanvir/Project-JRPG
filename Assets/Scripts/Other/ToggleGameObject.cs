@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ToggleGameObject : MonoBehaviour
 {
-   public bool SetActive
+    #region Public Properties
+
+    public bool SetActive
     {
         get { return gameObject.activeInHierarchy; }
         set { gameObject.SetActive(value); }
     }
+
+    #endregion Public Properties
 }

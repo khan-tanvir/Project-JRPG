@@ -1,21 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class QuestGiverPanel : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _questPrefab;
-
-    [SerializeField]
-    private Transform _questArea;
-
-    [SerializeField]
-    private GameObject _descriptionPanel;
-
-    [SerializeField]
-    private GameObject _questsPanel;
+    #region Private Fields
 
     [SerializeField]
     private GameObject _acceptButton;
@@ -25,13 +13,33 @@ public class QuestGiverPanel : MonoBehaviour
 
     private Quest _currentSelectedQuest;
 
+    [SerializeField]
+    private GameObject _descriptionPanel;
+
+    [SerializeField]
+    private Transform _questArea;
+
     private QuestGiver _questGiver;
+
+    [SerializeField]
+    private GameObject _questPrefab;
+
+    [SerializeField]
+    private GameObject _questsPanel;
+
+    #endregion Private Fields
+
+    #region Public Properties
 
     public static QuestGiverPanel Instance
     {
         get;
         internal set;
     }
+
+    #endregion Public Properties
+
+    #region Private Methods
 
     private void Awake()
     {
@@ -43,20 +51,9 @@ public class QuestGiverPanel : MonoBehaviour
         ClearPanel();
     }
 
-    public void ShowQuests(QuestGiver questGiver)
-    {
-        _questGiver = questGiver;
+    #endregion Private Methods
 
-        ClearPanel();
-
-        foreach (Quest quest in questGiver.Quests)
-        {
-            GameObject temp = Instantiate(_questPrefab, _questArea);
-            temp.GetComponent<TMP_Text>().text = quest.Title;
-
-            temp.GetComponent<UnacceptedQuest>().Quest = quest;
-        }
-    }
+    #region Public Methods
 
     public void ClearPanel()
     {
@@ -64,34 +61,6 @@ public class QuestGiverPanel : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-    }
-
-    public void SwitchBetweenWindows()
-    {
-        _descriptionPanel.SetActive(!_descriptionPanel.activeInHierarchy);
-        _questsPanel.SetActive(!_questsPanel.activeInHierarchy);
-        _acceptButton.SetActive(!_acceptButton.activeInHierarchy);
-        _backButton.SetActive(!_backButton.activeInHierarchy);
-
-        _currentSelectedQuest = null;
-    }
-
-    public void ShowDescription(Quest quest)
-    {
-        SwitchBetweenWindows();
-
-        _currentSelectedQuest = quest;
-
-        string objectives = "\n";
-
-        foreach (Objective objective in _currentSelectedQuest.Objectives)
-        {
-            objectives += objective.Information + "\n";
-        }
-
-        string textToDisplay = string.Format("{0}\n\n<size=25>{1}</size><size=20>{2}</size>", _currentSelectedQuest.Title, _currentSelectedQuest.Description, objectives);
-
-        _descriptionPanel.GetComponentInChildren<TMP_Text>().text = textToDisplay;
     }
 
     public void GiveQuestToPlayer()
@@ -112,4 +81,49 @@ public class QuestGiverPanel : MonoBehaviour
             SwitchBetweenWindows();
         }
     }
+
+    public void ShowDescription(Quest quest)
+    {
+        SwitchBetweenWindows();
+
+        _currentSelectedQuest = quest;
+
+        string objectives = "\n";
+
+        foreach (Objective objective in _currentSelectedQuest.Objectives)
+        {
+            objectives += objective.Information + "\n";
+        }
+
+        string textToDisplay = string.Format("{0}\n\n<size=25>{1}</size><size=20>{2}</size>", _currentSelectedQuest.Title, _currentSelectedQuest.Description, objectives);
+
+        _descriptionPanel.GetComponentInChildren<TMP_Text>().text = textToDisplay;
+    }
+
+    public void ShowQuests(QuestGiver questGiver)
+    {
+        _questGiver = questGiver;
+
+        ClearPanel();
+
+        foreach (Quest quest in questGiver.Quests)
+        {
+            GameObject temp = Instantiate(_questPrefab, _questArea);
+            temp.GetComponent<TMP_Text>().text = quest.Title;
+
+            temp.GetComponent<UnacceptedQuest>().Quest = quest;
+        }
+    }
+
+    public void SwitchBetweenWindows()
+    {
+        _descriptionPanel.SetActive(!_descriptionPanel.activeInHierarchy);
+        _questsPanel.SetActive(!_questsPanel.activeInHierarchy);
+        _acceptButton.SetActive(!_acceptButton.activeInHierarchy);
+        _backButton.SetActive(!_backButton.activeInHierarchy);
+
+        _currentSelectedQuest = null;
+    }
+
+    #endregion Public Methods
 }

@@ -3,49 +3,69 @@
 public enum State
 {
     PATROL,
+
     FOLLOW,
+
     IDLE
 }
 
 public class AIController : MonoBehaviour
 {
+    #region Private Fields
+
     private Animator _animator;
-
-    private Rigidbody2D _rigidBody;
-
-    [SerializeField]
-    private Transform _target;
-
-    [SerializeField]
-    private State _state;
 
     private bool _moveAI;
 
     [SerializeField]
+    private float _movementSpeed;
+
+    [SerializeField]
     private string _npcName;
+
+    private Rigidbody2D _rigidBody;
+
+    [SerializeField]
+    private State _state;
+
+    [SerializeField]
+    private Transform _target;
 
     private Vector2 direction;
 
-    [SerializeField]
-    private float _movementSpeed;
+    private float waitTime;
+
+    #endregion Private Fields
+
+    #region Public Fields
+
+    [Header("Area of movement")]
+    public float maxX;
+
+    public float maxY;
+
+    public float minX;
+
+    public float minY;
 
     public Transform moveSpot;
+
+    [Header("Time adjustment")]
+    public float startWaitTime;
+
+    #endregion Public Fields
+
+    #region Public Properties
+
+    public EscortObjective EscortObjective
+    {
+        get;
+        set;
+    }
 
     public string NPCName
     {
         get { return _npcName; }
-    }
-
-    public Transform Target
-    {
-        get { return _target; }
-        set { _target = value; }
-    }
-
-    public State State
-    {
-        get { return _state; }
-        set { _state = value; }
     }
 
     public float Speed
@@ -54,44 +74,47 @@ public class AIController : MonoBehaviour
         set { _movementSpeed = value; }
     }
 
-    [Header("Area of movement")]
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
-
-    [Header("Time adjustment")]
-    public float startWaitTime;
-    private float waitTime;
-
-    private void Start()
+    public State State
     {
-        waitTime = startWaitTime;
-
-        SetupComponents();
+        get { return _state; }
+        set { _state = value; }
     }
 
-    private void SetupComponents()
+    public Transform Target
     {
-        _animator = GetComponent<Animator>();
-        _rigidBody = GetComponent<Rigidbody2D>();
+        get { return _target; }
+        set { _target = value; }
     }
 
-    private void Update()
+    #endregion Public Properties
+
+    #region Private Methods
+
+    private RaycastHit2D CheckRaycast(Vector2 direction)
     {
-        direction = Target.position - _rigidBody.transform.position;
-        direction.Normalize();
+        Vector2 startingPositionX = new Vector2(_rigidBody.transform.position.x, _rigidBody.transform.position.y);
 
-        _animator.SetFloat("Horizontal", direction.x);
-        _animator.SetFloat("Vertical", direction.y);
+        LayerMask mask = LayerMask.GetMask("Building");
 
-        if (_moveAI)
+        Debug.DrawRay(startingPositionX, direction, Color.white);
+
+        return Physics2D.CircleCast(startingPositionX, 1.0f, direction, 0.0f, mask);
+    }
+
+    private bool CheckRaycastUpdate()
+    {
+        Vector2 direction = new Vector2(0, 0);
+        RaycastHit2D hit = CheckRaycast(direction);
+
+        if (hit.collider)
         {
-            _animator.SetFloat("Speed", direction.sqrMagnitude);
+            Debug.Log("Hit " + hit.collider.name);
+            moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            return true;
         }
         else
         {
-            _animator.SetFloat("Speed", 0.0f);
+            return false;
         }
     }
 
@@ -102,18 +125,15 @@ public class AIController : MonoBehaviour
             case State.PATROL:
                 Patrol();
                 break;
+
             case State.FOLLOW:
                 Follow();
                 break;
+
             case State.IDLE:
                 Idle();
                 break;
         }
-    }
-
-    private void Patrol()
-    {
-
     }
 
     private void Follow()
@@ -135,31 +155,80 @@ public class AIController : MonoBehaviour
         waitTime -= Time.deltaTime;
     }
 
-    private RaycastHit2D CheckRaycast(Vector2 direction)
+    private void Patrol()
     {
-        Vector2 startingPositionX = new Vector2(_rigidBody.transform.position.x, _rigidBody.transform.position.y);
+        CheckRaycastUpdate();
 
-        LayerMask mask = LayerMask.GetMask("Building");
+        transform.position = Vector2.MoveTowards(transform.position, moveSpot.position, Speed * Time.deltaTime);
 
-        Debug.DrawRay(startingPositionX, direction, Color.white);
-
-        return Physics2D.CircleCast(startingPositionX, 1.0f, direction, 0.0f, mask);
+        if (Vector2.Distance(transform.position, moveSpot.position) < 0.2f)
+        {
+            if (waitTime <= 0)
+            {
+                startWaitTime = Random.Range(1f, 6f);
+                waitTime = startWaitTime;
+                moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            }
+            else
+            {
+                waitTime -= Time.deltaTime;
+            }
+        }
     }
 
-    bool CheckRaycastUpdate()
+    private void SetupComponents()
     {
-        Vector2 direction = new Vector2(0, 0);
-        RaycastHit2D hit = CheckRaycast(direction);
+        _animator = GetComponent<Animator>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+    }
 
-        if (hit.collider)
+    private void Start()
+    {
+        waitTime = startWaitTime;
+
+        SetupComponents();
+    }
+
+    private void Update()
+    {
+        // Clean this up
+        if (Target == null)
+            return;
+        
+        direction = Target.position - _rigidBody.transform.position;
+        direction.Normalize();
+
+        _animator.SetFloat("Horizontal", direction.x);
+        _animator.SetFloat("Vertical", direction.y);
+
+
+        if (_moveAI && State != State.IDLE)
         {
-            Debug.Log("Hit " + hit.collider.name);
-            moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
-            return true;
+            _animator.SetFloat("Speed", direction.sqrMagnitude);
         }
         else
         {
-            return false;
+            _animator.SetFloat("Speed", 0.0f);
         }
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
+    public void ToggleFollower()
+    {
+        if (_state == State.IDLE)
+        {
+            _state = State.FOLLOW;
+            EscortObjective.IsFollowing = true;
+        }
+        else if (_state == State.FOLLOW)
+        {
+            _state = State.IDLE;
+            EscortObjective.IsFollowing = false;
+        }
+    }
+
+    #endregion Public Methods
 }

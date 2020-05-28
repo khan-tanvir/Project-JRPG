@@ -1,22 +1,40 @@
 ﻿[System.Serializable]
 public class Item
 {
+    #region Private Fields
+
     [UnityEngine.HideInInspector]
     private ItemMB _itemMB;
-    
-    public int ID
+
+    #endregion Private Fields
+
+    #region Public Constructors
+
+    public Item(int id, string name, string description)
     {
-        get;
-        internal set;
+        ID = id;
+        Name = name;
+        Description = description;
     }
 
-    public string Name
+    public Item(Item copyItem)
     {
-        get;
-        internal set;
+        this.ID = copyItem.ID;
+        this.Name = copyItem.Name;
+        this.Description = copyItem.Description;
     }
+
+    #endregion Public Constructors
+
+    #region Public Properties
 
     public string Description
+    {
+        get;
+        internal set;
+    }
+
+    public int ID
     {
         get;
         internal set;
@@ -28,17 +46,11 @@ public class Item
         set { _itemMB = value; }
     }
 
-    public Item(int id, string name, string description)
+    public string Name
     {
-        ID = id;
-        Name = name;
-        Description = description;
+        get;
+        internal set;
     }
 
-    public Item (Item copyItem)
-    {
-        this.ID = copyItem.ID;
-        this.Name = copyItem.Name;
-        this.Description = copyItem.Description;
-    }
+    #endregion Public Properties
 }

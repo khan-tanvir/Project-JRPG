@@ -1,12 +1,26 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class MethodCaller : MonoBehaviour
 {
     // This class is used to call functions via inspector
 
+    #region Public Fields
+
     public UnityEvent Functions;
+
+    #endregion Public Fields
+
+    #region Private Methods
+
+    private void FunctionsToCall()
+    {
+        Functions.Invoke();
+    }
+
+    #endregion Private Methods
+
+    #region Public Methods
 
     public void OnEnable()
     {
@@ -16,8 +30,5 @@ public class MethodCaller : MonoBehaviour
         FunctionsToCall();
     }
 
-    void FunctionsToCall()
-    {
-        Functions.Invoke();
-    }
+    #endregion Public Methods
 }

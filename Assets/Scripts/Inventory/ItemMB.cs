@@ -4,26 +4,36 @@ using UnityEngine.UI;
 [System.Serializable]
 public abstract class ItemMB : MonoBehaviour, IInteractable
 {
-    [SerializeField]
-    protected Material interactionMat;
+    #region Protected Fields
 
-    [HideInInspector]
-    public Material defaultMat;
+    protected bool _canInteract;
 
     [SerializeField]
     protected int _itemID;
 
-    protected bool _canInteract;
+    [SerializeField]
+    protected Material interactionMat;
 
-    public abstract Item Item
-    {
-        get;
-        set;
-    }
+    #endregion Protected Fields
+
+    #region Public Fields
+
+    [HideInInspector]
+    public Material defaultMat;
+
+    #endregion Public Fields
+
+    #region Public Properties
+
     public abstract bool EnabledInteraction
     {
         get;
         set;
+    }
+
+    public Image ImageComp
+    {
+        get { return gameObject.GetComponent<Image>(); }
     }
 
     public abstract bool InfiniteUses
@@ -31,9 +41,11 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
         get;
         set;
     }
-    public Image ImageComp
+
+    public abstract Item Item
     {
-        get { return gameObject.GetComponent<Image>(); }
+        get;
+        set;
     }
 
     public SpriteRenderer SpriteRendererComp
@@ -41,15 +53,23 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
         get { return gameObject.GetComponent<SpriteRenderer>(); }
     }
 
-    public virtual void Start()
+    #endregion Public Properties
+
+    #region Public Methods
+
+    public virtual void Awake()
     {
         Item = new Item(ItemDatabase.Instance.GetItemByID(_itemID));
         Item.ItemMB = this;
-        
+
         defaultMat = gameObject.GetComponent<Renderer>().material;
-
         _canInteract = true;
+    }
 
+    public void CallItemChangeEvent()
+    {
+        // Calls the Gather Objective Change Event
+        EventsManager.Instance.GatherObjectiveChange(Item.Name);
     }
 
     public virtual void Focus()
@@ -91,9 +111,5 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
         }
     }
 
-    public void CallItemChangeEvent()
-    {
-        // Calls the Gather Objective Change Event
-        EventsManager.Instance.GatherObjectiveChange(Item.Name);
-    }
+    #endregion Public Methods
 }

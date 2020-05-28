@@ -10,6 +10,8 @@ public enum SoundType
 [System.Serializable]
 public class Sound
 {
+    #region Private Fields
+
     [SerializeField]
     private AudioClip _clip;
 
@@ -19,11 +21,19 @@ public class Sound
     [SerializeField]
     private SoundType _type;
 
-    [Range(0.0f, 1.0f)]
-    public float volume;
+    #endregion Private Fields
+
+    #region Public Fields
 
     [HideInInspector]
     public AudioSource source;
+
+    [Range(0.0f, 1.0f)]
+    public float volume;
+
+    #endregion Public Fields
+
+    #region Public Properties
 
     // Reference to the audio file
     public AudioClip Clip
@@ -41,4 +51,6 @@ public class Sound
     {
         get { return _type; }
     }
+
+    #endregion Public Properties
 }

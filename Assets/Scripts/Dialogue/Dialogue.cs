@@ -1,21 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 [System.Serializable]
 public class Dialogue
 {
-    public string script;
+    #region Public Fields
+
+    [TextArea(3, 10)]
+    public string[] lines;
 
     public string[] name;
 
+    public string script;
+
     public Sprite[] sprite;
 
-    [TextArea(3,10)]
-    public string[] lines;
+    #endregion Public Fields
+
+    #region Public Methods
+
+    public void assignLines()
+    {
+        List<Dictionary<string, string>> allTextDic = ParseFile();
+        for (int i = 0; i < allTextDic.Count; i++)
+        {
+            Dictionary<string, string> dic = allTextDic[i];
+            lines[i] = dic["script" + i];
+            name[i] = dic["name" + i];
+        }
+    }
 
     public List<Dictionary<string, string>> ParseFile()
     {
@@ -33,7 +48,7 @@ public class Dialogue
                 var oneString = oneDict.Elements("string");
                 XElement element = oneString.ElementAt(i);
                 int index = element.ToString().IndexOf(":");
-                string characterName = element.ToString().Substring(0, index).Replace("<string>", "").Replace(":","");
+                string characterName = element.ToString().Substring(0, index).Replace("<string>", "").Replace(":", "");
                 string line = element.ToString().Replace("<string>", "").Replace("</string>", "").Replace(characterName + ":", "");
 
                 Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -46,21 +61,10 @@ public class Dialogue
                 {
                     allElements = true;
                 }
-
             }
         }
         return allTextDic;
-
     }
 
-    public void assignLines()
-    {
-        List<Dictionary<string, string>> allTextDic = ParseFile();
-        for (int i = 0; i < allTextDic.Count; i++)
-        {
-            Dictionary<string, string> dic = allTextDic[i];
-            lines[i] = dic["script"+i];
-            name[i] = dic["name" + i];
-        }
-    }
+    #endregion Public Methods
 }

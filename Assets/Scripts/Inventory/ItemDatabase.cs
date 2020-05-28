@@ -1,17 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
 {
-    // All items that exist in the game will be stored in this database 
-    // Items should be referenced as their prefab
-   public List<Item> Items
-    {
-        get;
-        internal set;
-    }
+    #region Public Properties
 
     public static ItemDatabase Instance
     {
@@ -19,12 +11,28 @@ public class ItemDatabase : MonoBehaviour
         internal set;
     }
 
+    // All items that exist in the game will be stored in this database
+    // Items should be referenced as their prefab
+    public List<Item> Items
+    {
+        get;
+        internal set;
+    }
+
+    #endregion Public Properties
+
+    #region Private Methods
+
     private void Awake()
     {
         Instance = this;
 
         CreateDatabase();
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
 
     public void CreateDatabase()
     {
@@ -59,4 +67,6 @@ public class ItemDatabase : MonoBehaviour
 
         return loadedObject;
     }
+
+    #endregion Public Methods
 }

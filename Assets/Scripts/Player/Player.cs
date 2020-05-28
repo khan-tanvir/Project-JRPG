@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Data;
-using System.Numerics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    #region Private Fields
+
+    [SerializeField]
+    private GameObject _inventory;
+
+    [SerializeField]
+    private GameObject _journal;
+
     [SerializeField]
     private float _movementSpeed;
 
     private PlayerInteraction _playerInteraction;
 
-    private GameObject _journal;
-    private GameObject _inventory;
-    
-    public Rigidbody2D RigidBody
-    {
-        get;
-        internal set;
-    }
+    #endregion Private Fields
 
-    public float MovementSpeed
-    {
-        get { return _movementSpeed; }
-        set { _movementSpeed = value; }
-    }
+    #region Public Properties
 
     public Animator Animator
     {
@@ -38,11 +32,27 @@ public class Player : MonoBehaviour
         internal set;
     }
 
+    public float MovementSpeed
+    {
+        get { return _movementSpeed; }
+        set { _movementSpeed = value; }
+    }
+
     public PlayerInputActions PlayerInput
     {
         get;
         internal set;
     }
+
+    public Rigidbody2D RigidBody
+    {
+        get;
+        internal set;
+    }
+
+    #endregion Public Properties
+
+    #region Private Methods
 
     private void Awake()
     {
@@ -50,24 +60,12 @@ public class Player : MonoBehaviour
         InitialiseInput();
     }
 
-    private void Start()
+    private void FixedUpdate()
     {
-        LoadPlayerPosition();
+        RigidBody.MovePosition(RigidBody.position + (Time.fixedDeltaTime * MovementSpeed * Direction));
 
-        if (MovementSpeed == 0)
-        {
-            Debug.LogError("Player Movement Speed is 0\nSet the speed in the inspector.");
-        }
-    }
-
-    private void LoadComponents()
-    {
-        RigidBody = gameObject.GetComponent<Rigidbody2D>();
-        Animator = gameObject.GetComponent<Animator>();
-        _playerInteraction = gameObject.GetComponent<PlayerInteraction>();
-
-        _inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
-        _journal = GameObject.Find("Canvas").transform.Find("Journal").gameObject;
+        _playerInteraction.PlayerPosition = transform.position;
+        _playerInteraction.Raycast();
     }
 
     private void InitialiseInput()
@@ -79,6 +77,19 @@ public class Player : MonoBehaviour
         PlayerInput.PlayerControls.Pause.performed += ctx => ToggleGame();
         PlayerInput.PlayerControls.Interact.performed += ctx => Interact();
         PlayerInput.PlayerControls.ToggleFollower.performed += ctx => ToggleFollower();
+    }
+
+    private void Interact()
+    {
+        if (_playerInteraction.InteractableObject)
+            _playerInteraction.CallInteract();
+    }
+
+    private void LoadComponents()
+    {
+        RigidBody = gameObject.GetComponent<Rigidbody2D>();
+        Animator = gameObject.GetComponent<Animator>();
+        _playerInteraction = gameObject.GetComponent<PlayerInteraction>();
     }
 
     private void LoadPlayerPosition()
@@ -98,19 +109,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        Animator.SetFloat("Horizontal", Direction.x);
-        Animator.SetFloat("Vertical", Direction.y);
-        Animator.SetFloat("Speed", Direction.sqrMagnitude);
-    }
-
-    private void FixedUpdate()
-    {
-        RigidBody.MovePosition(RigidBody.position + (Time.fixedDeltaTime * MovementSpeed * Direction));
-
-        _playerInteraction.PlayerPosition = transform.position;
-        _playerInteraction.Raycast();
+        if (PlayerInput != null)
+            PlayerInput.Disable();
     }
 
     private void OnEnable()
@@ -119,10 +121,24 @@ public class Player : MonoBehaviour
             PlayerInput.Enable();
     }
 
-    private void OnDisable()
+    private void Start()
     {
-        if (PlayerInput != null)
-            PlayerInput.Disable();
+        LoadPlayerPosition();
+
+        if (MovementSpeed == 0)
+        {
+            Debug.LogError("Player Movement Speed is 0\nSet the speed in the inspector.");
+        }
+    }
+
+    private void ToggleFollower()
+    {
+        EventsManager.Instance.ToggleFollower();
+    }
+
+    private void ToggleGame()
+    {
+        GameObject.Find("Canvas").GetComponent<PauseMenu>().Toggle();
     }
 
     private void ToggleInventory()
@@ -141,19 +157,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void ToggleGame()
+    private void Update()
     {
-        GameObject.Find("Canvas").GetComponent<PauseMenu>().Toggle();
+        Animator.SetFloat("Horizontal", Direction.x);
+        Animator.SetFloat("Vertical", Direction.y);
+        Animator.SetFloat("Speed", Direction.sqrMagnitude);
     }
 
-    private void Interact()
-    {
-        if (_playerInteraction.InteractableObject)
-            _playerInteraction.CallInteract();
-    }
-
-    private void ToggleFollower()
-    {
-
-    }
+    #endregion Private Methods
 }

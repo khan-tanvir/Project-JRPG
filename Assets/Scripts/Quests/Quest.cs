@@ -1,50 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public enum QuestStatus
 {
     NOTACCEPTED,
+
     GIVEN,
+
     COMPLETE
 }
 
 [System.Serializable]
 public class Quest
 {
-    public QuestMB QuestMB
-    {
-        get;
-        set;
-    }
-    
-    public string Title
-    {
-        get;
-        set;
-    }
+    #region Public Properties
 
     public string Description
-    {
-        get;
-        set;
-    }
-
-    public QuestStatus Status
-    {
-        get;
-        set;
-    }
-
-    public string QuestGiverName
-    {
-        get;
-        set;
-    }
-    
-    public List<Objective> Objectives
     {
         get;
         set;
@@ -62,19 +32,51 @@ public class Quest
                 {
                     i++;
                     QuestManager.Instance.UnSubscribeToEvent(obj);
-                    obj.Complete =  true;
+                    obj.Complete = true;
                 }
 
                 if (obj.Complete)
 
-                if (i == Objectives.Count)
-                {
-                    Status = QuestStatus.COMPLETE;
-                    return true;
-                }
+                    if (i == Objectives.Count)
+                    {
+                        Status = QuestStatus.COMPLETE;
+                        return true;
+                    }
             }
 
             return false;
         }
     }
+
+    public List<Objective> Objectives
+    {
+        get;
+        set;
+    }
+
+    public string QuestGiverName
+    {
+        get;
+        set;
+    }
+
+    public QuestMB QuestMB
+    {
+        get;
+        set;
+    }
+
+    public QuestStatus Status
+    {
+        get;
+        set;
+    }
+
+    public string Title
+    {
+        get;
+        set;
+    }
+
+    #endregion Public Properties
 }

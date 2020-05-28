@@ -1,26 +1,41 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EventsManager : MonoBehaviour
 {
+    #region Public Events
+
+    public event Action<string> OnGatherObjectiveChange;
+
+    public event Action<string> OnInteractionWithItem;
+
+    public event Action<string> OnLocationEntered;
+
+    public event Action OnToggleFollower;
+
+    #endregion Public Events
+
+    #region Public Properties
+
     public static EventsManager Instance
     {
         get;
         internal set;
     }
-    
+
+    #endregion Public Properties
+
+    #region Private Methods
+
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }
 
-    public event Action<string> OnGatherObjectiveChange;
-    public event Action<string> OnInteractionWithItem;
-    public event Action<string> OnLocationEntered;
-    public event Action OnToggleFollower;
+    #endregion Private Methods
+
+    #region Public Methods
 
     public void GatherObjectiveChange(string item)
     {
@@ -41,4 +56,6 @@ public class EventsManager : MonoBehaviour
     {
         OnToggleFollower?.Invoke();
     }
+
+    #endregion Public Methods
 }

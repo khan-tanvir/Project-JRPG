@@ -1,34 +1,26 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestGiver : MonoBehaviour, IInteractable
 {
+    #region Private Fields
+
     [SerializeField]
-    private GameObject _questPrefab;
-    [SerializeField]
-    private GameObject _questGiverPanel;
+    private Material _defaultMat;
 
     // Create a separate script for this
     [SerializeField]
     private Material _interactionMat;
+
     [SerializeField]
-    private Material _defaultMat;
+    private GameObject _questGiverPanel;
 
-    public List<Quest> Quests
-    {
-        get;
-        internal set;
-    }
+    [SerializeField]
+    private GameObject _questPrefab;
 
-    public string NPCName
-    {
-        get;
-        set;
-    }
+    #endregion Private Fields
+
+    #region Public Properties
 
     public bool EnabledInteraction
     {
@@ -44,6 +36,23 @@ public class QuestGiver : MonoBehaviour, IInteractable
             return true;
         }
     }
+
+    public string NPCName
+    {
+        get;
+        set;
+    }
+
+    public List<Quest> Quests
+    {
+        get;
+        internal set;
+    }
+
+    #endregion Public Properties
+
+    #region Private Methods
+
     private void Awake()
     {
         Quests = new List<Quest>();
@@ -62,6 +71,10 @@ public class QuestGiver : MonoBehaviour, IInteractable
         }
     }
 
+    #endregion Private Methods
+
+    #region Public Methods
+
     public void CreateQuest(Quest quest)
     {
         foreach (Objective objective in quest.Objectives)
@@ -78,15 +91,17 @@ public class QuestGiver : MonoBehaviour, IInteractable
         gameObject.GetComponent<Renderer>().material = _interactionMat;
     }
 
+    public void OnInteract()
+    {
+        _questGiverPanel.SetActive(true);
+        QuestGiverPanel.Instance.ShowQuests(this);
+    }
+
     public void UnFocus()
     {
         if (EnabledInteraction)
             gameObject.GetComponent<Renderer>().material = _defaultMat;
     }
 
-    public void OnInteract()
-    {
-        _questGiverPanel.SetActive(true);
-        QuestGiverPanel.Instance.ShowQuests(this);
-    }
+    #endregion Public Methods
 }

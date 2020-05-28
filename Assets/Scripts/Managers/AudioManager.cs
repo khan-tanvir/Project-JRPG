@@ -8,8 +8,13 @@ public class AudioManager : MonoBehaviour
     // TODO: Fade-In and Fade-Out
     // TODO: Sound Effects
 
+    #region Private Fields
+
     [SerializeField]
     private AudioMixer _audioMixer;
+
+    [SerializeField]
+    private Slider _effectSlider;
 
     [SerializeField]
     private Slider _masterSlider;
@@ -17,12 +22,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private Slider _musicSlider;
 
-    [SerializeField]
-    private Slider _effectSlider;
-
     // Array that stores all sounds
     [SerializeField]
     private Sound[] _sounds;
+
+    #endregion Private Fields
+
+    #region Public Properties
 
     // Hold reference to this object
     public static AudioManager Instance
@@ -43,6 +49,10 @@ public class AudioManager : MonoBehaviour
         get { return _sounds; }
     }
 
+    #endregion Public Properties
+
+    #region Private Methods
+
     private void Awake()
     {
         CreateInstance();
@@ -50,16 +60,6 @@ public class AudioManager : MonoBehaviour
 
         // Countering a bug that changes the name to the 2nd element of sounds
         gameObject.name = "Audio Manager";
-    }
-
-    public void Start()
-    {
-        if (_masterSlider != null && _musicSlider != null && _effectSlider != null)
-        {
-            _masterSlider.value = GameData.Instance.MasterVolume;
-            _musicSlider.value = GameData.Instance.MusicVolume;
-            _effectSlider.value = GameData.Instance.EffectVolume;
-        }
     }
 
     private void CreateInstance()
@@ -88,32 +88,45 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void SetMasterVolume(float volume)
-    {
-        // Using log10 for a better slider
-        _audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20.0f);
+    #endregion Private Methods
 
-        PlayerPrefs.SetFloat("Master Volume", volume);
+    #region Public Methods
+
+    public void DisableMusicLoop()
+    {
+        Find(CurrentMusic).source.loop = false;
     }
 
-    public void SetMusicVolume(float volume)
+    public void EnableMusicLoop()
     {
-        _audioMixer.SetFloat("Music Volume", Mathf.Log10(volume) * 20.0f);
-
-        PlayerPrefs.SetFloat("Music Volume", volume);
-    }
-
-    public void SetEffectsVolume(float volume)
-    {
-        _audioMixer.SetFloat("Effects Volume", Mathf.Log10(volume) * 20.0f);
-
-        PlayerPrefs.SetFloat("Effects Volume", volume);
+        Find(CurrentMusic).source.loop = true;
     }
 
     public Sound Find(string name)
     {
         Sound soundToFind = Array.Find(_sounds, clip => clip.Name == name);
         return soundToFind;
+    }
+
+    public bool IsPlaying(string name)
+    {
+        if (Find(name) != null)
+        {
+            if (Find(name).source.isPlaying)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void PlayEffect(string name)
+    {
+        if (Find(name) != null)
+        {
+            Find(name).source.Play();
+        }
     }
 
     public void PlayMusic(string name)
@@ -137,35 +150,42 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayEffect(string name)
+    public void SetEffectsVolume(float volume)
     {
-        if (Find(name) != null)
+        _audioMixer.SetFloat("Effects Volume", Mathf.Log10(volume) * 20.0f);
+
+        PlayerPrefs.SetFloat("Effects Volume", volume);
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        // Using log10 for a better slider
+        _audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20.0f);
+
+        PlayerPrefs.SetFloat("Master Volume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        _audioMixer.SetFloat("Music Volume", Mathf.Log10(volume) * 20.0f);
+
+        PlayerPrefs.SetFloat("Music Volume", volume);
+    }
+
+    public void Start()
+    {
+        if (_masterSlider != null && _musicSlider != null && _effectSlider != null)
         {
-            Find(name).source.Play();
+            _masterSlider.value = GameData.Instance.MasterVolume;
+            _musicSlider.value = GameData.Instance.MusicVolume;
+            _effectSlider.value = GameData.Instance.EffectVolume;
         }
     }
 
-    public bool IsPlaying(string name)
+    public void StopCurrentMusic()
     {
-        if (Find(name) != null)
-        {
-            if (Find(name).source.isPlaying)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void EnableMusicLoop()
-    {
-        Find(CurrentMusic).source.loop = true;
-    }
-
-    public void DisableMusicLoop()
-    {
-        Find(CurrentMusic).source.loop = false;
+        if (IsPlaying(CurrentMusic))
+            Find(CurrentMusic).source.Stop();
     }
 
     public void StopMusic(string name)
@@ -178,9 +198,5 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void StopCurrentMusic()
-    {
-        if (IsPlaying(CurrentMusic))
-            Find(CurrentMusic).source.Stop();
-    }
+    #endregion Public Methods
 }

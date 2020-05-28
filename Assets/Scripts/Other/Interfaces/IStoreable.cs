@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public interface IStoreable
 {
-    bool EnablePickUp
-    {
-        get;
-        set;
-    }
+    #region Public Properties
 
-    bool IsItemStored
+    bool EnablePickUp
     {
         get;
         set;
@@ -20,10 +15,22 @@ public interface IStoreable
         get;
     }
 
+    bool IsItemStored
+    {
+        get;
+        set;
+    }
+
     SpriteRenderer SpriteRendererComp
     {
         get;
     }
 
+    #endregion Public Properties
+
+    #region Public Methods
+
     void AddItemToInventory();
+
+    #endregion Public Methods
 }

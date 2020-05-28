@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Sign : ItemMB
 {
-    [HideInInspector]
-    private Item _item;
+    #region Private Fields
 
     [SerializeField]
     private bool _enableInteraction;
@@ -13,11 +10,12 @@ public class Sign : ItemMB
     [SerializeField]
     private bool _infiniteUses;
 
-    public override Item Item
-    {
-        get { return _item; }
-        set { _item = value; }
-    }
+    [HideInInspector]
+    private Item _item;
+
+    #endregion Private Fields
+
+    #region Public Properties
 
     public override bool EnabledInteraction
     {
@@ -30,4 +28,12 @@ public class Sign : ItemMB
         get { return _infiniteUses; }
         set { _infiniteUses = value; }
     }
+
+    public override Item Item
+    {
+        get { return _item; }
+        set { _item = value; }
+    }
+
+    #endregion Public Properties
 }

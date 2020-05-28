@@ -1,46 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class Slot : MonoBehaviour
 {
+    #region Public Properties
+
     public Item InvItem
     {
-        get 
-        {
-            try
-            {
-                return GetComponentInChildren<ItemMB>().Item;
-            }
-            catch (System.NullReferenceException e)
-            {
-                return null;
-            }
-        }
+        get;
+        internal set;
     }
 
-    public void StoreItem(Item item)
-    {
+    #endregion Public Properties
 
-        if (InvItem.ItemMB == null)
-        {
-            InvItem.ItemMB = item.ItemMB;
-        }
-
-        foreach (Transform child in transform)
-        {
-            if (child.name != "Cross")
-            {
-                child.name = InvItem.Name;
-            }
-        }
-    }
+    #region Public Methods
 
     public void DropItem()
     {
-        if (InvItem?.ItemMB != null)
+        if (transform.GetComponentInChildren<ItemMB>() != null)
         {
             if (transform.GetComponentInChildren<IDroppable>()?.EnableDrop != true)
             {
@@ -65,6 +42,36 @@ public class Slot : MonoBehaviour
             temp.GetComponentInChildren<IDroppable>().ItemDropped();
 
             Destroy(child.gameObject);
+
+            InvItem = null;
         }
     }
+
+    public void RemoveItem()
+    {
+        InvItem.ItemMB = null;
+
+        foreach (Transform child in transform)
+        {
+            if (child.name != "Cross")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    public void StoreItem(Item item)
+    {
+        InvItem = item;
+
+        foreach (Transform child in transform)
+        {
+            if (child.name != "Cross")
+            {
+                child.name = InvItem.Name;
+            }
+        }
+    }
+
+    #endregion Public Methods
 }

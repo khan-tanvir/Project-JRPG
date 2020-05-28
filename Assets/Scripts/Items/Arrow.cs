@@ -1,33 +1,44 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class Arrow : ItemMB, IStoreable, IDroppable
 {
-    [HideInInspector]
-    private Item _item;
-    
-    [SerializeField]
-    private bool _enableInteraction;
+    #region Private Fields
 
     [SerializeField]
-    private bool _infiniteUses;
+    private bool _enableDrop;
+
+    [SerializeField]
+    private bool _enableInteraction;
 
     [SerializeField]
     private bool _enablePickUp;
 
     [SerializeField]
-    private bool _enableDrop;
-    
-    public override Item Item
-    {
-        get { return _item; }
-        set { _item = value; }
-    }
+    private bool _infiniteUses;
+
+    [HideInInspector]
+    private Item _item;
+
+    #endregion Private Fields
+
+    #region Public Properties
 
     public override bool EnabledInteraction
     {
         get { return _enableInteraction; }
         set { _enableInteraction = value; }
+    }
+
+    public bool EnableDrop
+    {
+        get { return _enableDrop; }
+        set { _enableDrop = value; }
+    }
+
+    public bool EnablePickUp
+    {
+        get { return _enablePickUp; }
+        set { _enablePickUp = value; }
     }
 
     public override bool InfiniteUses
@@ -36,23 +47,21 @@ public class Arrow : ItemMB, IStoreable, IDroppable
         set { _infiniteUses = value; }
     }
 
-    public bool EnablePickUp 
-    {
-        get { return _enablePickUp; }
-        set { _enablePickUp = value; }
-    }
-
     public bool IsItemStored
     {
         get;
         set;
     }
 
-    public bool EnableDrop
+    public override Item Item
     {
-        get { return _enableDrop; }
-        set { _enableDrop = value; }
+        get { return _item; }
+        set { _item = value; }
     }
+
+    #endregion Public Properties
+
+    #region Public Methods
 
     public void AddItemToInventory()
     {
@@ -71,7 +80,7 @@ public class Arrow : ItemMB, IStoreable, IDroppable
     public void ItemDropped()
     {
         if (!IsItemStored)
-        { 
+        {
             //transform.localScale = new Vector2(1.0f, 1.0f);
 
             ImageComp.enabled = false;
@@ -95,4 +104,6 @@ public class Arrow : ItemMB, IStoreable, IDroppable
             _canInteract = false;
         }
     }
+
+    #endregion Public Methods
 }

@@ -1,19 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    #region Private Fields
+
     [SerializeField]
     private int _numberOfSlots;
 
     [SerializeField]
-    private GameObject _slotObject;
+    private Transform _slotContainer;
 
     [SerializeField]
-    private Transform _slotContainer;
+    private GameObject _slotObject;
+
+    #endregion Private Fields
+
+    #region Public Properties
+
+    public static Inventory Instance
+    {
+        get;
+        internal set;
+    }
 
     public List<Slot> Slots
     {
@@ -21,11 +31,9 @@ public class Inventory : MonoBehaviour
         set;
     }
 
-    public static Inventory Instance
-    {
-        get;
-        internal set;
-    }
+    #endregion Public Properties
+
+    #region Private Methods
 
     private void Awake()
     {
@@ -49,66 +57,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void LoadInventory()
-    {
-        for (int i = 0; i < GameData.Instance.PlayerData.InventoryItems.Count; i++)
-        {
-            InventoryItem item = GameData.Instance.PlayerData.InventoryItems[i];
+    #endregion Private Methods
 
-            var loadedObject = ItemDatabase.Instance.GetItemPrefab(item.ID);
-
-            if (loadedObject == null)
-            {
-                Debug.LogError("loadedObject is null, check the item ID");
-                return;
-            }
-                
-            GameObject createdGameObject = Instantiate(loadedObject, Slots[item.Position].transform, false) as GameObject;
-
-            if (createdGameObject.GetComponent<ItemMB>().Item == null)
-            {
-                createdGameObject.GetComponent<ItemMB>().Item = new Item(ItemDatabase.Instance.GetItemByID(item.ID));
-            }
-
-            createdGameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-            createdGameObject.gameObject.GetComponent<Image>().enabled = true;
-            createdGameObject.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-
-            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.ID));
-        }
-    }
-
-    public int GetItemCount(string item)
-    {
-        int total = 0;
-
-        for (int i = 0; i < Slots.Count; i++)
-        {
-            if (Slots[i].InvItem != null && Slots[i].InvItem.Name == item)
-            {
-                total++;
-            }
-        }
-
-        return total;
-    }
-    
-    public void SaveInventory()
-    {
-        List<InventoryItem> itemsToStore = new List<InventoryItem>();
-
-        for (int i = 0; i < Slots.Count; i++)
-        {
-            if (Slots[i].InvItem != null)
-            {
-                InventoryItem item = new InventoryItem(ItemDatabase.Instance.GetItemByName(Slots[i].InvItem.Name).ID, i);
-                itemsToStore.Add(item);
-            }
-        }
-
-        GameData.Instance.PlayerData.InventoryItems = itemsToStore;
-    }
+    #region Public Methods
 
     public bool FillSlot(GameObject objectToInstantiate)
     {
@@ -117,7 +68,7 @@ public class Inventory : MonoBehaviour
             if (Slots[i].InvItem == null)
             {
                 objectToInstantiate.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
-                
+
                 GameObject itemObject = Instantiate(objectToInstantiate, Slots[i].transform, false);
 
                 itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
@@ -125,16 +76,6 @@ public class Inventory : MonoBehaviour
                 if (itemObject.GetComponent<ItemMB>().Item == null)
                 {
                     return false;
-                }
-                
-                if (itemObject.GetComponent<IStoreable>().ImageComp == null)
-                {
-                    objectToInstantiate.GetComponent<Image>();
-                }
-
-                if (itemObject.GetComponent<IStoreable>().SpriteRendererComp == null)
-                {
-                    objectToInstantiate.GetComponent<SpriteRenderer>();
                 }
 
                 itemObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -153,24 +94,79 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public void DropItem(Item item)
+    public int GetItemCount(string item)
     {
-        int index = Slots.FindIndex(slot => slot.InvItem.Equals(item));
+        int total = 0;
 
-        Vector2 playerPos = FindObjectOfType<Player>().GetComponent<Rigidbody2D>().transform.position;
+        for (int i = 0; i < Slots.Count; i++)
+        {
+            if (Slots[i].InvItem != null && Slots[i].InvItem.Name == item)
+            {
+                total++;
+            }
+        }
 
-        // Set the range for dropping them item and the z value has to be -1 so it can be seen from the main camera
-        Vector3 dropPos = new Vector3(playerPos.x + UnityEngine.Random.Range(-1.5f, 1.5f), playerPos.y + UnityEngine.Random.Range(-1.5f, 1.5f), -1.0f);
-
-        Transform child = Slots[index].transform.Find(item.Name);
-
-        Instantiate(child.gameObject, dropPos, Quaternion.identity);
-
-        Destroy(child.gameObject);
-
-        //// Adjust the instaniated object
-        //temp.transform.localScale = new Vector2(1.0f, 1.0f);
-
-        //Destroy
+        return total;
     }
+
+    public void LoadInventory()
+    {
+        for (int i = 0; i < GameData.Instance.PlayerData.InventoryItems.Count; i++)
+        {
+            InventoryItem item = GameData.Instance.PlayerData.InventoryItems[i];
+
+            var loadedObject = ItemDatabase.Instance.GetItemPrefab(item.ID);
+
+            if (loadedObject == null)
+            {
+                Debug.LogError("loadedObject is null, check the item ID");
+                return;
+            }
+
+            GameObject createdGameObject = Instantiate(loadedObject, Slots[item.Position].transform, false) as GameObject;
+
+            if (createdGameObject.GetComponent<ItemMB>().Item == null)
+            {
+                createdGameObject.GetComponent<ItemMB>().Item = new Item(ItemDatabase.Instance.GetItemByID(item.ID));
+            }
+
+            createdGameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+            createdGameObject.gameObject.GetComponent<Image>().enabled = true;
+            createdGameObject.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.ID));
+        }
+    }
+
+    public void RemoveItem(string item)
+    {
+        int index = Slots.FindIndex(slot => slot.InvItem.Name.Equals(item));
+
+        if (index == -1)
+        {
+            Debug.LogError("Item not found.");
+            return;
+        }
+
+        Slots[index].RemoveItem();
+    }
+
+    public void SaveInventory()
+    {
+        List<InventoryItem> itemsToStore = new List<InventoryItem>();
+
+        for (int i = 0; i < Slots.Count; i++)
+        {
+            if (Slots[i].InvItem != null)
+            {
+                InventoryItem item = new InventoryItem(ItemDatabase.Instance.GetItemByName(Slots[i].InvItem.Name).ID, i);
+                itemsToStore.Add(item);
+            }
+        }
+
+        GameData.Instance.PlayerData.InventoryItems = itemsToStore;
+    }
+
+    #endregion Public Methods
 }

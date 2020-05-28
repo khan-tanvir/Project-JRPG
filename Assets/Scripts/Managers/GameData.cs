@@ -4,76 +4,25 @@ using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 
-[System.Serializable]
-public class PlayerData
-{
-    [SerializeField]
-    private float[] _position = { -999.0f, -999.0f };
-
-    [SerializeField]
-    private int _questProgress;
-
-    private List<InventoryItem> _inventoryItems = null;
-
-    public string PlayerName
-    {
-        get;
-        set;
-    }
-
-    public float[] PlayerPosition
-    {
-        get { return _position; }
-        set { _position = value; }
-    }
-
-    public int PlayerQuestProgress
-    {
-        get { return _questProgress; }
-        set { _questProgress = value; }
-    }
-
-    public List<InventoryItem> InventoryItems
-    {
-        get;
-        set;
-    }
-}
-
-[System.Serializable]
-public class InventoryItem
-{
-    public int ID
-    {
-        get;
-        internal set;
-    }
-
-    public int Position
-    {
-        get;
-        internal set;
-    }
-
-    public InventoryItem(int itemID, int pos)
-    {
-        ID = itemID;
-        Position = pos;
-    }
-}
-
 public class GameData : MonoBehaviour
 {
-    public PlayerData PlayerData
+    #region Public Properties
+
+    public static GameData Instance
     {
         get;
-        set;
+        internal set;
     }
 
     public int CurrentSaveFile
     {
         get;
         set;
+    }
+
+    public float EffectVolume
+    {
+        get { return PlayerPrefs.GetFloat("Effects Volume", 0.3f); }
     }
 
     public int[] ExistingSaveFiles
@@ -92,16 +41,15 @@ public class GameData : MonoBehaviour
         get { return PlayerPrefs.GetFloat("Music Volume", 0.18f); }
     }
 
-    public float EffectVolume
-    {
-        get { return PlayerPrefs.GetFloat("Effects Volume", 0.3f); }
-    }
-
-    public static GameData Instance
+    public PlayerData PlayerData
     {
         get;
-        internal set;
+        set;
     }
+
+    #endregion Public Properties
+
+    #region Private Methods
 
     // Start is called before the first frame update
     private void Awake()
@@ -111,7 +59,6 @@ public class GameData : MonoBehaviour
 
         ExistingSaveFiles = new int[3];
     }
-
 
     private void CreateInstance()
     {
@@ -124,6 +71,51 @@ public class GameData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private string DisplayName(int pos)
+    {
+        // Get the player name of the file
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream fileStream = File.Open(Application.persistentDataPath + "/playerInfo" + pos + ".dat", FileMode.Open);
+
+        // Cast the file data as PlayerData before we can do something with it
+        PlayerData data = (PlayerData)binaryFormatter.Deserialize(fileStream);
+
+        fileStream.Close();
+
+        return data.PlayerName;
+    }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
+    public void CheckAllFiles()
+    {
+        Transform fileMenu = GameObject.Find("Canvas").transform.Find("File Menu").transform;
+
+        for (int i = 0; i < 3; i++)
+        {
+            TMP_Text temp = fileMenu.Find("File " + (i + 1) + " Text").GetComponent<TMP_Text>();
+
+            if (File.Exists(Application.persistentDataPath + "/playerInfo" + i + ".dat"))
+            {
+                ExistingSaveFiles[i] = 1;
+                temp.text = DisplayName(i);
+            }
+            else
+            {
+                ExistingSaveFiles[i] = 0;
+                temp.text = "[BLANK]";
+            }
+        }
+    }
+
+    public void ClearData()
+    {
+        // This function will be called when the player goes back to main menu from the game scene
+        PlayerData = null;
     }
 
     public void CreateData(string name)
@@ -144,30 +136,16 @@ public class GameData : MonoBehaviour
         CheckAllFiles();
     }
 
-    public void SaveData()
+    public void DeleteData(int pos)
     {
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        // This stores it within the appdata folder
-        FileStream fileStream = File.Create(Application.persistentDataPath + "/playerInfo" + CurrentSaveFile + ".dat");
-
-        Debug.Log("SAVING " + PlayerData.PlayerName + " to File " + CurrentSaveFile);
-
-        // Serialise the data
-        binaryFormatter.Serialize(fileStream, PlayerData);
-
-        fileStream.Close();
-
-        QuestsDatabase database = new QuestsDatabase();
-
-        database.SaveToDatabase(CurrentSaveFile, QuestManager.Instance.Quests);
-
-        Debug.Log("Player data has been saved");
+        File.Delete(Application.persistentDataPath + "/playerInfo" + pos + ".dat");
+        CheckAllFiles();
     }
 
     public void LoadData(int pos)
     {
         ClearData();
-        
+
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream fileStream = File.Open(Application.persistentDataPath + "/playerInfo" + pos + ".dat", FileMode.Open);
 
@@ -187,50 +165,100 @@ public class GameData : MonoBehaviour
         SceneManagerScript.Instance.SceneToGoTo("Game");
     }
 
-    public void CheckAllFiles()
+    public void SaveData()
     {
-        Transform fileMenu = GameObject.Find("Canvas").transform.Find("File Menu").transform;
-
-        for (int i = 0; i < 3; i++)
-        {
-            TMP_Text temp = fileMenu.Find("File " + (i + 1) + " Text").GetComponent<TMP_Text>();
-
-            if (File.Exists(Application.persistentDataPath + "/playerInfo" + i + ".dat"))
-            {
-                ExistingSaveFiles[i] = 1;
-                temp.text = DisplayName(i);
-            }
-            else
-            {
-                ExistingSaveFiles[i] = 0;
-                temp.text = "[BLANK]";
-            }   
-        }
-    }
-
-    private string DisplayName(int pos)
-    {
-        // Get the player name of the file
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream fileStream = File.Open(Application.persistentDataPath + "/playerInfo" + pos + ".dat", FileMode.Open);
 
-        // Cast the file data as PlayerData before we can do something with it
-        PlayerData data = (PlayerData)binaryFormatter.Deserialize(fileStream);
+        // This stores it within the appdata folder
+        FileStream fileStream = File.Create(Application.persistentDataPath + "/playerInfo" + CurrentSaveFile + ".dat");
+
+        Debug.Log("SAVING " + PlayerData.PlayerName + " to File " + CurrentSaveFile);
+
+        // Serialise the data
+        binaryFormatter.Serialize(fileStream, PlayerData);
 
         fileStream.Close();
 
-        return data.PlayerName;
+        QuestsDatabase database = new QuestsDatabase();
+
+        database.SaveToDatabase(CurrentSaveFile, QuestManager.Instance.Quests);
+
+        Debug.Log("Player data has been saved");
     }
 
-    public void ClearData()
+    #endregion Public Methods
+}
+
+[System.Serializable]
+public class InventoryItem
+{
+    #region Public Constructors
+
+    public InventoryItem(int itemID, int pos)
     {
-        // This function will be called when the player goes back to main menu from the game scene
-        PlayerData = null;
+        ID = itemID;
+        Position = pos;
     }
 
-    public void  DeleteData(int pos)
+    #endregion Public Constructors
+
+    #region Public Properties
+
+    public int ID
     {
-        File.Delete(Application.persistentDataPath + "/playerInfo" + pos + ".dat");
-        CheckAllFiles();
+        get;
+        internal set;
     }
+
+    public int Position
+    {
+        get;
+        internal set;
+    }
+
+    #endregion Public Properties
+}
+
+[System.Serializable]
+public class PlayerData
+{
+    #region Private Fields
+
+    private List<InventoryItem> _inventoryItems = null;
+
+    [SerializeField]
+    private float[] _position = { -999.0f, -999.0f };
+
+    [SerializeField]
+    private int _questProgress;
+
+    #endregion Private Fields
+
+    #region Public Properties
+
+    public List<InventoryItem> InventoryItems
+    {
+        get;
+        set;
+    }
+
+    public string PlayerName
+    {
+        get;
+        set;
+    }
+
+    public float[] PlayerPosition
+    {
+        get { return _position; }
+        set { _position = value; }
+    }
+
+    public int PlayerQuestProgress
+    {
+        get { return _questProgress; }
+        set { _questProgress = value; }
+    }
+
+    #endregion Public Properties
 }

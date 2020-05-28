@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
+﻿public interface IInteractable
+{
+    #region Public Properties
 
-public interface IInteractable
-{   
     // Can player interact with object
     bool EnabledInteraction
     {
@@ -16,9 +15,15 @@ public interface IInteractable
         get;
     }
 
+    #endregion Public Properties
+
+    #region Public Methods
+
     void Focus();
+
+    void OnInteract();
 
     void UnFocus();
 
-    void OnInteract();
+    #endregion Public Methods
 }

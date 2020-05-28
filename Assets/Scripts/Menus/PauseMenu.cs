@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    #region Public Fields
+
     public GameObject _pauseMenu;
+
+    #endregion Public Fields
+
+    #region Public Properties
 
     public static bool GameIsPaused
     {
@@ -12,19 +16,17 @@ public class PauseMenu : MonoBehaviour
         internal set;
     }
 
+    #endregion Public Properties
+
+    #region Public Methods
+
     public void Pause()
     {
         _pauseMenu.SetActive(true);
+
         // Freeze the game
         Time.timeScale = 0.0f;
         GameIsPaused = true;
-    }
-
-    public void Resume()
-    {
-        _pauseMenu.SetActive(false);
-        Time.timeScale = 1.0f;
-        GameIsPaused = false;
     }
 
     public void Quit()
@@ -33,16 +35,11 @@ public class PauseMenu : MonoBehaviour
         SceneManagerScript.Instance.SceneToGoTo("Menu");
     }
 
-    public void Toggle()
+    public void Resume()
     {
-        if (GameIsPaused)
-        {
-            Resume();
-        }
-        else
-        {
-            Pause();
-        }
+        _pauseMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+        GameIsPaused = false;
     }
 
     public void SavePlayerProgress()
@@ -59,4 +56,18 @@ public class PauseMenu : MonoBehaviour
 
         GameData.Instance.SaveData();
     }
+
+    public void Toggle()
+    {
+        if (GameIsPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
+    #endregion Public Methods
 }

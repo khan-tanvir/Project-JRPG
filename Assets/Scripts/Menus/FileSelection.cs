@@ -1,24 +1,31 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class FileSelection : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject fileMenu;
+    #region Private Fields
 
     [SerializeField]
     private GameObject fileCreationMenu;
+
+    [SerializeField]
+    private GameObject fileMenu;
+
+    #endregion Private Fields
+
+    #region Private Methods
 
     private void OnEnable()
     {
         GameData.Instance.CheckAllFiles();
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
 
     public void ButtonPressed()
     {
@@ -87,8 +94,10 @@ public class FileSelection : MonoBehaviour
                 break;
 
             case "Confirm Button":
+
                 // Get text component of File Creation Menu's InputField child
                 string input = fileCreationMenu.GetComponentInChildren<TMP_InputField>().text;
+
                 // Input Validation
                 if (string.IsNullOrEmpty(input))
                 {
@@ -116,4 +125,6 @@ public class FileSelection : MonoBehaviour
                 break;
         }
     }
+
+    #endregion Public Methods
 }

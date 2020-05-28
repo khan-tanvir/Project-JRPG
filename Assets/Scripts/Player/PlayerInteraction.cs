@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    
+    #region Private Fields
+
     private IInteractable _currentInteractable;
 
     [SerializeField]
@@ -12,6 +11,10 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField]
     private float radius = 1.0f;
+
+    #endregion Private Fields
+
+    #region Public Properties
 
     public bool InteractableObject
     {
@@ -26,6 +29,10 @@ public class PlayerInteraction : MonoBehaviour
         internal get;
         set;
     }
+
+    #endregion Public Properties
+
+    #region Public Methods
 
     public void CallInteract()
     {
@@ -85,7 +92,6 @@ public class PlayerInteraction : MonoBehaviour
                     return;
                 }
             }
-
         }
         else
         {
@@ -97,4 +103,6 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
     }
+
+    #endregion Public Methods
 }
