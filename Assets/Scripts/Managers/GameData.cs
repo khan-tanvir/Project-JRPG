@@ -139,6 +139,7 @@ public class GameData : MonoBehaviour
     public void DeleteData(int pos)
     {
         File.Delete(Application.persistentDataPath + "/playerInfo" + pos + ".dat");
+        File.Delete(Application.persistentDataPath + "/playerQuestDB" + pos + ".json");
         CheckAllFiles();
     }
 

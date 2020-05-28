@@ -12,7 +12,8 @@
           "Type": "GATHER",
           "Description": "Gather [Test]  0/4",
           "FirstEntry": "Test",
-          "SecondEntry": "4"
+          "SecondEntry": "4",
+          "ThirdEntry": "0"
         }
       ]
     },
@@ -27,9 +28,7 @@
           "Complete": false,
           "Type": "ACTIVATE",
           "Description": "Interact with the ARROW on the ground",
-          "FirstEntry": "Arrow",
-          "SecondEntry": "",
-          "ThirdEntry": ""
+          "FirstEntry": "Arrow"
         }
       ]
     },
@@ -45,8 +44,7 @@
           "Type": "ESCORT",
           "Description": "Escort [Test] to [4]",
           "FirstEntry": "Test",
-          "SecondEntry": "4",
-          "ThirdEntry": ""
+          "SecondEntry": "Cave"
         }
       ]
     },
@@ -61,9 +59,7 @@
           "Complete": false,
           "Type": "SEARCH",
           "Description": "Walk to the entrance of the cave",
-          "FirstEntry": "Cave",
-          "SecondEntry": "",
-          "ThirdEntry": ""
+          "FirstEntry": "Cave"
         }
       ]
     },
@@ -77,10 +73,9 @@
         {
           "Complete": false,
           "Type": "DELIVER",
-          "Description": "Take [Test] to [4]",
-          "FirstEntry": "Test",
-          "SecondEntry": "4",
-          "ThirdEntry": ""
+          "Description": "Take [Arrow] to [Cave]",
+          "FirstEntry": "Arrow",
+          "SecondEntry": "Cave"
         }
       ]
     }

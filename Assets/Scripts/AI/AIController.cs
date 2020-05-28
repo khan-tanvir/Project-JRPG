@@ -208,13 +208,18 @@ public class AIController : MonoBehaviour
         }
         else
         {
-            _animator.SetFloat("Speed", 0.0f);
+            ResetSpeed();
         }
     }
 
     #endregion Private Methods
 
     #region Public Methods
+
+    public void ResetSpeed()
+    {
+        _animator.SetFloat("Speed", 0.0f);
+    }
 
     public void ToggleFollower()
     {

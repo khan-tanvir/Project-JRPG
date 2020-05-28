@@ -65,6 +65,8 @@ public class QuestManager : MonoBehaviour
 
         EventsManager.Instance.OnToggleFollower -= temp.ToggleFollower;
 
+        temp.ResetSpeed();
+
         temp.State = State.IDLE;
         temp.Target = null;
 
