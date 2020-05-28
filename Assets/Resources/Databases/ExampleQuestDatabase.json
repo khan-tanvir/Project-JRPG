@@ -1,0 +1,83 @@
+{
+  "QuestEntry": [
+    {
+      "ID": 0,
+      "Title": "Gather Test",
+      "Description": "Test Saving",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "GATHER",
+          "Description": "Gather [Test]  0/4",
+          "FirstEntry": "Test",
+          "SecondEntry": "4",
+          "ThirdEntry": "0"
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Activate Test",
+      "Description": "DESCRIPTION",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "ACTIVATE",
+          "Description": "Interact with the ARROW on the ground",
+          "FirstEntry": "Arrow"
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Escort Test",
+      "Description": "Test Saving",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "ESCORT",
+          "Description": "Escort [Test] to [4]",
+          "FirstEntry": "Test",
+          "SecondEntry": "Cave"
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Search Test",
+      "Description": "Test Saving",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "SEARCH",
+          "Description": "Walk to the entrance of the cave",
+          "FirstEntry": "Cave"
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Deliver Test",
+      "Description": "Test Saving",
+      "Giver": "NPC_NAME",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "DELIVER",
+          "Description": "Take [Arrow] to [Cave]",
+          "FirstEntry": "Arrow",
+          "SecondEntry": "Cave"
+        }
+      ]
+    }
+  ]
+}
