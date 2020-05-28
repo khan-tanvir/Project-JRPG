@@ -22,7 +22,8 @@ public class DialogueManager : MonoBehaviour
 
     #region Public Fields
 
-    public Animator animator;
+    //public Animator animator;
+    public GameObject dialogueBox;
 
     public TMP_Text dialogueText;
 
@@ -79,7 +80,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        animator.SetBool("isActive", false);
+        //animator.SetBool("isActive", false);
+        dialogueBox.SetActive(false);
     }
 
     public void ForwardText()
@@ -119,7 +121,7 @@ public class DialogueManager : MonoBehaviour
     {
         tempDialogueCheck = dialogue;
 
-        animator.SetBool("isActive", true);
+        dialogueBox.SetActive(true);
 
         nameText.text = dialogue.name[lineCount];
 
