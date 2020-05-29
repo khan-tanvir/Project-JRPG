@@ -72,19 +72,6 @@ public class Slot : MonoBehaviour
         }
     }
 
-    public void RemoveItem()
-    {
-        InvItem.ItemMB = null;
-
-        foreach (Transform child in transform)
-        {
-            if (child.name != "Cross")
-            {
-                Destroy(child.gameObject);
-            }
-        }
-    }
-
     public void StoreItem(Item item)
     {
         InvItem = item;
