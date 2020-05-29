@@ -75,18 +75,25 @@ public class QuestManager : MonoBehaviour
 
     private void SetupDeliverObjective(DeliverObjective objective)
     {
-        // Get prefab by objective.itemname
+        int index = Inventory.Instance.Slots.FindIndex(a => a.ObjectID == "Quest Item: " + objective.Item);
 
-        GameObject temp = Instantiate(_ARROW);
-
-        if (temp.GetComponent<IDroppable>() != null)
+        if (index != -1)
         {
-            temp.GetComponent<IDroppable>().EnableDrop = false;
+            Inventory.Instance.Slots[index].GetComponentInChildren<IDroppable>().EnableDrop = false;
         }
-
-        if (Inventory.Instance.FillSlot(temp))
+        else
         {
-            Destroy(temp);
+            GameObject temp = Instantiate(_ARROW);
+
+            if (temp.GetComponent<IDroppable>() != null)
+            {
+                temp.GetComponent<IDroppable>().EnableDrop = false;
+            }
+
+            if (Inventory.Instance.FillSlot(temp, objective.Item))
+            {
+                Destroy(temp);
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,7 +62,12 @@ public class Inventory : MonoBehaviour
 
     #region Public Methods
 
-    public bool FillSlot(GameObject objectToInstantiate)
+    private void ReOrderSlots()
+    {
+        Slots.OrderByDescending(i => i.InvItem);
+    }
+
+    public bool FillSlot(GameObject objectToInstantiate, string questItem = "")
     {
         for (int i = 0; i < Slots.Count; i++)
         {
@@ -81,8 +87,16 @@ public class Inventory : MonoBehaviour
 
                 itemObject.GetComponent<IDGenerator>().Instance.InInventory = true;
 
-                Slots[i].ObjectID = itemObject.GetComponent<IDGenerator>().Instance.ObjectID;
-                Slots[i].InitialPosition = itemObject.GetComponent<IDGenerator>().Instance.InitialPosition;
+                if (string.IsNullOrEmpty(questItem))
+                {
+                    Slots[i].ObjectID = itemObject.GetComponent<IDGenerator>().Instance.ObjectID;
+                    Slots[i].InitialPosition = itemObject.GetComponent<IDGenerator>().Instance.InitialPosition;
+                }
+                else
+                {
+                    Slots[i].ObjectID = "Quest Item: " + questItem;
+                    Slots[i].InitialPosition = default;
+                }
 
                 //objectToInstantiate.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
 
@@ -102,6 +116,8 @@ public class Inventory : MonoBehaviour
                 SceneManagerScript.Instance.AddToSceneObjectList(itemObject.GetComponent<IDGenerator>().Instance);
 
                 EventsManager.Instance.GatherObjectiveChange(Slots[i].InvItem.Name);
+
+                ReOrderSlots();
 
                 return true;
             }
@@ -129,6 +145,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < GameData.Instance.PlayerData.InventoryItems.Count; i++)
         {
+            Debug.Log("Item loaded");
             InventoryItem item = GameData.Instance.PlayerData.InventoryItems[i];
 
             var loadedObject = ItemDatabase.Instance.GetItemPrefab(item.ID);
@@ -159,7 +176,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(string item)
     {
-        int index = Slots.FindIndex(slot => slot.InvItem.Name.Equals(item) && slot.GetComponentInChildren<IDroppable>()?.EnableDrop == false);
+        int index = Slots.FindIndex(slot => slot.ObjectID == "Quest Item: " + item);
 
         if (index == -1)
         {
@@ -167,7 +184,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        Slots[index].RemoveItem();
+        Slots.RemoveAt(index);
     }
 
     public void SaveInventory()
@@ -178,6 +195,7 @@ public class Inventory : MonoBehaviour
         {
             if (Slots[i].InvItem != null)
             {
+                Debug.Log("Saving at postion " + i);
                 InventoryItem item = new InventoryItem(ItemDatabase.Instance.GetItemByName(Slots[i].InvItem.Name).ID, i, Slots[i].ObjectID);
                 itemsToStore.Add(item);
             }
