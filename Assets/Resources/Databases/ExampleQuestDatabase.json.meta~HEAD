@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Resources/Databases/ExampleQuestDatabase.json.meta
+guid: 06e00882f9984a6488b7cd047c16ecca
+=======
+guid: 1633e9012371cf04ca330542a6a1534d
+>>>>>>> master:Assets/Resources/Dialogue.xml.meta
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

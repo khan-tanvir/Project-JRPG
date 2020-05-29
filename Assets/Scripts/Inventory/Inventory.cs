@@ -67,8 +67,6 @@ public class Inventory : MonoBehaviour
         {
             if (Slots[i].InvItem == null)
             {
-                objectToInstantiate.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
-
                 GameObject itemObject = Instantiate(objectToInstantiate, Slots[i].transform, false);
 
                 itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
@@ -77,6 +75,22 @@ public class Inventory : MonoBehaviour
                 {
                     return false;
                 }
+                itemObject.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
+
+                itemObject.GetComponent<IDGenerator>().Instance = objectToInstantiate.GetComponent<IDGenerator>().Instance;
+
+                itemObject.GetComponent<IDGenerator>().Instance.InInventory = true;
+
+                Slots[i].ObjectID = itemObject.GetComponent<IDGenerator>().Instance.ObjectID;
+                Slots[i].InitialPosition = itemObject.GetComponent<IDGenerator>().Instance.InitialPosition;
+
+                //objectToInstantiate.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
+
+                //objectToInstantiate.GetComponent<IDGenerator>().Instance.InInventory = true;
+
+                //itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
+
+                //Slots[i].ObjectID = objectToInstantiate.GetComponent<IDGenerator>().Instance.ObjectID;
 
                 itemObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
@@ -84,6 +98,8 @@ public class Inventory : MonoBehaviour
                 itemObject.GetComponent<IStoreable>().SpriteRendererComp.enabled = false;
 
                 Slots[i].StoreItem(itemObject.GetComponent<ItemMB>().Item);
+
+                SceneManagerScript.Instance.AddToSceneObjectList(itemObject.GetComponent<IDGenerator>().Instance);
 
                 EventsManager.Instance.GatherObjectiveChange(Slots[i].InvItem.Name);
 
@@ -130,6 +146,8 @@ public class Inventory : MonoBehaviour
                 createdGameObject.GetComponent<ItemMB>().Item = new Item(ItemDatabase.Instance.GetItemByID(item.ID));
             }
 
+            Slots[item.Position].ObjectID = item.ObjectID;
+
             createdGameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             createdGameObject.gameObject.GetComponent<Image>().enabled = true;
@@ -141,7 +159,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(string item)
     {
-        int index = Slots.FindIndex(slot => slot.InvItem.Name.Equals(item));
+        int index = Slots.FindIndex(slot => slot.InvItem.Name.Equals(item) && slot.GetComponentInChildren<IDroppable>()?.EnableDrop == false);
 
         if (index == -1)
         {
@@ -160,7 +178,7 @@ public class Inventory : MonoBehaviour
         {
             if (Slots[i].InvItem != null)
             {
-                InventoryItem item = new InventoryItem(ItemDatabase.Instance.GetItemByName(Slots[i].InvItem.Name).ID, i);
+                InventoryItem item = new InventoryItem(ItemDatabase.Instance.GetItemByName(Slots[i].InvItem.Name).ID, i, Slots[i].ObjectID);
                 itemsToStore.Add(item);
             }
         }
