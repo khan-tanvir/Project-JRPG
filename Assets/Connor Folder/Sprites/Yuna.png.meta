@@ -1,43 +1,43 @@
 fileFormatVersion: 2
-guid: af21a864631865e478510b1b127dcdd5
+guid: aa37d994cc2e18342afc1e8ee2d87f33
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 587498548924201495
-    second: Haruto_0
+      213: -5236916857525245211
+    second: Yuna_0
   - first:
-      213: -6279849967029827587
-    second: Haruto StillForward
+      213: -6072104755634223938
+    second: Yuna_1
   - first:
-      213: -5075703712237960212
-    second: Haruto_2
+      213: -6453000635842259871
+    second: Yuna_2
   - first:
-      213: -2564403142378087880
-    second: Haruto_3
+      213: 7056176858576383078
+    second: Yuna_3
   - first:
-      213: -1517344828995038806
-    second: Haruto StillLeft
+      213: -8771657446804158276
+    second: Yuna_4
   - first:
-      213: -3056522179935469025
-    second: Haruto_5
+      213: 5690998811243579332
+    second: Yuna_5
   - first:
-      213: -6704814911987600868
-    second: Haruto_6
+      213: -3257961004451157072
+    second: Yuna_6
   - first:
-      213: -549388068278993700
-    second: Haruto StillRight
+      213: -5229300093926046927
+    second: Yuna_7
   - first:
-      213: 4063665994232144832
-    second: Haruto_8
+      213: 2208572596058903674
+    second: Yuna_8
   - first:
-      213: -146757513708816166
-    second: Haruto_9
+      213: -2437665101594208714
+    second: Yuna_9
   - first:
-      213: -9182985699678188627
-    second: Haruto StillBackwards
+      213: -6874172205298299705
+    second: Yuna_10
   - first:
-      213: -7735430341801067520
-    second: Haruto_11
+      213: 340756671656507063
+    second: Yuna_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -67,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -99,7 +99,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -111,7 +111,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -123,7 +123,7 @@ TextureImporter:
     buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -135,7 +135,7 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -147,253 +147,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Haruto_0
+      name: Yuna_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 9
         y: 144
-        width: 33
-        height: 45
+        width: 31
+        height: 44
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71a3faa41d6372800800000000000000
-      internalID: 587498548924201495
+      spriteID: 5eae3fc4ddbb257b0800000000000000
+      internalID: -5236916857525245211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto StillForward
+      name: Yuna_1
       rect:
         serializedVersion: 2
-        x: 55
-        y: 144
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df740702abd79d8a0800000000000000
-      internalID: -6279849967029827587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_2
-      rect:
-        serializedVersion: 2
-        x: 104
+        x: 56
         y: 144
         width: 32
         height: 45
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3cceead5a7f89b0800000000000000
-      internalID: -5075703712237960212
+      spriteID: eb4467965ec8bbba0800000000000000
+      internalID: -6072104755634223938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto_3
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 96
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83a98a5cde8696cd0800000000000000
-      internalID: -2564403142378087880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto StillLeft
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 96
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa199f1daee41fae0800000000000000
-      internalID: -1517344828995038806
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_5
+      name: Yuna_2
       rect:
         serializedVersion: 2
         x: 103
+        y: 144
+        width: 33
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16490457c165276a0800000000000000
+      internalID: -6453000635842259871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuna_3
+      rect:
+        serializedVersion: 2
+        x: 10
         y: 96
-        width: 33
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66ce6c7b7739ce160800000000000000
+      internalID: 7056176858576383078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuna_4
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 96
+        width: 31
         height: 45
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1208d0854d0595d0800000000000000
-      internalID: -3056522179935469025
+      spriteID: cb804dfb600d44680800000000000000
+      internalID: -8771657446804158276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto_6
+      name: Yuna_5
       rect:
         serializedVersion: 2
-        x: 7
-        y: 48
-        width: 33
-        height: 46
+        x: 106
+        y: 96
+        width: 30
+        height: 44
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c12bc367c56b3f2a0800000000000000
-      internalID: -6704814911987600868
+      spriteID: 4c70851444d7afe40800000000000000
+      internalID: 5690998811243579332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto StillRight
+      name: Yuna_6
       rect:
         serializedVersion: 2
-        x: 55
+        x: 5
         y: 48
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cdc7462767e2068f0800000000000000
-      internalID: -549388068278993700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_8
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 48
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c3aa0801ba056830800000000000000
-      internalID: 4063665994232144832
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_9
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 0
         width: 34
-        height: 46
+        height: 44
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad8344f91dc96fdf0800000000000000
-      internalID: -146757513708816166
+      spriteID: 0bb2d955ab569c2d0800000000000000
+      internalID: -3257961004451157072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto StillBackwards
+      name: Yuna_7
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 48
+        width: 33
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1330f95454bcd67b0800000000000000
+      internalID: -5229300093926046927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuna_8
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 48
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a74d0c8131d66ae10800000000000000
+      internalID: 2208572596058903674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuna_9
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 31
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6365c12618cab2ed0800000000000000
+      internalID: -2437665101594208714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuna_10
       rect:
         serializedVersion: 2
         x: 55
         y: 0
-        width: 33
-        height: 46
+        width: 32
+        height: 45
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dab8031e82b7f8080800000000000000
-      internalID: -9182985699678188627
+      spriteID: 7ccc45adcc80a90a0800000000000000
+      internalID: -6874172205298299705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto_11
+      name: Yuna_11
       rect:
         serializedVersion: 2
         x: 103
         y: 0
         width: 33
-        height: 45
+        height: 44
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c3b24961b36a490800000000000000
-      internalID: -7735430341801067520
+      spriteID: 7b63ee0336c9ab400800000000000000
+      internalID: 340756671656507063
       vertices: []
       indices: 
       edges: []
