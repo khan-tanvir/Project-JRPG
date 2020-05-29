@@ -31,6 +31,12 @@ public class Player : MonoBehaviour
         internal set;
     }
 
+    public UnityEngine.Vector2 FacingDirection
+    {
+        get;
+        internal set;
+    }
+
     public float MovementSpeed
     {
         get { return _movementSpeed; }
@@ -87,7 +93,7 @@ public class Player : MonoBehaviour
     private void LoadComponents()
     {
         RigidBody = gameObject.GetComponent<Rigidbody2D>();
-        Animator = gameObject.GetComponent<Animator>();
+        Animator = gameObject.GetComponentInChildren<Animator>();
         _playerInteraction = gameObject.GetComponent<PlayerInteraction>();
     }
 
@@ -148,8 +154,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Animator.SetFloat("Horizontal", Direction.x);
-        Animator.SetFloat("Vertical", Direction.y);
+        if (Direction != Vector2.zero)
+        {
+            FacingDirection = Direction;
+        }
+
+        Animator.SetFloat("Horizontal", FacingDirection.x);
+        Animator.SetFloat("Vertical", FacingDirection.y);
         Animator.SetFloat("Speed", Direction.sqrMagnitude);
     }
 
