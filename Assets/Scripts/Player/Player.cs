@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -94,19 +93,9 @@ public class Player : MonoBehaviour
 
     private void LoadPlayerPosition()
     {
-        try
-        {
-            if (GameData.Instance.PlayerData.PlayerPosition[0] >= 800.0f && GameData.Instance.PlayerData.PlayerPosition[1] >= 800.0f)
-            {
-                UnityEngine.Vector3 loadPos = new UnityEngine.Vector3(GameData.Instance.PlayerData.PlayerPosition[0], GameData.Instance.PlayerData.PlayerPosition[1], -1);
+        UnityEngine.Vector3 loadPos = new UnityEngine.Vector3(GameData.Instance.PlayerData.PlayerPosition[0], GameData.Instance.PlayerData.PlayerPosition[1], -1);
 
-                transform.position = loadPos;
-            }
-        }
-        catch (NullReferenceException e)
-        {
-            Debug.LogWarning("Load from the menu scene to avoid errors.\n" + e.Message);
-        }
+        transform.position = loadPos;
     }
 
     private void OnDisable()
