@@ -50,9 +50,17 @@ public class PauseMenu : MonoBehaviour
         GameData.Instance.PlayerData.PlayerPosition[0] = FindObjectOfType<Player>().RigidBody.position.x;
         GameData.Instance.PlayerData.PlayerPosition[1] = FindObjectOfType<Player>().RigidBody.position.y;
 
-        Debug.Log("X: " + GameData.Instance.PlayerData.PlayerPosition[0] + " Y: " + GameData.Instance.PlayerData.PlayerPosition[1]);
-
         Inventory.Instance.SaveInventory();
+
+        foreach (IDGenerator idgen in Resources.FindObjectsOfTypeAll<IDGenerator>())
+        {
+            if (idgen == null || idgen.ObjectID == "")
+            {
+                continue;
+            }
+
+            idgen.Save();
+        }
 
         GameData.Instance.SaveData();
     }

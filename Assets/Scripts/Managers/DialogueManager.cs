@@ -80,7 +80,6 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        //animator.SetBool("isActive", false);
         dialogueBox.SetActive(false);
     }
 

@@ -3,12 +3,31 @@
 [System.Serializable]
 public class Slot : MonoBehaviour
 {
+    #region Private Fields
+
+    [HideInInspector]
+    private Vector2 _initialPosition;
+
+    #endregion Private Fields
+
     #region Public Properties
+
+    public Vector2 InitialPosition
+    {
+        get => _initialPosition;
+        set => _initialPosition = value;
+    }
 
     public Item InvItem
     {
         get;
         internal set;
+    }
+
+    public string ObjectID
+    {
+        get;
+        set;
     }
 
     #endregion Public Properties
@@ -39,24 +58,17 @@ public class Slot : MonoBehaviour
                 temp.GetComponent<ItemMB>().Item = InvItem;
             }
 
-            temp.GetComponentInChildren<IDroppable>().ItemDropped();
+            temp.GetComponent<IDroppable>().ItemDropped();
+
+            temp.GetComponent<IDGenerator>().ObjectID = ObjectID;
+            temp.GetComponent<IDGenerator>().InitialPosition = InitialPosition;
+
+            temp.GetComponent<IDGenerator>().InInventory = false;
 
             Destroy(child.gameObject);
 
             InvItem = null;
-        }
-    }
-
-    public void RemoveItem()
-    {
-        InvItem.ItemMB = null;
-
-        foreach (Transform child in transform)
-        {
-            if (child.name != "Cross")
-            {
-                Destroy(child.gameObject);
-            }
+            ObjectID = "";
         }
     }
 
@@ -69,6 +81,8 @@ public class Slot : MonoBehaviour
             if (child.name != "Cross")
             {
                 child.name = InvItem.Name;
+                child.GetComponent<IDGenerator>().ObjectID = ObjectID;
+                child.GetComponent<IDGenerator>().InInventory = true;
             }
         }
     }

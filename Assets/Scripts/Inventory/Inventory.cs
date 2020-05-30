@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,14 +62,17 @@ public class Inventory : MonoBehaviour
 
     #region Public Methods
 
-    public bool FillSlot(GameObject objectToInstantiate)
+    private void ReOrderSlots()
+    {
+        Slots.OrderByDescending(i => i.InvItem);
+    }
+
+    public bool FillSlot(GameObject objectToInstantiate, string questItem = "")
     {
         for (int i = 0; i < Slots.Count; i++)
         {
             if (Slots[i].InvItem == null)
             {
-                objectToInstantiate.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
-
                 GameObject itemObject = Instantiate(objectToInstantiate, Slots[i].transform, false);
 
                 itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
@@ -77,6 +81,30 @@ public class Inventory : MonoBehaviour
                 {
                     return false;
                 }
+                itemObject.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
+
+                itemObject.GetComponent<IDGenerator>().Instance = objectToInstantiate.GetComponent<IDGenerator>().Instance;
+
+                itemObject.GetComponent<IDGenerator>().Instance.InInventory = true;
+
+                if (string.IsNullOrEmpty(questItem))
+                {
+                    Slots[i].ObjectID = itemObject.GetComponent<IDGenerator>().Instance.ObjectID;
+                    Slots[i].InitialPosition = itemObject.GetComponent<IDGenerator>().Instance.InitialPosition;
+                }
+                else
+                {
+                    Slots[i].ObjectID = "Quest Item: " + questItem;
+                    Slots[i].InitialPosition = default;
+                }
+
+                //objectToInstantiate.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
+
+                //objectToInstantiate.GetComponent<IDGenerator>().Instance.InInventory = true;
+
+                //itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
+
+                //Slots[i].ObjectID = objectToInstantiate.GetComponent<IDGenerator>().Instance.ObjectID;
 
                 itemObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
@@ -85,7 +113,11 @@ public class Inventory : MonoBehaviour
 
                 Slots[i].StoreItem(itemObject.GetComponent<ItemMB>().Item);
 
+                SceneManagerScript.Instance.AddToSceneObjectList(itemObject.GetComponent<IDGenerator>().Instance);
+
                 EventsManager.Instance.GatherObjectiveChange(Slots[i].InvItem.Name);
+
+                ReOrderSlots();
 
                 return true;
             }
@@ -113,6 +145,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < GameData.Instance.PlayerData.InventoryItems.Count; i++)
         {
+            Debug.Log("Item loaded");
             InventoryItem item = GameData.Instance.PlayerData.InventoryItems[i];
 
             var loadedObject = ItemDatabase.Instance.GetItemPrefab(item.ID);
@@ -130,6 +163,8 @@ public class Inventory : MonoBehaviour
                 createdGameObject.GetComponent<ItemMB>().Item = new Item(ItemDatabase.Instance.GetItemByID(item.ID));
             }
 
+            Slots[item.Position].ObjectID = item.ObjectID;
+
             createdGameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             createdGameObject.gameObject.GetComponent<Image>().enabled = true;
@@ -141,7 +176,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(string item)
     {
-        int index = Slots.FindIndex(slot => slot.InvItem.Name.Equals(item));
+        int index = Slots.FindIndex(slot => slot.ObjectID == "Quest Item: " + item);
 
         if (index == -1)
         {
@@ -149,7 +184,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        Slots[index].RemoveItem();
+        Slots.RemoveAt(index);
     }
 
     public void SaveInventory()
@@ -160,7 +195,8 @@ public class Inventory : MonoBehaviour
         {
             if (Slots[i].InvItem != null)
             {
-                InventoryItem item = new InventoryItem(ItemDatabase.Instance.GetItemByName(Slots[i].InvItem.Name).ID, i);
+                Debug.Log("Saving at postion " + i);
+                InventoryItem item = new InventoryItem(ItemDatabase.Instance.GetItemByName(Slots[i].InvItem.Name).ID, i, Slots[i].ObjectID);
                 itemsToStore.Add(item);
             }
         }

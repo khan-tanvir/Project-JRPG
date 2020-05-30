@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -27,6 +26,12 @@ public class Player : MonoBehaviour
     }
 
     public UnityEngine.Vector2 Direction
+    {
+        get;
+        internal set;
+    }
+
+    public UnityEngine.Vector2 FacingDirection
     {
         get;
         internal set;
@@ -88,25 +93,15 @@ public class Player : MonoBehaviour
     private void LoadComponents()
     {
         RigidBody = gameObject.GetComponent<Rigidbody2D>();
-        Animator = gameObject.GetComponent<Animator>();
+        Animator = gameObject.GetComponentInChildren<Animator>();
         _playerInteraction = gameObject.GetComponent<PlayerInteraction>();
     }
 
     private void LoadPlayerPosition()
     {
-        try
-        {
-            if (GameData.Instance.PlayerData.PlayerPosition[0] >= 800.0f && GameData.Instance.PlayerData.PlayerPosition[1] >= 800.0f)
-            {
-                UnityEngine.Vector3 loadPos = new UnityEngine.Vector3(GameData.Instance.PlayerData.PlayerPosition[0], GameData.Instance.PlayerData.PlayerPosition[1], -1);
+        UnityEngine.Vector3 loadPos = new UnityEngine.Vector3(GameData.Instance.PlayerData.PlayerPosition[0], GameData.Instance.PlayerData.PlayerPosition[1], -1);
 
-                transform.position = loadPos;
-            }
-        }
-        catch (NullReferenceException e)
-        {
-            Debug.LogWarning("Load from the menu scene to avoid errors.\n" + e.Message);
-        }
+        transform.position = loadPos;
     }
 
     private void OnDisable()
@@ -159,8 +154,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Animator.SetFloat("Horizontal", Direction.x);
-        Animator.SetFloat("Vertical", Direction.y);
+        if (Direction != Vector2.zero)
+        {
+            FacingDirection = Direction;
+        }
+
+        Animator.SetFloat("Horizontal", FacingDirection.x);
+        Animator.SetFloat("Vertical", FacingDirection.y);
         Animator.SetFloat("Speed", Direction.sqrMagnitude);
     }
 
