@@ -1,43 +1,43 @@
 fileFormatVersion: 2
-guid: af21a864631865e478510b1b127dcdd5
+guid: a2e2102ef8dd94548b2fa0609991c47b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 587498548924201495
-    second: Haruto_0
+      213: 893816987229535301
+    second: Osakabe_0
   - first:
-      213: -6279849967029827587
-    second: Haruto StillForward
+      213: -6419176106272278929
+    second: Osakabe_1
   - first:
-      213: -5075703712237960212
-    second: Haruto_2
+      213: 2527766351956850895
+    second: Osakabe_2
   - first:
-      213: -2564403142378087880
-    second: Haruto_3
+      213: 6208073962235707293
+    second: Osakabe_3
   - first:
-      213: -1517344828995038806
-    second: Haruto StillLeft
+      213: -7264442933596109
+    second: Osakabe_4
   - first:
-      213: -3056522179935469025
-    second: Haruto_5
+      213: -648547145195358908
+    second: Osakabe_5
   - first:
-      213: -6704814911987600868
-    second: Haruto_6
+      213: 6126501518533274304
+    second: Osakabe_6
   - first:
-      213: -549388068278993700
-    second: Haruto StillRight
+      213: -6040932291998782517
+    second: Osakabe_7
   - first:
-      213: 4063665994232144832
-    second: Haruto_8
+      213: 1697523778718393854
+    second: Osakabe_8
   - first:
-      213: -146757513708816166
-    second: Haruto_9
+      213: -4609268511276079210
+    second: Osakabe_9
   - first:
-      213: -9182985699678188627
-    second: Haruto StillBackwards
+      213: 4045734789525185765
+    second: Osakabe_10
   - first:
-      213: -7735430341801067520
-    second: Haruto_11
+      213: -203518085497836638
+    second: Osakabe_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -147,253 +147,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Haruto_0
+      name: Osakabe_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 9
         y: 144
+        width: 31
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54cb60270d9776c00800000000000000
+      internalID: 893816987229535301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osakabe_1
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 144
+        width: 31
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6637f277518ae6a0800000000000000
+      internalID: -6419176106272278929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osakabe_2
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 144
+        width: 31
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc8b29bba1e641320800000000000000
+      internalID: 2527766351956850895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osakabe_3
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 96
+        width: 34
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9f396a7062872650800000000000000
+      internalID: 6208073962235707293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osakabe_4
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 96
         width: 33
         height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71a3faa41d6372800800000000000000
-      internalID: 587498548924201495
+      spriteID: 330b373170136eff0800000000000000
+      internalID: -7264442933596109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto StillForward
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 144
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df740702abd79d8a0800000000000000
-      internalID: -6279849967029827587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_2
+      name: Osakabe_5
       rect:
         serializedVersion: 2
         x: 104
-        y: 144
+        y: 96
         width: 32
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3cceead5a7f89b0800000000000000
-      internalID: -5075703712237960212
+      spriteID: 445798ebec5eff6f0800000000000000
+      internalID: -648547145195358908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto_3
+      name: Osakabe_6
       rect:
         serializedVersion: 2
-        x: 7
-        y: 96
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83a98a5cde8696cd0800000000000000
-      internalID: -2564403142378087880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto StillLeft
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 96
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa199f1daee41fae0800000000000000
-      internalID: -1517344828995038806
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_5
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 96
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1208d0854d0595d0800000000000000
-      internalID: -3056522179935469025
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_6
-      rect:
-        serializedVersion: 2
-        x: 7
+        x: 5
         y: 48
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c12bc367c56b3f2a0800000000000000
-      internalID: -6704814911987600868
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto StillRight
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 48
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cdc7462767e2068f0800000000000000
-      internalID: -549388068278993700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_8
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 48
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c3aa0801ba056830800000000000000
-      internalID: 4063665994232144832
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_9
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 0
         width: 34
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad8344f91dc96fdf0800000000000000
-      internalID: -146757513708816166
+      spriteID: 0ca2118eba4b50550800000000000000
+      internalID: 6126501518533274304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto StillBackwards
+      name: Osakabe_7
       rect:
         serializedVersion: 2
-        x: 55
-        y: 0
+        x: 54
+        y: 48
         width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dab8031e82b7f8080800000000000000
-      internalID: -9182985699678188627
+      spriteID: bcbe93f261c4a2ca0800000000000000
+      internalID: -6040932291998782517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto_11
+      name: Osakabe_8
       rect:
         serializedVersion: 2
         x: 103
-        y: 0
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 48
+        width: 32
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c3b24961b36a490800000000000000
-      internalID: -7735430341801067520
+      spriteID: ef5e94402e0de8710800000000000000
+      internalID: 1697523778718393854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osakabe_9
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 31
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 697eefeb5b69800c0800000000000000
+      internalID: -4609268511276079210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osakabe_10
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 31
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4a6191b56552830800000000000000
+      internalID: 4045734789525185765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osakabe_11
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 39
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aba8882165fc2df0800000000000000
+      internalID: -203518085497836638
       vertices: []
       indices: 
       edges: []

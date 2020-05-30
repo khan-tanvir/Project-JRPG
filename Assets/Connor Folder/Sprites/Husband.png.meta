@@ -1,43 +1,43 @@
 fileFormatVersion: 2
-guid: af21a864631865e478510b1b127dcdd5
+guid: 5e6e08723065f0644adaf71bc6be9842
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 587498548924201495
-    second: Haruto_0
+      213: 8403113420175783407
+    second: Husband_0
   - first:
-      213: -6279849967029827587
-    second: Haruto StillForward
+      213: 1038825959326049330
+    second: Husband_1
   - first:
-      213: -5075703712237960212
-    second: Haruto_2
+      213: -6110334019728190739
+    second: Husband_2
   - first:
-      213: -2564403142378087880
-    second: Haruto_3
+      213: 3021625059065130732
+    second: Husband_3
   - first:
-      213: -1517344828995038806
-    second: Haruto StillLeft
+      213: -2666673570919483417
+    second: Husband_4
   - first:
-      213: -3056522179935469025
-    second: Haruto_5
+      213: 2022719457675099108
+    second: Husband_5
   - first:
-      213: -6704814911987600868
-    second: Haruto_6
+      213: 4870638735849909090
+    second: Husband_6
   - first:
-      213: -549388068278993700
-    second: Haruto StillRight
+      213: 69754605421452341
+    second: Husband_7
   - first:
-      213: 4063665994232144832
-    second: Haruto_8
+      213: -370698738232614945
+    second: Husband_8
   - first:
-      213: -146757513708816166
-    second: Haruto_9
+      213: -3636738227418815825
+    second: Husband_9
   - first:
-      213: -9182985699678188627
-    second: Haruto StillBackwards
+      213: -6125085233498873175
+    second: Husband_10
   - first:
-      213: -7735430341801067520
-    second: Haruto_11
+      213: -5894159570076526720
+    second: Husband_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -147,253 +147,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Haruto_0
+      name: Husband_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 8
         y: 144
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 71a3faa41d6372800800000000000000
-      internalID: 587498548924201495
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto StillForward
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 144
-        width: 33
+        width: 30
         height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df740702abd79d8a0800000000000000
-      internalID: -6279849967029827587
+      spriteID: fe535e0522bdd9470800000000000000
+      internalID: 8403113420175783407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto_2
+      name: Husband_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 144
+        width: 29
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2346511c4b6aa6e00800000000000000
+      internalID: 1038825959326049330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Husband_2
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 144
+        width: 30
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de2dd1f359bb33ba0800000000000000
+      internalID: -6110334019728190739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Husband_3
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 96
+        width: 29
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceeeef16bf7fee920800000000000000
+      internalID: 3021625059065130732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Husband_4
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 96
+        width: 29
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e7fb6114821efad0800000000000000
+      internalID: -2666673570919483417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Husband_5
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 96
+        width: 29
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ebbef241a4221c10800000000000000
+      internalID: 2022719457675099108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Husband_6
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 48
+        width: 29
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26b679fdf1cf79340800000000000000
+      internalID: 4870638735849909090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Husband_7
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 48
+        width: 29
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53cd79da171d7f000800000000000000
+      internalID: 69754605421452341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Husband_8
       rect:
         serializedVersion: 2
         x: 104
-        y: 144
-        width: 32
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce3cceead5a7f89b0800000000000000
-      internalID: -5075703712237960212
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_3
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 96
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83a98a5cde8696cd0800000000000000
-      internalID: -2564403142378087880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto StillLeft
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 96
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa199f1daee41fae0800000000000000
-      internalID: -1517344828995038806
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_5
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 96
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1208d0854d0595d0800000000000000
-      internalID: -3056522179935469025
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_6
-      rect:
-        serializedVersion: 2
-        x: 7
         y: 48
-        width: 33
+        width: 29
         height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c12bc367c56b3f2a0800000000000000
-      internalID: -6704814911987600868
+      spriteID: fdf95fc26730bdaf0800000000000000
+      internalID: -370698738232614945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto StillRight
+      name: Husband_9
       rect:
         serializedVersion: 2
-        x: 55
-        y: 48
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cdc7462767e2068f0800000000000000
-      internalID: -549388068278993700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_8
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 48
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c3aa0801ba056830800000000000000
-      internalID: 4063665994232144832
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Haruto_9
-      rect:
-        serializedVersion: 2
-        x: 7
+        x: 9
         y: 0
-        width: 34
+        width: 30
         height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad8344f91dc96fdf0800000000000000
-      internalID: -146757513708816166
+      spriteID: fa22e95b9d5b78dc0800000000000000
+      internalID: -3636738227418815825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto StillBackwards
+      name: Husband_10
       rect:
         serializedVersion: 2
-        x: 55
+        x: 57
         y: 0
-        width: 33
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 29
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dab8031e82b7f8080800000000000000
-      internalID: -9182985699678188627
+      spriteID: 9a22f46ae635ffaa0800000000000000
+      internalID: -6125085233498873175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Haruto_11
+      name: Husband_11
       rect:
         serializedVersion: 2
-        x: 103
+        x: 104
         y: 0
-        width: 33
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 30
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c3b24961b36a490800000000000000
-      internalID: -7735430341801067520
+      spriteID: 0879e10891db33ea0800000000000000
+      internalID: -5894159570076526720
       vertices: []
       indices: 
       edges: []
