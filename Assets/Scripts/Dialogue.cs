@@ -33,7 +33,6 @@ public class Dialogue
                 var oneString = oneDict.Elements("string");
                 XElement element = oneString.ElementAt(i);
                 int index = element.ToString().IndexOf(":");
-                Debug.Log(element);
                 string characterName = element.ToString().Substring(0, index).Replace("<string>", "").Replace(":","");
                 string line = element.ToString().Replace("<string>", "").Replace("</string>", "").Replace(characterName + ":", "");
 

@@ -2078,6 +2078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue Box
       objectReference: {fileID: 0}
+    - target: {fileID: 3622407478518482168, guid: 44dbe76e61db1734fa0f827bf66c7cac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3622407478598070455, guid: 44dbe76e61db1734fa0f827bf66c7cac,
         type: 3}
       propertyPath: m_AnchoredPosition.x

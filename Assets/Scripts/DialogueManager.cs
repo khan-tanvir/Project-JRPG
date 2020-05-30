@@ -7,9 +7,13 @@ public class DialogueManager : MonoBehaviour
 {
     public Animator animator;
 
+    private GameObject box;
+
     private Queue<string> lines;
 
     private string[] previousLines;
+
+    private bool ConversationStarted;
 
     public Text nameText;
 
@@ -27,12 +31,18 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         lineCount = 0;
+        ConversationStarted = false;
+        box = GameObject.Find("Dialogue Box");
         lines = new Queue<string>();
     }
 
     public void StartConversation(Dialogue dialogue)
     {
         tempDialogueCheck = dialogue;
+
+        ConversationStarted = true;
+
+        box.SetActive(true);
 
         animator.SetBool("isActive", true);
 
@@ -120,7 +130,18 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("isActive", false);
+        Invoke("deactivate", 0.2f);
+        ConversationStarted = false;
     }
 
+    public void deactivate()
+    {
+        box.SetActive(false);
+    }
+
+    public bool DialogueStarted()
+    {
+        return ConversationStarted;
+    }
 
 }
