@@ -82,12 +82,22 @@ public class Player : MonoBehaviour
         PlayerInput.PlayerControls.Pause.performed += ctx => ToggleGame();
         PlayerInput.PlayerControls.Interact.performed += ctx => Interact();
         PlayerInput.PlayerControls.ToggleFollower.performed += ctx => ToggleFollower();
+
+#if DEBUG
+        PlayerInput.PlayerControls.KillPlayer.performed += ctx => KillPlayer();
+
+#endif
     }
 
     private void Interact()
     {
         if (_playerInteraction.InteractableObject)
             _playerInteraction.CallInteract();
+    }
+
+    private void KillPlayer()
+    {
+        SceneManagerScript.Instance.ReloadScene();
     }
 
     private void LoadComponents()
@@ -99,9 +109,7 @@ public class Player : MonoBehaviour
 
     private void LoadPlayerPosition()
     {
-        UnityEngine.Vector3 loadPos = new UnityEngine.Vector3(GameData.Instance.PlayerData.PlayerPosition[0], GameData.Instance.PlayerData.PlayerPosition[1], -1);
-
-        transform.position = loadPos;
+        transform.position = RespawnManager.Instance.CurrentCheckpoint;
     }
 
     private void OnDisable()

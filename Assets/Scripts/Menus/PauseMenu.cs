@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Security.Cryptography;
+using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         Resume();
+        Destroy(QuestManager.Instance.gameObject);
+        Destroy(EventsManager.Instance.gameObject);
+        Destroy(RespawnManager.Instance.gameObject);
+
         SceneManagerScript.Instance.SceneToGoTo("Menu");
     }
 
@@ -44,11 +49,17 @@ public class PauseMenu : MonoBehaviour
 
     public void SavePlayerProgress()
     {
+        if (GameData.Instance.PlayerData == null)
+        {
+            Debug.LogError("You need to load a save file first");
+            return;
+        }
+        
         // Before saving make sure you have loaded a file first
 
         // Store the position
-        GameData.Instance.PlayerData.PlayerPosition[0] = FindObjectOfType<Player>().RigidBody.position.x;
-        GameData.Instance.PlayerData.PlayerPosition[1] = FindObjectOfType<Player>().RigidBody.position.y;
+        GameData.Instance.PlayerData.PlayerPosition[0] = RespawnManager.Instance.CurrentCheckpoint.x;
+        GameData.Instance.PlayerData.PlayerPosition[1] = RespawnManager.Instance.CurrentCheckpoint.y;
 
         Inventory.Instance.SaveInventory();
 

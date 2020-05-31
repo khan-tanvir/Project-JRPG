@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Kill Player",
+                    "type": "Button",
+                    "id": "c87e0b34-d04c-4e9b-8fab-e2851d64b369",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -184,6 +192,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "ToggleFollower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54ba1f36-4a27-4129-96e5-ddbddba34c80",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Kill Player",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
