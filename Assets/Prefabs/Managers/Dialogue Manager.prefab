@@ -43,7 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7950b4090e926f45aed9dfae064122e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialoguePanel: {fileID: 0}
+  _optionsBox: {fileID: 0}
   animator: {fileID: 0}
-  nameText: {fileID: 0}
+  choiceAnimator: {fileID: 0}
   dialogueText: {fileID: 0}
+  nameText: {fileID: 0}
+  script: 
   sprite: {fileID: 0}

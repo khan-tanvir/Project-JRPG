@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -57,6 +56,7 @@ public class PauseMenu : MonoBehaviour
         Destroy(QuestManager.Instance.gameObject);
         Destroy(EventsManager.Instance.gameObject);
         Destroy(RespawnManager.Instance.gameObject);
+        Destroy(DialogueManager.Instance.gameObject);
 
         SceneManagerScript.Instance.SceneToGoTo("Menu");
     }
@@ -86,7 +86,7 @@ public class PauseMenu : MonoBehaviour
 
         foreach (IDGenerator idgen in Resources.FindObjectsOfTypeAll<IDGenerator>())
         {
-            if (idgen == null || idgen.ObjectID == "")
+            if (idgen == null || string.IsNullOrEmpty(idgen.ObjectID))
             {
                 continue;
             }
