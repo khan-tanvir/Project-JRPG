@@ -240,6 +240,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f038156bef0f14546909d780a1b786de, type: 3}
+--- !u!1 &15018887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1404892330631041508, guid: 52571c9bf4d853144bd7f69e50d8f964,
+    type: 3}
+  m_PrefabInstance: {fileID: 7442128894167716903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &42792380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1569,7 +1575,7 @@ SpriteRenderer:
   m_SortingLayerID: 2140049083
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 95406b6737b66479a80d172766f8bac5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03b3b03d94fe64ca991436d28accda10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1637,7 +1643,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3125, y: 1.1875}
+    oldSize: {x: 0.3125, y: 0.4375}
     newSize: {x: 0.3125, y: 1.1875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1839,7 +1845,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3125, y: 1.1875}
+    oldSize: {x: 0.3125, y: 0.4375}
     newSize: {x: 0.3125, y: 1.1875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1887,7 +1893,7 @@ SpriteRenderer:
   m_SortingLayerID: 2140049083
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 95406b6737b66479a80d172766f8bac5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bff474feb3ed041f0abe9d1ec39e3b73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1966,6 +1972,11 @@ PrefabInstance:
       propertyPath: _journal
       value: 
       objectReference: {fileID: 1784132505}
+    - target: {fileID: 1797515301977936077, guid: e138cb2d7f880d740a7433b8dd8e7c55,
+        type: 3}
+      propertyPath: _deathMenu
+      value: 
+      objectReference: {fileID: 15018887}
     - target: {fileID: 4090694619136756743, guid: e138cb2d7f880d740a7433b8dd8e7c55,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -3,9 +3,19 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    #region Private Fields
+
+    private bool _hasPlayerBeenPrompted;
+
+    #endregion Private Fields
+
     #region Public Fields
 
-    public GameObject _pauseMenu;
+    [SerializeField]
+    private GameObject _pauseMenu;
+
+    [SerializeField]
+    private GameObject _savePrompt;
 
     #endregion Public Fields
 
@@ -30,8 +40,19 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
+    public void PlayerHasBeenPrompted()
+    {
+        _hasPlayerBeenPrompted = true;
+    }
+
     public void Quit()
     {
+        if (!_hasPlayerBeenPrompted)
+        {
+            _savePrompt.SetActive(true);
+            return;
+        }
+
         Resume();
         Destroy(QuestManager.Instance.gameObject);
         Destroy(EventsManager.Instance.gameObject);
@@ -54,7 +75,7 @@ public class PauseMenu : MonoBehaviour
             Debug.LogError("You need to load a save file first");
             return;
         }
-        
+
         // Before saving make sure you have loaded a file first
 
         // Store the position
@@ -74,6 +95,8 @@ public class PauseMenu : MonoBehaviour
         }
 
         GameData.Instance.SaveData();
+
+        _hasPlayerBeenPrompted = true;
     }
 
     public void Toggle()

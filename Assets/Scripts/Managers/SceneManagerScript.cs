@@ -128,6 +128,7 @@ public class SceneManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         RespawnManager.Instance.SceneReload();
+        Time.timeScale = 1.0f;
     }
 
     public void SceneToGoTo(string sceneName)

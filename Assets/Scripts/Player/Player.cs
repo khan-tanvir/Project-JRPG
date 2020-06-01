@@ -5,6 +5,9 @@ public class Player : MonoBehaviour
     #region Private Fields
 
     [SerializeField]
+    private GameObject _deathMenu;
+
+    [SerializeField]
     private GameObject _inventory;
 
     [SerializeField]
@@ -97,7 +100,9 @@ public class Player : MonoBehaviour
 
     private void KillPlayer()
     {
-        SceneManagerScript.Instance.ReloadScene();
+        Time.timeScale = 0.0f;
+        _deathMenu.SetActive(true);
+        PlayerInput.Disable();
     }
 
     private void LoadComponents()
