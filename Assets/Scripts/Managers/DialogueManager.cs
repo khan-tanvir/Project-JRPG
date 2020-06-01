@@ -24,6 +24,7 @@ public class DialogueManager : MonoBehaviour
 
     //public Animator animator;
     public GameObject dialogueBox;
+    public Player player;
 
     public TMP_Text dialogueText;
 
@@ -81,6 +82,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         dialogueBox.SetActive(false);
+        player.PlayerInput.Enable();
     }
 
     public void ForwardText()
@@ -121,6 +123,8 @@ public class DialogueManager : MonoBehaviour
         tempDialogueCheck = dialogue;
 
         dialogueBox.SetActive(true);
+
+        player.PlayerInput.Disable();
 
         nameText.text = dialogue.name[lineCount];
 
