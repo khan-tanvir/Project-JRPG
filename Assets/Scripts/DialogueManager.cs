@@ -7,7 +7,11 @@ public class DialogueManager : MonoBehaviour
 {
     public Animator animator;
 
+    public Animator choiceAnimator;
+
     private GameObject box;
+
+    private GameObject optionBox;
 
     private Queue<string> lines;
 
@@ -15,7 +19,11 @@ public class DialogueManager : MonoBehaviour
 
     private bool ConversationStarted;
 
+    private bool optionsPresent;
+
     public Text nameText;
+
+    public string script;
 
     public Text dialogueText;
 
@@ -31,14 +39,25 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         lineCount = 0;
+        optionsPresent = false;
         ConversationStarted = false;
+        optionBox = GameObject.Find("Option selecter");
         box = GameObject.Find("Dialogue Box");
         lines = new Queue<string>();
     }
 
+    public void optionsInDialogue(bool InDialogue)
+    {
+        optionsPresent = InDialogue;
+    }
+
     public void StartConversation(Dialogue dialogue)
     {
+        lineCount = 0;
+
         tempDialogueCheck = dialogue;
+
+        script = dialogue.script;
 
         ConversationStarted = true;
 
@@ -47,8 +66,6 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isActive", true);
 
         nameText.text = dialogue.name[lineCount];
-
-        lineCount = 0;
 
         sprite.sprite = dialogue.sprite[lineCount];
 
@@ -100,7 +117,14 @@ public class DialogueManager : MonoBehaviour
         if (lines.Count==0)
         {
             lineCount = 0;
-            EndDialogue();
+            if (optionsPresent == false)
+            {
+                EndDialogue();
+            }
+            else
+            {
+                choiceAnimator.SetBool("IsActive", true);
+            }
             return;
         }
         else
