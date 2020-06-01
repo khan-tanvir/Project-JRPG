@@ -1658,6 +1658,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7442128894167716903}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1517591197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3312335362343582071, guid: 52571c9bf4d853144bd7f69e50d8f964,
+    type: 3}
+  m_PrefabInstance: {fileID: 7442128894167716903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1606802576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8542,6 +8548,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1371856852}
+    - target: {fileID: 357984530638749917, guid: 52571c9bf4d853144bd7f69e50d8f964,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 357984530638749917, guid: 52571c9bf4d853144bd7f69e50d8f964,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 357984530638749917, guid: 52571c9bf4d853144bd7f69e50d8f964,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986852197820133082, guid: 52571c9bf4d853144bd7f69e50d8f964,
+        type: 3}
+      propertyPath: m_Name
+      value: No
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312335362343582071, guid: 52571c9bf4d853144bd7f69e50d8f964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7442128895184803376, guid: 52571c9bf4d853144bd7f69e50d8f964,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8656,6 +8687,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442128895184803391, guid: 52571c9bf4d853144bd7f69e50d8f964,
+        type: 3}
+      propertyPath: _savePrompt
+      value: 
+      objectReference: {fileID: 1517591197}
+    - target: {fileID: 7769591706349707948, guid: 52571c9bf4d853144bd7f69e50d8f964,
+        type: 3}
+      propertyPath: m_Name
+      value: Yes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52571c9bf4d853144bd7f69e50d8f964, type: 3}
