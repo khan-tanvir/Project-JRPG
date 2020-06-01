@@ -11,6 +11,10 @@ public class EventsManager : MonoBehaviour
 
     public event Action<string> OnLocationEntered;
 
+    public event Action OnPlayerDeath;
+
+    public event Action OnRespawn;
+
     public event Action OnToggleFollower;
 
     #endregion Public Events
@@ -30,7 +34,20 @@ public class EventsManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        Instance = this;
+        CreateInstance();
+    }
+
+    private void CreateInstance()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     #endregion Private Methods
@@ -50,6 +67,16 @@ public class EventsManager : MonoBehaviour
     public void LocationEntered(string location)
     {
         OnLocationEntered?.Invoke(location);
+    }
+
+    public void PlayerDeath()
+    {
+        OnPlayerDeath?.Invoke();
+    }
+
+    public void Respawn()
+    {
+        OnRespawn?.Invoke();
     }
 
     public void ToggleFollower()

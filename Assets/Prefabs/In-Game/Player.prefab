@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7320f0304876a8f4695bf4ef7aee6a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numberOfSlots: 0
+  _numberOfSlots: 25
   _slotContainer: {fileID: 0}
   _slotObject: {fileID: 1832966433400925932, guid: 333e4bbea43afeb4aaf27b145df04310,
     type: 3}
