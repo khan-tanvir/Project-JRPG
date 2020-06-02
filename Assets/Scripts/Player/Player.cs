@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -17,6 +19,12 @@ public class Player : MonoBehaviour
     private float _movementSpeed;
 
     private PlayerInteraction _playerInteraction;
+
+    public bool UseGamePad
+    {
+        get;
+        internal set;
+    }
 
     #endregion Private Fields
 
@@ -79,6 +87,9 @@ public class Player : MonoBehaviour
     private void InitialiseInput()
     {
         PlayerInput = new PlayerInputActions();
+
+        SwitchInput();
+
         PlayerInput.PlayerControls.Move.performed += ctx => Direction = ctx.ReadValue<UnityEngine.Vector2>();
         PlayerInput.PlayerControls.Inventory.performed += ctx => ToggleInventory();
         PlayerInput.PlayerControls.Journal.performed += ctx => ToggleJournal();
@@ -175,6 +186,22 @@ public class Player : MonoBehaviour
         Animator.SetFloat("Horizontal", FacingDirection.x);
         Animator.SetFloat("Vertical", FacingDirection.y);
         Animator.SetFloat("Speed", Direction.sqrMagnitude);
+    }
+
+    public void SwitchInput()
+    {
+        if (UseGamePad)
+        {
+            var binding = PlayerInput.controlSchemes.First(a => a.name == "Keyboard").bindingGroup;
+            PlayerInput.bindingMask = InputBinding.MaskByGroup(binding);
+            UseGamePad = false;
+        }
+        else
+        {
+            var binding = PlayerInput.controlSchemes.First(a => a.name == "Gamepad").bindingGroup;
+            PlayerInput.bindingMask = InputBinding.MaskByGroup(binding);
+            UseGamePad = true;
+        }
     }
 
     #endregion Private Methods
