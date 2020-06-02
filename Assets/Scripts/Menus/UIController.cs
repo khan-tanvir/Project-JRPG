@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour, IPointerEnterHandler
 {
@@ -18,7 +19,11 @@ public class UIController : MonoBehaviour, IPointerEnterHandler
 
     private void OnEnable()
     {
+        Debug.Log("test");
+        
         EventSystem.current.SetSelectedGameObject(_selected);
+
+        _selected.GetComponent<UnityEngine.UI.Selectable>().Select();
 
         if (_backButton != null)
         {
