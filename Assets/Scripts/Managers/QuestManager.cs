@@ -12,13 +12,10 @@ public class QuestManager : MonoBehaviour
 
     private Quest _currentSelectedQuest;
 
-    [SerializeField]
     private TMP_Text _descriptionPanel;
 
-    [SerializeField]
     private Transform _listTransform;
 
-    [SerializeField]
     private TMP_Text _numberOfQuests;
 
     [SerializeField]
@@ -46,17 +43,37 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        CreateInstance();
+    }
 
-        Quests = new List<Quest>();
-
-        LoadQuestDatabase();
+    private void CreateInstance()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void LoadQuestDatabase()
     {
         QuestsDatabase database = new QuestsDatabase();
         database.ReadDatabase(GameData.Instance.CurrentSaveFile);
+    }
+
+    private void LoadVariables()
+    {
+        Transform journal = FindObjectOfType<Canvas>().transform.Find("Journal");
+
+        _descriptionPanel = journal.Find("Selected").Find("Text Box").Find("Text").GetComponent<TMP_Text>();
+        _listTransform = journal.Find("List").Find("Quest Area");
+        _numberOfQuests = journal.Find("Capacity").Find("Text").GetComponent<TMP_Text>();
+
+        Quests = new List<Quest>();
     }
 
     private void OnEscortObjectiveComplete(EscortObjective objective)
@@ -108,6 +125,12 @@ public class QuestManager : MonoBehaviour
         temp.Target = FindObjectOfType<Player>().transform;
 
         EventsManager.Instance.OnToggleFollower += temp.ToggleFollower;
+    }
+
+    private void Start()
+    {
+        LoadVariables();
+        LoadQuestDatabase();
     }
 
     private void SubscribeToEvent(Objective objective)

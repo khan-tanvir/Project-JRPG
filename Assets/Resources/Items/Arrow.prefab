@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 501204988629294666}
   - component: {fileID: 501204988629294662}
   - component: {fileID: 8728067686578027251}
+  - component: {fileID: 8221893544367187734}
   m_Layer: 8
   m_Name: Arrow
   m_TagString: Untagged
@@ -113,8 +114,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2140049083
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 95406b6737b66479a80d172766f8bac5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -155,10 +156,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4316215d6402d4dbeb804d9b23b718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemID: 2
   interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
   defaultMat: {fileID: 0}
-  _itemID: 2
-  _enableInteraction: 1
-  _infiniteUses: 1
-  _enablePickUp: 1
   _enableDrop: 1
+  _enableInteraction: 1
+  _enablePickUp: 1
+  _infiniteUses: 1
+--- !u!114 &8221893544367187734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501204988629294664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a056d88e1c02b3d4882fceb26edc59c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inInventory: 0
+  _isDestroyed: 0
+  _objectID: 

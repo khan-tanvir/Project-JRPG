@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     #region Private Fields
+
+    [SerializeField]
+    private GameObject _deathMenu;
 
     [SerializeField]
     private GameObject _inventory;
@@ -14,6 +19,12 @@ public class Player : MonoBehaviour
     private float _movementSpeed;
 
     private PlayerInteraction _playerInteraction;
+
+    public bool UseGamePad
+    {
+        get;
+        internal set;
+    }
 
     #endregion Private Fields
 
@@ -76,18 +87,33 @@ public class Player : MonoBehaviour
     private void InitialiseInput()
     {
         PlayerInput = new PlayerInputActions();
+
+        SwitchInput();
+
         PlayerInput.PlayerControls.Move.performed += ctx => Direction = ctx.ReadValue<UnityEngine.Vector2>();
         PlayerInput.PlayerControls.Inventory.performed += ctx => ToggleInventory();
         PlayerInput.PlayerControls.Journal.performed += ctx => ToggleJournal();
         PlayerInput.PlayerControls.Pause.performed += ctx => ToggleGame();
         PlayerInput.PlayerControls.Interact.performed += ctx => Interact();
         PlayerInput.PlayerControls.ToggleFollower.performed += ctx => ToggleFollower();
+
+#if DEBUG
+        PlayerInput.PlayerControls.KillPlayer.performed += ctx => KillPlayer();
+
+#endif
     }
 
     private void Interact()
     {
         if (_playerInteraction.InteractableObject)
             _playerInteraction.CallInteract();
+    }
+
+    private void KillPlayer()
+    {
+        Time.timeScale = 0.0f;
+        _deathMenu.SetActive(true);
+        PlayerInput.Disable();
     }
 
     private void LoadComponents()
@@ -99,9 +125,7 @@ public class Player : MonoBehaviour
 
     private void LoadPlayerPosition()
     {
-        UnityEngine.Vector3 loadPos = new UnityEngine.Vector3(GameData.Instance.PlayerData.PlayerPosition[0], GameData.Instance.PlayerData.PlayerPosition[1], -1);
-
-        transform.position = loadPos;
+        transform.position = RespawnManager.Instance.CurrentCheckpoint;
     }
 
     private void OnDisable()
@@ -162,6 +186,22 @@ public class Player : MonoBehaviour
         Animator.SetFloat("Horizontal", FacingDirection.x);
         Animator.SetFloat("Vertical", FacingDirection.y);
         Animator.SetFloat("Speed", Direction.sqrMagnitude);
+    }
+
+    public void SwitchInput()
+    {
+        if (UseGamePad)
+        {
+            var binding = PlayerInput.controlSchemes.First(a => a.name == "Keyboard").bindingGroup;
+            PlayerInput.bindingMask = InputBinding.MaskByGroup(binding);
+            UseGamePad = false;
+        }
+        else
+        {
+            var binding = PlayerInput.controlSchemes.First(a => a.name == "Gamepad").bindingGroup;
+            PlayerInput.bindingMask = InputBinding.MaskByGroup(binding);
+            UseGamePad = true;
+        }
     }
 
     #endregion Private Methods

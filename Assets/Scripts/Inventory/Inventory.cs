@@ -145,7 +145,6 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < GameData.Instance.PlayerData.InventoryItems.Count; i++)
         {
-            Debug.Log("Item loaded");
             InventoryItem item = GameData.Instance.PlayerData.InventoryItems[i];
 
             var loadedObject = ItemDatabase.Instance.GetItemPrefab(item.ID);

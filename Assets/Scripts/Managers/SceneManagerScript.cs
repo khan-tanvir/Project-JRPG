@@ -82,19 +82,14 @@ public class SceneManagerScript : MonoBehaviour
 
     public void ExamineScene()
     {
-        if (GameData.Instance.PlayerData.SceneObjectsList == null || GameData.Instance.PlayerData.SceneObjectsList.Count == 0)
+        if (GameData.Instance.PlayerData == null || GameData.Instance.PlayerData.SceneObjectsList == null || GameData.Instance.PlayerData.SceneObjectsList.Count == 0)
         {
             return;
         }
 
-        ///<summary>
-        /// go through all objects with idgen component
-        /// if we find a matching id then check if its marked as destroyed or marked as in inventory
-        ///</summary>
-
         foreach (IDGenerator idgen in Resources.FindObjectsOfTypeAll<IDGenerator>())
         {
-            if (idgen == null || idgen.ObjectID == "")
+            if (idgen == null || string.IsNullOrEmpty(idgen.ObjectID))
             {
                 continue;
             }
@@ -127,6 +122,13 @@ public class SceneManagerScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        RespawnManager.Instance.SceneReload();
+        Time.timeScale = 1.0f;
     }
 
     public void SceneToGoTo(string sceneName)
