@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransistion : MonoBehaviour
 {
-    public string sceneLoad;
+    public string sceneToLoad;
+    public Vector2 playerPosition;
+    public VectorValue scenePosition;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player") && !collision.isTrigger)
         {
-            SceneManager.LoadScene(sceneLoad);
+            scenePosition.initialValue = playerPosition;
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 
