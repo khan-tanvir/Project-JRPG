@@ -98,15 +98,7 @@ public class Inventory : MonoBehaviour
                     Slots[i].InitialPosition = default;
                 }
 
-                //objectToInstantiate.GetComponent<Renderer>().material = objectToInstantiate.GetComponent<ItemMB>().defaultMat;
-
-                //objectToInstantiate.GetComponent<IDGenerator>().Instance.InInventory = true;
-
-                //itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
-
-                //Slots[i].ObjectID = objectToInstantiate.GetComponent<IDGenerator>().Instance.ObjectID;
-
-                itemObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                itemObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
                 itemObject.GetComponent<IStoreable>().ImageComp.enabled = true;
                 itemObject.GetComponent<IStoreable>().SpriteRendererComp.enabled = false;

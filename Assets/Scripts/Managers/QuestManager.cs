@@ -116,7 +116,12 @@ public class QuestManager : MonoBehaviour
 
     private void SetupEscortObjective(EscortObjective objective)
     {
-        AIController temp = GameObject.Find(objective.FollowerName).GetComponent<AIController>();
+        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
+
+        if (temp == null)
+        {
+            Debug.Log("No AIController component could be found with the given name, " + objective.FollowerName);
+        }
 
         temp.EscortObjective = objective;
 
