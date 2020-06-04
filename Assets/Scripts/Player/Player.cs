@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
     {
         PlayerInput = new PlayerInputActions();
 
-        SwitchInput();
+        //SwitchInput();
 
         PlayerInput.PlayerControls.Move.performed += ctx => Direction = ctx.ReadValue<UnityEngine.Vector2>();
         PlayerInput.PlayerControls.Inventory.performed += ctx => ToggleInventory();
