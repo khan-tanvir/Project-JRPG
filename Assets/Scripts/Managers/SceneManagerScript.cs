@@ -138,18 +138,18 @@ public class SceneManagerScript : MonoBehaviour
         switch (sceneName)
         {
             case "Menu":
-                CurrentScene = sceneName;
                 AudioManager.Instance.PlayMusic("MainMenu");
                 break;
 
             case "Game":
-                CurrentScene = sceneName;
                 AudioManager.Instance.PlayMusic("GameScene");
                 break;
 
             default:
                 break;
         }
+
+        CurrentScene = sceneName;
     }
 
     #endregion Public Methods

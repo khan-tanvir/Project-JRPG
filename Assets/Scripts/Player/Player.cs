@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     #region Private Fields
 
     [SerializeField]
+    private GameObject _cycleMenu;
+
+    [SerializeField]
     private GameObject _deathMenu;
 
     [SerializeField]
@@ -96,6 +99,7 @@ public class Player : MonoBehaviour
         PlayerInput.PlayerControls.Pause.performed += ctx => ToggleGame();
         PlayerInput.PlayerControls.Interact.performed += ctx => Interact();
         PlayerInput.PlayerControls.ToggleFollower.performed += ctx => ToggleFollower();
+        PlayerInput.PlayerControls.CycleMenu.performed += ctx => ToggleCycleMenu();
 
 #if DEBUG
         PlayerInput.PlayerControls.KillPlayer.performed += ctx => KillPlayer();
@@ -105,8 +109,10 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        if (_playerInteraction.InteractableObject)
+        if (_playerInteraction.InteractableObject && !_cycleMenu.activeInHierarchy && !_journal.activeInHierarchy && !_inventory.activeInHierarchy)
+        {
             _playerInteraction.CallInteract();
+        }
     }
 
     private void KillPlayer()
@@ -147,6 +153,15 @@ public class Player : MonoBehaviour
         if (MovementSpeed == 0)
         {
             Debug.LogError("Player Movement Speed is 0\nSet the speed in the inspector.");
+        }
+    }
+
+    private void ToggleCycleMenu()
+    {
+        if (!_inventory.activeInHierarchy && !_journal.activeInHierarchy)
+        {
+            FindObjectOfType<CycleMenu>().MenuOnEnable();
+            Direction = new Vector2();
         }
     }
 
