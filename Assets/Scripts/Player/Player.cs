@@ -115,13 +115,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void KillPlayer()
-    {
-        Time.timeScale = 0.0f;
-        _deathMenu.SetActive(true);
-        PlayerInput.Disable();
-    }
-
     private void LoadComponents()
     {
         RigidBody = gameObject.GetComponent<Rigidbody2D>();
@@ -201,6 +194,13 @@ public class Player : MonoBehaviour
         Animator.SetFloat("Horizontal", FacingDirection.x);
         Animator.SetFloat("Vertical", FacingDirection.y);
         Animator.SetFloat("Speed", Direction.sqrMagnitude);
+    }
+
+    public void KillPlayer()
+    {
+        Time.timeScale = 0.0f;
+        _deathMenu.SetActive(true);
+        PlayerInput.Disable();
     }
 
     public void SwitchInput()

@@ -80,6 +80,21 @@ public class CycleMenu : MonoBehaviour
     private void Update()
     {
         Menu.transform.position = new Vector2(Camera.main.WorldToScreenPoint(FindObjectOfType<Player>().transform.position).x, Camera.main.WorldToScreenPoint(FindObjectOfType<Player>().transform.position).y + 75.0f);
+
+        if (Menu.activeInHierarchy)
+        {
+            if (EventSystem.current.currentSelectedGameObject != _journalButton.gameObject || EventSystem.current.currentSelectedGameObject != _inventoryButton.gameObject)
+            {
+                if (_inventoryButton.interactable)
+                {
+                    EventSystem.current.SetSelectedGameObject(_inventoryButton.gameObject);
+                }
+                else
+                {
+                    EventSystem.current.SetSelectedGameObject(_journalButton.gameObject);
+                }
+            }
+        }
     }
 
     #endregion Private Methods
@@ -109,8 +124,6 @@ public class CycleMenu : MonoBehaviour
             return;
         }
 
-        Debug.Log(EventSystem.current.currentSelectedGameObject);
-
         if (EventSystem.current.currentSelectedGameObject == Menu.transform.GetChild(0).gameObject)
         {
             _anim.SetBool("Switch", false);
@@ -127,8 +140,6 @@ public class CycleMenu : MonoBehaviour
 
     public void MenuOnDisable()
     {
-        Debug.Log("Menu disabled");
-
         Menu.SetActive(false);
 
         SwitchActionMap();
@@ -136,8 +147,6 @@ public class CycleMenu : MonoBehaviour
 
     public void MenuOnEnable()
     {
-        Debug.Log("Menu activated");
-
         Menu.SetActive(true);
 
         SwitchActionMap();

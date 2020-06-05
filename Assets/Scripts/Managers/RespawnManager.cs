@@ -90,7 +90,6 @@ public class RespawnManager : MonoBehaviour
         foreach (CheckPoint checkPoint in FindObjectsOfType<CheckPoint>())
         {
             points.Add(checkPoint);
-            Debug.Log(checkPoint.name);
         }
 
         CheckPoints = points;

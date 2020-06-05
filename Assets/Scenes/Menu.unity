@@ -267,18 +267,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 525828006033089781, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 525828006033089781, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_PreserveAspect
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220170184336964, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
+    - target: {fileID: 1044972708, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -392,15 +381,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1122220170994555895, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
         type: 3}
-      propertyPath: m_IsActive
+      propertyPath: m_text
+      value: 'This game psychologically profiles you as you play.
+
+        It uses
+        its knowledge against you, creating your own personal nightmare.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190079
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+        type: 3}
+      propertyPath: m_enableAutoSizing
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6104480374208367743, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_fontSize
+      value: 20.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9, type: 3}
