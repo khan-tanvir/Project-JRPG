@@ -8,9 +8,16 @@ public class DialogueManager : MonoBehaviour
 {
     #region Private Fields
 
+    [SerializeField]
+    private GameObject _dialoguePanel;
+
+    private bool ConversationStarted;
+
     private int lineCount;
 
     private Queue<string> lines;
+
+    private bool optionsPresent;
 
     private string[] previousLines;
 
@@ -22,22 +29,58 @@ public class DialogueManager : MonoBehaviour
 
     #region Public Fields
 
+    public GameObject _optionsBox;
+
     public Animator animator;
+
+    public Animator choiceAnimator;
 
     public TMP_Text dialogueText;
 
     public TMP_Text nameText;
 
+    public string script;
+
     public Image sprite;
 
     #endregion Public Fields
 
+    #region Public Properties
+
+    public static DialogueManager Instance
+    {
+        get;
+        internal set;
+    }
+
+    #endregion Public Properties
+
     #region Private Methods
+
+    private void Awake()
+    {
+        CreateInstance();
+    }
+
+    private void CreateInstance()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
         lineCount = 0;
+        optionsPresent = false;
+        ConversationStarted = false;
         lines = new Queue<string>();
     }
 
@@ -56,12 +99,30 @@ public class DialogueManager : MonoBehaviour
 
     #region Public Methods
 
+    public void Deactivate()
+    {
+        _dialoguePanel.SetActive(false);
+        _optionsBox.SetActive(false);
+    }
+
+    public bool DialogueStarted()
+    {
+        return ConversationStarted;
+    }
+
     public void DisplayText()
     {
         if (lines.Count == 0)
         {
             lineCount = 0;
-            EndDialogue();
+            if (optionsPresent == false)
+            {
+                EndDialogue();
+            }
+            else
+            {
+                choiceAnimator.SetBool("IsActive", true);
+            }
             return;
         }
         else
@@ -80,6 +141,8 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("isActive", false);
+        Invoke("Deactivate", 0.2f);
+        ConversationStarted = false;
     }
 
     public void ForwardText()
@@ -97,6 +160,11 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text = previousLines[prevLineCount];
             dialogueText.color = Color.blue;
         }
+    }
+
+    public void optionsInDialogue(bool InDialogue)
+    {
+        optionsPresent = InDialogue;
     }
 
     public void PreviousText()
@@ -117,13 +185,19 @@ public class DialogueManager : MonoBehaviour
 
     public void StartConversation(Dialogue dialogue)
     {
+        lineCount = 0;
+
         tempDialogueCheck = dialogue;
+
+        script = dialogue.script;
+
+        ConversationStarted = true;
+
+        _dialoguePanel.SetActive(true);
 
         animator.SetBool("isActive", true);
 
         nameText.text = dialogue.name[lineCount];
-
-        lineCount = 0;
 
         sprite.sprite = dialogue.sprite[lineCount];
 

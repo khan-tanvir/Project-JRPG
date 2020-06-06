@@ -116,7 +116,12 @@ public class QuestManager : MonoBehaviour
 
     private void SetupEscortObjective(EscortObjective objective)
     {
-        AIController temp = GameObject.Find(objective.FollowerName).GetComponent<AIController>();
+        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
+
+        if (temp == null)
+        {
+            Debug.Log("No AIController component could be found with the given name, " + objective.FollowerName);
+        }
 
         temp.EscortObjective = objective;
 
@@ -171,7 +176,17 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateQuestsCapacity()
     {
-        _numberOfQuests.text = Quests.Count.ToString() + "/-";
+        int i = 0;
+
+        foreach (Quest Quest in Quests)
+        {
+            if (Quest.Status == QuestStatus.GIVEN)
+            {
+                i++;
+            }
+        }
+
+        _numberOfQuests.text = i.ToString() + "/-";
     }
 
     #endregion Private Methods

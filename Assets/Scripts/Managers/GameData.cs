@@ -160,7 +160,7 @@ public class GameData : MonoBehaviour
         //Track the save file
         CurrentSaveFile = pos;
 
-        SceneManagerScript.Instance.SceneToGoTo("Game");
+        FindObjectOfType<Canvas>().transform.Find("Warning Pop-Up").gameObject.SetActive(true);
     }
 
     public void SaveData()

@@ -5,6 +5,16 @@
 		<string>Kevin:I'm penny</string>
 		<string>Lenny:It's a pleasure to meet you</string>
 		<string>Terry:Goodbye!</string>
+		<Option1>
+			<option>Wait! I just wanted to say you're cool</option>
+			<lines>1</lines>
+			<string>Kyle:OMG really!?(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>I hate you</option>
+			<lines>1</lines>
+			<string>Kyle:I see, so that's how it is huh?(hero-attack-front-1)</string>	
+		</Option2>
 	</penny>
 	<Kyle>
 		<string>Kyle:yoyoyo!</string>
@@ -16,5 +26,16 @@
 		<string>Sam:In the beginning there was an explosion</string>
 		<string>Sam:An explosion so big it shook the very fabric of society</string>
 		<string>Host:Anyway enough of that back to our original programming</string>
+		<Option1>
+			<option>No! Wait!</option>
+			<lines>1</lines>
+			<string>???:Anyway it's time for you to leave(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>I have the Estar flik and I will use it!</option>
+			<lines>2</lines>
+			<string>???:I see huh, so that's how it is? Well I'm gonna have to put a stop to that aren't I.(hero-attack-front-1)</string>
+			<string>???:Kek it's time for you to leave(hero-attack-front-1)</string>		
+		</Option2>
 	</intro>
 </script>

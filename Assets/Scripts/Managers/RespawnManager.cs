@@ -8,6 +8,8 @@ public class RespawnManager : MonoBehaviour
     [SerializeField]
     private List<CheckPoint> _checkPoints;
 
+    private int _checkPointToGoTo;
+
     [SerializeField]
     private Vector2 _currentCheckpoint;
 
@@ -63,10 +65,18 @@ public class RespawnManager : MonoBehaviour
             _currentCheckpoint = new Vector2(GameData.Instance.PlayerData.PlayerPosition[0], GameData.Instance.PlayerData.PlayerPosition[1]);
     }
 
+    private void SceneTransitionCall(int num)
+    {
+        _checkPointToGoTo = num;
+    }
+
     private void Start()
     {
         GetCheckPoints();
         LoadCheckPoint();
+
+        EventsManager.Instance.OnSceneChange += GetCheckPoints;
+        EventsManager.Instance.OnCheckPointCall += SceneTransitionCall;
     }
 
     #endregion Private Methods
@@ -83,6 +93,22 @@ public class RespawnManager : MonoBehaviour
         }
 
         CheckPoints = points;
+
+        if (_checkPointToGoTo != 0)
+        {
+            SetActiveCheckPoint(GetCheckPointWithID(_checkPointToGoTo));
+        }
+    }
+
+    public CheckPoint GetCheckPointWithID(int id)
+    {
+        _checkPointToGoTo = 0;
+        return CheckPoints.Find(a => a.gameObject.name == id.ToString());
+    }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        EventsManager.Instance.SceneChange();
     }
 
     public void SceneReload()

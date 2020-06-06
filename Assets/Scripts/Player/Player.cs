@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     #region Private Fields
+
+    [SerializeField]
+    private GameObject _cycleMenu;
 
     [SerializeField]
     private GameObject _deathMenu;
@@ -17,6 +22,12 @@ public class Player : MonoBehaviour
     private float _movementSpeed;
 
     private PlayerInteraction _playerInteraction;
+
+    public bool UseGamePad
+    {
+        get;
+        internal set;
+    }
 
     #endregion Private Fields
 
@@ -79,12 +90,16 @@ public class Player : MonoBehaviour
     private void InitialiseInput()
     {
         PlayerInput = new PlayerInputActions();
+
+        //SwitchInput();
+
         PlayerInput.PlayerControls.Move.performed += ctx => Direction = ctx.ReadValue<UnityEngine.Vector2>();
         PlayerInput.PlayerControls.Inventory.performed += ctx => ToggleInventory();
         PlayerInput.PlayerControls.Journal.performed += ctx => ToggleJournal();
         PlayerInput.PlayerControls.Pause.performed += ctx => ToggleGame();
         PlayerInput.PlayerControls.Interact.performed += ctx => Interact();
         PlayerInput.PlayerControls.ToggleFollower.performed += ctx => ToggleFollower();
+        PlayerInput.PlayerControls.CycleMenu.performed += ctx => ToggleCycleMenu();
 
 #if DEBUG
         PlayerInput.PlayerControls.KillPlayer.performed += ctx => KillPlayer();
@@ -94,15 +109,10 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        if (_playerInteraction.InteractableObject)
+        if (_playerInteraction.InteractableObject && !_cycleMenu.activeInHierarchy && !_journal.activeInHierarchy && !_inventory.activeInHierarchy)
+        {
             _playerInteraction.CallInteract();
-    }
-
-    private void KillPlayer()
-    {
-        Time.timeScale = 0.0f;
-        _deathMenu.SetActive(true);
-        PlayerInput.Disable();
+        }
     }
 
     private void LoadComponents()
@@ -136,6 +146,15 @@ public class Player : MonoBehaviour
         if (MovementSpeed == 0)
         {
             Debug.LogError("Player Movement Speed is 0\nSet the speed in the inspector.");
+        }
+    }
+
+    private void ToggleCycleMenu()
+    {
+        if (!_inventory.activeInHierarchy && !_journal.activeInHierarchy)
+        {
+            FindObjectOfType<CycleMenu>().MenuOnEnable();
+            Direction = new Vector2();
         }
     }
 
@@ -175,6 +194,29 @@ public class Player : MonoBehaviour
         Animator.SetFloat("Horizontal", FacingDirection.x);
         Animator.SetFloat("Vertical", FacingDirection.y);
         Animator.SetFloat("Speed", Direction.sqrMagnitude);
+    }
+
+    public void KillPlayer()
+    {
+        Time.timeScale = 0.0f;
+        _deathMenu.SetActive(true);
+        PlayerInput.Disable();
+    }
+
+    public void SwitchInput()
+    {
+        if (UseGamePad)
+        {
+            var binding = PlayerInput.controlSchemes.First(a => a.name == "Keyboard").bindingGroup;
+            PlayerInput.bindingMask = InputBinding.MaskByGroup(binding);
+            UseGamePad = false;
+        }
+        else
+        {
+            var binding = PlayerInput.controlSchemes.First(a => a.name == "Gamepad").bindingGroup;
+            PlayerInput.bindingMask = InputBinding.MaskByGroup(binding);
+            UseGamePad = true;
+        }
     }
 
     #endregion Private Methods

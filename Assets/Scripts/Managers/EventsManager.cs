@@ -15,7 +15,11 @@ public class EventsManager : MonoBehaviour
 
     public event Action OnRespawn;
 
+    public event Action OnSceneChange;
+
     public event Action OnToggleFollower;
+
+    public event Action<int> OnCheckPointCall;
 
     #endregion Public Events
 
@@ -79,9 +83,19 @@ public class EventsManager : MonoBehaviour
         OnRespawn?.Invoke();
     }
 
+    public void SceneChange()
+    {
+        OnSceneChange?.Invoke();
+    }
+
     public void ToggleFollower()
     {
         OnToggleFollower?.Invoke();
+    }
+
+    public void CheckPointCall(int point)
+    {
+        OnCheckPointCall?.Invoke(point);
     }
 
     #endregion Public Methods
