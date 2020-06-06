@@ -132,7 +132,6 @@ public class GameData : MonoBehaviour
 
         fileStream.Close();
 
-        Debug.Log("Created save file");
         CheckAllFiles();
     }
 
@@ -161,9 +160,7 @@ public class GameData : MonoBehaviour
         //Track the save file
         CurrentSaveFile = pos;
 
-        Debug.Log("LOADING " + PlayerData.PlayerName + " from File " + CurrentSaveFile);
-
-        SceneManagerScript.Instance.SceneToGoTo("Game");
+        FindObjectOfType<Canvas>().transform.Find("Warning Pop-Up").gameObject.SetActive(true);
     }
 
     public void SaveData()
@@ -174,6 +171,8 @@ public class GameData : MonoBehaviour
         FileStream fileStream = File.Create(Application.persistentDataPath + "/playerInfo" + CurrentSaveFile + ".dat");
 
         Debug.Log("SAVING " + PlayerData.PlayerName + " to File " + CurrentSaveFile);
+
+        PlayerData.SceneObjectsList = SceneManagerScript.Instance.SceneObjects;
 
         // Serialise the data
         binaryFormatter.Serialize(fileStream, PlayerData);
@@ -195,10 +194,11 @@ public class InventoryItem
 {
     #region Public Constructors
 
-    public InventoryItem(int itemID, int pos)
+    public InventoryItem(int itemID, int pos, string objectID)
     {
         ID = itemID;
         Position = pos;
+        ObjectID = objectID;
     }
 
     #endregion Public Constructors
@@ -206,6 +206,12 @@ public class InventoryItem
     #region Public Properties
 
     public int ID
+    {
+        get;
+        internal set;
+    }
+
+    public string ObjectID
     {
         get;
         internal set;
@@ -228,10 +234,12 @@ public class PlayerData
     private List<InventoryItem> _inventoryItems = null;
 
     [SerializeField]
-    private float[] _position = { -999.0f, -999.0f };
+    private float[] _position = { -6.96f, -2.52f };
 
     [SerializeField]
     private int _questProgress;
+
+    private List<SceneObject> _sceneObjects = null;
 
     #endregion Private Fields
 
@@ -259,6 +267,12 @@ public class PlayerData
     {
         get { return _questProgress; }
         set { _questProgress = value; }
+    }
+
+    public List<SceneObject> SceneObjectsList
+    {
+        get { return _sceneObjects; }
+        set { _sceneObjects = value; }
     }
 
     #endregion Public Properties

@@ -12,13 +12,10 @@ public class QuestManager : MonoBehaviour
 
     private Quest _currentSelectedQuest;
 
-    [SerializeField]
     private TMP_Text _descriptionPanel;
 
-    [SerializeField]
     private Transform _listTransform;
 
-    [SerializeField]
     private TMP_Text _numberOfQuests;
 
     [SerializeField]
@@ -46,17 +43,37 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        CreateInstance();
+    }
 
-        Quests = new List<Quest>();
-
-        LoadQuestDatabase();
+    private void CreateInstance()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void LoadQuestDatabase()
     {
         QuestsDatabase database = new QuestsDatabase();
         database.ReadDatabase(GameData.Instance.CurrentSaveFile);
+    }
+
+    private void LoadVariables()
+    {
+        Transform journal = FindObjectOfType<Canvas>().transform.Find("Journal");
+
+        _descriptionPanel = journal.Find("Selected").Find("Text Box").Find("Text").GetComponent<TMP_Text>();
+        _listTransform = journal.Find("List").Find("Quest Area");
+        _numberOfQuests = journal.Find("Capacity").Find("Text").GetComponent<TMP_Text>();
+
+        Quests = new List<Quest>();
     }
 
     private void OnEscortObjectiveComplete(EscortObjective objective)
@@ -75,24 +92,36 @@ public class QuestManager : MonoBehaviour
 
     private void SetupDeliverObjective(DeliverObjective objective)
     {
-        // Get prefab by objective.itemname
+        int index = Inventory.Instance.Slots.FindIndex(a => a.ObjectID == "Quest Item: " + objective.Item);
 
-        GameObject temp = Instantiate(_ARROW);
-
-        if (temp.GetComponent<IDroppable>() != null)
+        if (index != -1)
         {
-            temp.GetComponent<IDroppable>().EnableDrop = false;
+            Inventory.Instance.Slots[index].GetComponentInChildren<IDroppable>().EnableDrop = false;
         }
-
-        if (Inventory.Instance.FillSlot(temp))
+        else
         {
-            Destroy(temp);
+            GameObject temp = Instantiate(_ARROW);
+
+            if (temp.GetComponent<IDroppable>() != null)
+            {
+                temp.GetComponent<IDroppable>().EnableDrop = false;
+            }
+
+            if (Inventory.Instance.FillSlot(temp, objective.Item))
+            {
+                Destroy(temp);
+            }
         }
     }
 
     private void SetupEscortObjective(EscortObjective objective)
     {
-        AIController temp = GameObject.Find(objective.FollowerName).GetComponent<AIController>();
+        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
+
+        if (temp == null)
+        {
+            Debug.Log("No AIController component could be found with the given name, " + objective.FollowerName);
+        }
 
         temp.EscortObjective = objective;
 
@@ -101,6 +130,12 @@ public class QuestManager : MonoBehaviour
         temp.Target = FindObjectOfType<Player>().transform;
 
         EventsManager.Instance.OnToggleFollower += temp.ToggleFollower;
+    }
+
+    private void Start()
+    {
+        LoadVariables();
+        LoadQuestDatabase();
     }
 
     private void SubscribeToEvent(Objective objective)
@@ -141,7 +176,17 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateQuestsCapacity()
     {
-        _numberOfQuests.text = Quests.Count.ToString() + "/-";
+        int i = 0;
+
+        foreach (Quest Quest in Quests)
+        {
+            if (Quest.Status == QuestStatus.GIVEN)
+            {
+                i++;
+            }
+        }
+
+        _numberOfQuests.text = i.ToString() + "/-";
     }
 
     #endregion Private Methods

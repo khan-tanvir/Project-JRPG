@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Journal
   layers:
   - Default
   - TransparentFX
@@ -41,7 +42,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Tilemap
+  - name: Foreground
     uniqueID: 1494210737
     locked: 0
   - name: Items

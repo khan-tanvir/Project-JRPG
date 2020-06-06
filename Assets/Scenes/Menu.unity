@@ -267,14 +267,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1122220170449200674, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220170449200674, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 1044972708, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1122220170653319191, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
@@ -387,120 +381,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1122220170821236672, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_text
+      value: 'This game psychologically profiles you as you play.
+
+        It uses
+        its knowledge against you, creating your own personal nightmare.'
       objectReference: {fileID: 0}
-    - target: {fileID: 1122220170821236687, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 6.8464355
+      propertyPath: m_fontColor32.rgba
+      value: 4278190079
       objectReference: {fileID: 0}
-    - target: {fileID: 1122220170994555895, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
         type: 3}
-      propertyPath: m_IsActive
+      propertyPath: m_enableAutoSizing
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1122220170999978988, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
         type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220170999978988, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220170999978988, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171150524874, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 38.69995
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171150524874, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 82.69995
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171288504856, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171762360761, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171762360761, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171762360761, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171787196469, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 13.585205
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171823476531, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171823476531, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122220171977178926, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2305330569868724771, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2305330569868724771, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2579673731038466453, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_Name
-      value: EffectsVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 2579673731038466453, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061736624573737136, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061736624573737136, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061736624573737136, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      propertyPath: m_fontSize
+      value: 20.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9, type: 3}
