@@ -80,62 +80,6 @@ public class QuestsDatabase
         return File.ReadAllText(Application.persistentDataPath + "/playerQuestDB" + saveFileID + ".json");
     }
 
-    private List<Objective> ReadObjectives(QuestEntry quest, Quest parent)
-    {
-        List<Objective> loadedObjectives = new List<Objective>();
-
-        foreach (ObjectivesEntry objective in quest.ObjectivesEntry)
-        {
-            Objective temp = null;
-            switch (objective.Type)
-            {
-                case "GATHER":
-
-                    // first entry is item to gather followed by, required amount and current amount
-                    temp = new GatherObjective(objective.Description, objective.FirstEntry, int.Parse(objective.SecondEntry));
-                    break;
-
-                case "ESCORT":
-
-                    // first entry is npc to escort, second is target location
-                    // TODO: make third entry a bool whether to escort target
-                    temp = new EscortObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
-                    break;
-
-                case "SEARCH":
-
-                    // First entry is place to find
-                    temp = new SearchObjective(objective.Description, objective.FirstEntry);
-                    break;
-
-                case "ACTIVATE":
-
-                    // First entry is item / npc to interact with
-                    // TODO: Make second entry a bool whether first entry is an npc
-                    temp = new ActivateObjective(objective.Description, objective.FirstEntry);
-                    break;
-
-                case "DELIVER":
-                    temp = new DeliverObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
-                    break;
-            }
-
-            if (temp != null)
-            {
-                temp.Complete = objective.Complete;
-
-                if (!temp.Complete)
-                {
-                    temp.Parent = parent;
-                }
-
-                loadedObjectives.Add(temp);
-            }
-        }
-
-        return loadedObjectives;
-    }
-
     private List<ObjectivesEntry> WriteObjectives(Quest quest)
     {
         List<ObjectivesEntry> objectivesEntries = new List<ObjectivesEntry>();
@@ -203,47 +147,10 @@ public class QuestsDatabase
         if (_questList.QuestEntry.Count == 0)
         {
             Debug.LogError("There are no quests in the database.");
+            return;
         }
 
-        foreach (QuestEntry quest in _questList.QuestEntry)
-        {
-            Quest loadedQuest = new Quest();
-
-            loadedQuest.Title = quest.Title;
-            loadedQuest.Description = quest.Description;
-            loadedQuest.QuestGiverName = quest.Giver;
-
-            if (quest.ObjectivesEntry.Count == 0)
-            {
-                Debug.LogError("Quest: " + loadedQuest.Title + " has no objectives.");
-            }
-
-            loadedQuest.Objectives = ReadObjectives(quest, loadedQuest);
-
-            switch (quest.Status)
-            {
-                case 0:
-
-                    // Quest has not been added to journal
-                    loadedQuest.Status = QuestStatus.NOTACCEPTED;
-                    QuestManager.Instance.GiveQuestToQuestGiver(loadedQuest);
-                    break;
-
-                case 1:
-
-                    // Quest has been accepted but is not completed
-                    loadedQuest.Status = QuestStatus.GIVEN;
-                    QuestManager.Instance.AddQuestToJournal(loadedQuest);
-                    break;
-
-                case 2:
-
-                    // Quest has been accepted and completed
-                    loadedQuest.Status = QuestStatus.COMPLETE;
-                    QuestManager.Instance.AddQuestToJournal(loadedQuest);
-                    break;
-            }
-        }
+        QuestManager.Instance.AddToQuestsList(_questList);
     }
 
     public void SaveToDatabase(int saveFileID, List<Quest> quests)

@@ -136,6 +136,9 @@ public class QuestManager : MonoBehaviour
     {
         LoadVariables();
         LoadQuestDatabase();
+
+        EventsManager.Instance.OnSceneChange += HandleQuests;
+        HandleQuests();
     }
 
     private void SubscribeToEvent(Objective objective)
@@ -193,6 +196,62 @@ public class QuestManager : MonoBehaviour
 
     #region Public Methods
 
+    private List<Objective> ReadObjectives(QuestEntry quest, Quest parent)
+    {
+        List<Objective> loadedObjectives = new List<Objective>();
+
+        foreach (ObjectivesEntry objective in quest.ObjectivesEntry)
+        {
+            Objective temp = null;
+            switch (objective.Type)
+            {
+                case "GATHER":
+
+                    // first entry is item to gather followed by, required amount and current amount
+                    temp = new GatherObjective(objective.Description, objective.FirstEntry, int.Parse(objective.SecondEntry));
+                    break;
+
+                case "ESCORT":
+
+                    // first entry is npc to escort, second is target location
+                    // TODO: make third entry a bool whether to escort target
+                    temp = new EscortObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
+                    break;
+
+                case "SEARCH":
+
+                    // First entry is place to find
+                    temp = new SearchObjective(objective.Description, objective.FirstEntry);
+                    break;
+
+                case "ACTIVATE":
+
+                    // First entry is item / npc to interact with
+                    // TODO: Make second entry a bool whether first entry is an npc
+                    temp = new ActivateObjective(objective.Description, objective.FirstEntry);
+                    break;
+
+                case "DELIVER":
+                    temp = new DeliverObjective(objective.Description, objective.FirstEntry, objective.SecondEntry);
+                    break;
+            }
+
+            if (temp != null)
+            {
+                temp.Complete = objective.Complete;
+
+                if (!temp.Complete)
+                {
+                    temp.Parent = parent;
+                }
+
+                loadedObjectives.Add(temp);
+            }
+        }
+
+        return loadedObjectives;
+    }
+
     public void AddQuestToJournal(Quest quest)
     {
         GameObject questObject = Instantiate(_questPrefab, _listTransform);
@@ -226,6 +285,31 @@ public class QuestManager : MonoBehaviour
         UpdateQuestsCapacity();
     }
 
+    public void AddToQuestsList(QuestList questList)
+    {
+        List<Quest> quests = new List<Quest>();
+
+        foreach (QuestEntry quest in questList.QuestEntry)
+        {
+            Quest loadedQuest = new Quest();
+
+            loadedQuest.Title = quest.Title;
+            loadedQuest.Description = quest.Description;
+            loadedQuest.QuestGiverName = quest.Giver;
+
+            if (quest.ObjectivesEntry.Count == 0)
+            {
+                Debug.LogError("Quest: " + loadedQuest.Title + " has no objectives.");
+            }
+
+            loadedQuest.Objectives = ReadObjectives(quest, loadedQuest);
+
+            quests.Add(loadedQuest);
+        }
+
+        Quests = quests;
+    }
+
     public void ClearCurrentQuest()
     {
         if (_currentSelectedQuest != null)
@@ -252,11 +336,28 @@ public class QuestManager : MonoBehaviour
         {
             if (questGiver.NPCName == quest.QuestGiverName)
             {
+                if (questGiver.Quests.Contains(quest))
+                {
+                    return;
+                }
+
                 questGiver.CreateQuest(quest);
+                Debug.Log("Given " + quest.Title + " to " + quest.QuestGiverName);
             }
-            if (!Quests.Contains(quest))
+        }
+    }
+
+    public void HandleQuests()
+    {
+        foreach (Quest quest in Quests)
+        {
+            if (quest.Status == QuestStatus.NOTACCEPTED)
             {
-                Quests.Add(quest);
+                GiveQuestToQuestGiver(quest);
+            }
+            else // QuestStatus == Complete || QuestStatus = given
+            {
+                AddQuestToJournal(quest);
             }
         }
     }
