@@ -78,7 +78,7 @@ public class QuestManager : MonoBehaviour
 
     private void OnEscortObjectiveComplete(EscortObjective objective)
     {
-        AIController temp = GameObject.Find(objective.FollowerName).GetComponent<AIController>();
+        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
 
         EventsManager.Instance.OnToggleFollower -= temp.ToggleFollower;
 
