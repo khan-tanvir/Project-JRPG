@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _numberOfSlots: 25
   _slotContainer: {fileID: 0}
-  _slotObject: {fileID: 1832966433400925932, guid: 333e4bbea43afeb4aaf27b145df04310,
+  _slotObject: {fileID: 3140715029867624738, guid: 333e4bbea43afeb4aaf27b145df04310,
     type: 3}
 --- !u!114 &1797515301977936077
 MonoBehaviour:
@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f93b7ff97bd6440bfdbe6b5ddeede4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cycleMenu: {fileID: 0}
+  _deathMenu: {fileID: 0}
   _inventory: {fileID: 0}
   _journal: {fileID: 0}
   _movementSpeed: 5
