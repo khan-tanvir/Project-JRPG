@@ -289,6 +289,82 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 681566b005872ed44a55c123307e3249, type: 3}
+--- !u!1001 &439960671
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794837, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806397852564794838, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3327571546848517446, guid: 8f388b3dd0b363541a1be85b26701875,
+        type: 3}
+    - target: {fileID: 1806397852564794861, guid: a267a0fec496d94458ffe85fc72d2a8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Ohaguro
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1967234010052567146, guid: a267a0fec496d94458ffe85fc72d2a8f, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: a267a0fec496d94458ffe85fc72d2a8f, type: 3}
 --- !u!1 &459878044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,6 +2844,48 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1409731323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1806397852564794861, guid: a267a0fec496d94458ffe85fc72d2a8f,
+    type: 3}
+  m_PrefabInstance: {fileID: 439960671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1409731324
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409731323}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 232687313a54ed541bf40b632aafb078, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1409731325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409731323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f93b7ff97bd6440bfdbe6b5ddeede4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cycleMenu: {fileID: 0}
+  _deathMenu: {fileID: 0}
+  _inventory: {fileID: 0}
+  _journal: {fileID: 0}
+  _movementSpeed: 2
 --- !u!1 &1489772109
 GameObject:
   m_ObjectHideFlags: 0
@@ -3292,7 +3410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &1918591136
 PlayableDirector:
   m_ObjectHideFlags: 0
