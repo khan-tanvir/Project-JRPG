@@ -9,18 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 16f45fb19d2dc70408c0606c3abd2b28
   - enabled: 1
-    path: Assets/Scenes/Bethany/Menu 1.unity
-    guid: b413c5526974c9943a3e40758f8450d8
-  - enabled: 1
-    path: Assets/Scenes/Bethany/Station Entrance.unity
-    guid: 5304dfa2b94bafa4a82d529e44b56337
-  - enabled: 1
-    path: Assets/Scenes/Bethany/Station.unity
-    guid: 1a5a84a9310c67846912f8933a091d63
-  - enabled: 1
-    path: Assets/Scenes/Bethany/Train.unity
-    guid: f7340511c73a06c4d916f7b0c3d063a8
-  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Second.unity
+    guid: 8290eceef7374b84ebe11ea690b6848d
   m_configObjects: {}
