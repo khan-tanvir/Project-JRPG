@@ -38,4 +38,20 @@
 			<string>???:Kek it's time for you to leave(hero-attack-front-1)</string>		
 		</Option2>
 	</intro>
+	<INSTrap>
+		<string>???:Ichi!</string>
+		<string>???:Ni!</string>
+		<string>???:San!</string>
+		<Option1>
+			<option>Shi!</option>
+			<lines>1</lines>
+			<string>???:Time for you to die(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>Yon!</option>
+			<lines>2</lines>
+			<string>???:Yes that is correct(hero-attack-front-1)</string>
+			<string>???:You may pass(hero-attack-front-1)</string>		
+		</Option2>
+	</INSTrap>
 </script>
