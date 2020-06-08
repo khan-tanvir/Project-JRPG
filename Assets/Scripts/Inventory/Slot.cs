@@ -83,6 +83,8 @@ public class Slot : MonoBehaviour
                 child.name = InvItem.Name;
                 child.GetComponent<IDGenerator>().ObjectID = ObjectID;
                 child.GetComponent<IDGenerator>().InInventory = true;
+
+                child.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0.0f, 0.0f, -1.0f);
             }
         }
     }
