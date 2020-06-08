@@ -98,8 +98,6 @@ public class Inventory : MonoBehaviour
                     Slots[i].InitialPosition = default;
                 }
 
-                itemObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-
                 itemObject.GetComponent<IStoreable>().ImageComp.enabled = true;
                 itemObject.GetComponent<IStoreable>().SpriteRendererComp.enabled = false;
 
