@@ -4,7 +4,7 @@
       "ID": 0,
       "Title": "Gather Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver1",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -21,7 +21,7 @@
       "ID": 0,
       "Title": "Activate Test",
       "Description": "DESCRIPTION",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver1",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -36,7 +36,7 @@
       "ID": 0,
       "Title": "Escort Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver2",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -52,7 +52,7 @@
       "ID": 0,
       "Title": "Search Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver2",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -67,7 +67,7 @@
       "ID": 0,
       "Title": "Deliver Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver1",
       "Status": 0,
       "ObjectivesEntry": [
         {

@@ -8,6 +8,9 @@ public class QuestGiver : MonoBehaviour, IInteractable
     [SerializeField]
     private Material _defaultMat;
 
+    [SerializeField]
+    private string _giverName;
+
     // Create a separate script for this
     [SerializeField]
     private Material _interactionMat;
@@ -39,8 +42,8 @@ public class QuestGiver : MonoBehaviour, IInteractable
 
     public string NPCName
     {
-        get;
-        set;
+        get { return _giverName; }
+        set { _giverName = value; }
     }
 
     public List<Quest> Quests
@@ -57,10 +60,6 @@ public class QuestGiver : MonoBehaviour, IInteractable
     {
         Quests = new List<Quest>();
         EnabledInteraction = true;
-
-        // TODO: Prefab npcs for name
-        // Debug
-        NPCName = "NPC_NAME";
     }
 
     private void OnTriggerExit2D(Collider2D other)
