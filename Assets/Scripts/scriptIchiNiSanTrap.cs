@@ -11,6 +11,8 @@ public class scriptIchiNiSanTrap : MonoBehaviour
 
     public Button option2;
 
+    public Player player;
+
     private bool choiceMade;
 
     private SpriteRenderer rend;
@@ -36,15 +38,12 @@ public class scriptIchiNiSanTrap : MonoBehaviour
 
     private void KillPlayer()
     {
-        //kills the player
-        Debug.Log("You are dead!");
+        player.KillPlayer();
     }
 
     private void LetPlayerPass()
     {
-        //lets the player pass
         StartCoroutine("Fade");
-        Debug.Log("You may pass");
     }
 
     IEnumerator Fade()

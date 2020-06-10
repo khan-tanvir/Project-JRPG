@@ -54,4 +54,116 @@
 			<string>???:You may pass(hero-attack-front-1)</string>		
 		</Option2>
 	</INSTrap>
+	<Riddles1>
+		<string>???:Oh hello there, I'm Osan gitsune. And you look awfully lost</string>
+		<string>Osan gitsune:Seeing as though you're here how about we play a game? I'll ask you a series of riddles and if you manage to answer 3 correctly I'll show you the way. If you can't answer correctly then I guess you'll just have to stay and play for a little while longer</string>
+		<string>Osan gitsune:And so, because we're on a train here's a little train based riddle for you</string>
+		<string>Osan gitsune:There's an electric train traveling south. The wind is from the north-west. In which direction would the smoke from the train be blowing?</string>
+		<Option1>
+			<option>None</option>
+			<lines>1</lines>
+			<string>Osan gitsune:My my, how impressive you got it correct(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>East</option>
+			<lines>1</lines>
+			<string>Osan gitsune:Ufufu, unfortunately that answer is wrong(hero-attack-front-1)</string>	
+		</Option2>
+	</Riddles1>
+	<Riddles2>
+		<string>Osan gitsune:Well time to move on to the next riddle</string>
+		<string>Osan gitsune:Remember you need to answer 3 correctly!</string>
+		<string>Osan gitsune:Otherwise you'll be stuck here with me</string>
+		<string>Osan gitsune:I am a word of few letters, if you cut off one letter I become stronger, cut off another and I become ten. What am I?</string>
+		<Option1>
+			<option>Fox</option>
+			<lines>1</lines>
+			<string>Osan gitsune:Yes, that's right!(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>Ions</option>
+			<lines>1</lines>
+			<string>Osan gitsune:You've just given me an incorrect answer(hero-attack-front-1)</string>	
+		</Option2>
+	</Riddles2>
+	<Riddles3>
+		<string>Osan gitsune:Next riddle!</string>
+		<string>Osan gitsune:3 correct answers are needed to pass</string>
+		<string>Osan gitsune:So keep that brain of yours thinking and I'm sure you'll get them eventually</string>
+		<string>Osan gitsune:Every single person in a plane crash died, but when rescue teams got to the wreckage they found half of the people alive. How is this possible</string>
+		<Option1>
+			<option>The couples survived</option>
+			<lines>1</lines>
+			<string>Osan gitsune:That's exactly the answer I wanted to hear(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>There were animals on the plane</option>
+			<lines>1</lines>
+			<string>Osan gitsune:Nope that's nowhere near(hero-attack-front-1)</string>	
+		</Option2>
+	</Riddles3>
+	<Riddles4>
+		<string>Osan gitsune:I've got another riddle for you</string>
+		<string>Osan gitsune:In order to pass 3 correct answers are all you need</string>
+		<string>Osan gitsune:So let's have some fun while you're here</string>
+		<string>Osan gitsune:What flies when it's born, lies when it's alive and runs when it's dead?</string>
+		<Option1>
+			<option>A snowflake</option>
+			<lines>1</lines>
+			<string>Osan gitsune:Ding ding ding, you got that right(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>Sand</option>
+			<lines>1</lines>
+			<string>Osan gitsune:Ah, that's not quite right(hero-attack-front-1)</string>	
+		</Option2>
+	</Riddles4>
+	<Riddles5>
+		<string>Osan gitsune:Time for another riddle!</string>
+		<string>Osan gitsune:net yourself 3 right answers and you're free to move on</string>
+		<string>Osan gitsune:But if you can't then you're going to have to stay here for a little longer</string>
+		<string>Osan gitsune:I start with T, end with T and have T in the middle. What am I?</string>
+		<Option1>
+			<option>A teapot</option>
+			<lines>1</lines>
+			<string>Osan gitsune:That's it! You got it right(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>A tent</option>
+			<lines>1</lines>
+			<string>Osan gitsune:Unfortunately not, you'll have to try again(hero-attack-front-1)</string>	
+		</Option2>
+	</Riddles5>
+	<Riddles6>
+		<string>Osan gitsune:It's riddle time!</string>
+		<string>Osan gitsune:If you get 3 then I'll show you where to go</string>
+		<string>Osan gitsune:It'd be more fun for me if you didn't though. </string>
+		<string>Osan gitsune:What falls but never breaks</string>
+		<Option1>
+			<option>Night</option>
+			<lines>1</lines>
+			<string>Osan gitsune:yes, that's correct(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>Day</option>
+			<lines>1</lines>
+			<string>Osan gitsune:no, that's incorrect(hero-attack-front-1)</string>	
+		</Option2>
+	</Riddles6>
+	<OsanFinal>
+		<string>Osan gutsune: Congratulations!</string>
+		<string>Osan gutsune: You've answered all of my riddles!</string>
+		<string>Osan gutsune: I've had a lot of fun playing with you</string>
+		<string>Osan gutsune: But it's time for you to go so goodbye!</string>
+		<Option1>
+			<option>Bye..... I guess</option>
+			<lines>1</lines>
+			<string>Osan gitsune:Bye bye(hero-attack-front-1)</string>	
+		</Option1>
+		<Option2>
+			<option>What a waste of time</option>
+			<lines>1</lines>
+			<string>Osan gitsune:How rude!(hero-attack-front-1)</string>	
+		</Option2>
+	</OsanFinal>
 </script>
