@@ -33,7 +33,7 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
 
     public Image ImageComp
     {
-        get { return gameObject.GetComponent<Image>(); }
+        get => gameObject.GetComponent<Image>();
     }
 
     public abstract bool InfiniteUses
@@ -50,7 +50,7 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
 
     public SpriteRenderer SpriteRendererComp
     {
-        get { return gameObject.GetComponent<SpriteRenderer>(); }
+        get => gameObject.GetComponent<SpriteRenderer>();
     }
 
     #endregion Public Properties

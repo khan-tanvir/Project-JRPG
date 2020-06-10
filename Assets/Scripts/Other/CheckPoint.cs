@@ -16,14 +16,14 @@ public class CheckPoint : MonoBehaviour
 
     public bool CheckPointTriggered
     {
-        get { return _triggered; }
-        set { _triggered = value; }
+        get => _triggered;
+        set => _triggered = value;
     }
 
     public Vector2 Position
     {
-        get { return _position; }
-        set { _position = value; }
+        get => _position;
+        set => _position = value;
     }
 
     #endregion Public Properties

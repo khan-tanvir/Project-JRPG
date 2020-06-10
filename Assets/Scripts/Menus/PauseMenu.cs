@@ -76,8 +76,6 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
-        // Before saving make sure you have loaded a file first
-
         // Store the position
         GameData.Instance.PlayerData.PlayerPosition[0] = RespawnManager.Instance.CurrentCheckpoint.x;
         GameData.Instance.PlayerData.PlayerPosition[1] = RespawnManager.Instance.CurrentCheckpoint.y;
@@ -93,6 +91,8 @@ public class PauseMenu : MonoBehaviour
 
             idgen.Save();
         }
+
+        GameData.Instance.PlayerData.SceneObjectsList = SceneManagerScript.Instance.SceneObjects;
 
         GameData.Instance.SaveData();
 

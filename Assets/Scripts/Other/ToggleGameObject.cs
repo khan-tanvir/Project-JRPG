@@ -6,8 +6,8 @@ public class ToggleGameObject : MonoBehaviour
 
     public bool SetActive
     {
-        get { return gameObject.activeInHierarchy; }
-        set { gameObject.SetActive(value); }
+        get => gameObject.activeInHierarchy;
+        set => gameObject.SetActive(value);
     }
 
     #endregion Public Properties

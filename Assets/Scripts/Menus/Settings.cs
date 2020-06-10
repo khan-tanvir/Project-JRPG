@@ -2,17 +2,9 @@
 
 public class Settings : MonoBehaviour
 {
-    void Update()
-    {
-        Graphics();
-    }
+    #region Private Methods
 
-    public void Graphics()
-    {
-        setResolution();
-    }
-
-   void setResolution()
+    private void setResolution()
     {
         // Getting the name of what is pressed
         string index = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
@@ -31,6 +23,21 @@ public class Settings : MonoBehaviour
                 Screen.SetResolution(960, 720, true, 60);
                 break;
         }
-
     }
+
+    private void Update()
+    {
+        Graphics();
+    }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
+    public void Graphics()
+    {
+        setResolution();
+    }
+
+    #endregion Public Methods
 }

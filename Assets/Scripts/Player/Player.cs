@@ -53,8 +53,8 @@ public class Player : MonoBehaviour
 
     public float MovementSpeed
     {
-        get { return _movementSpeed; }
-        set { _movementSpeed = value; }
+        get => _movementSpeed;
+        set => _movementSpeed = value;
     }
 
     public PlayerInputActions PlayerInput

@@ -25,26 +25,26 @@ public class Arrow : ItemMB, IStoreable, IDroppable
 
     public override bool EnabledInteraction
     {
-        get { return _enableInteraction; }
-        set { _enableInteraction = value; }
+        get => _enableInteraction;
+        set => _enableInteraction = value;
     }
 
     public bool EnableDrop
     {
-        get { return _enableDrop; }
-        set { _enableDrop = value; }
+        get => _enableDrop;
+        set => _enableDrop = value;
     }
 
     public bool EnablePickUp
     {
-        get { return _enablePickUp; }
-        set { _enablePickUp = value; }
+        get => _enablePickUp;
+        set => _enablePickUp = value;
     }
 
     public override bool InfiniteUses
     {
-        get { return _infiniteUses; }
-        set { _infiniteUses = value; }
+        get => _infiniteUses;
+        set => _infiniteUses = value;
     }
 
     public bool IsItemStored
@@ -55,8 +55,8 @@ public class Arrow : ItemMB, IStoreable, IDroppable
 
     public override Item Item
     {
-        get { return _item; }
-        set { _item = value; }
+        get => _item;
+        set => _item = value;
     }
 
     #endregion Public Properties

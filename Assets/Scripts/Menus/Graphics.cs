@@ -1,14 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 
 public class Graphics : MonoBehaviour
 {
-    Resolution[] resolutionsArray;
+    #region Private Fields
+
+    private Resolution[] resolutionsArray;
+
+    #endregion Private Fields
+
+    #region Public Fields
+
     public TMP_Dropdown _Dropdown;
 
-    void Start()
+    #endregion Public Fields
+
+    #region Private Methods
+
+    private void Start()
     {
         resolutionsArray = Screen.resolutions;
         _Dropdown.ClearOptions();
@@ -31,9 +41,15 @@ public class Graphics : MonoBehaviour
         _Dropdown.RefreshShownValue();
     }
 
+    #endregion Private Methods
+
+    #region Public Methods
+
     public void SetResolution(int ResolutionIndex)
     {
         Resolution resolution = resolutionsArray[ResolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
+
+    #endregion Public Methods
 }

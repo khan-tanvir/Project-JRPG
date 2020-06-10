@@ -42,8 +42,8 @@ public class QuestGiver : MonoBehaviour, IInteractable
 
     public string NPCName
     {
-        get { return _giverName; }
-        set { _giverName = value; }
+        get => _giverName;
+        set => _giverName = value;
     }
 
     public List<Quest> Quests

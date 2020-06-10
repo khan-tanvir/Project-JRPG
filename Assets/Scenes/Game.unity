@@ -1061,18 +1061,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1240255449 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9024649322600977120, guid: 52571c9bf4d853144bd7f69e50d8f964,
-    type: 3}
-  m_PrefabInstance: {fileID: 9024649323571648825}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1271458917
 GameObject:
   m_ObjectHideFlags: 0
@@ -8184,9 +8172,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3089651281601092207, guid: a08b72a04a31c644693bcfce5d0d53dd,
         type: 3}
+      propertyPath: _journal
+      value: 
+      objectReference: {fileID: 846008915}
+    - target: {fileID: 3089651281601092207, guid: a08b72a04a31c644693bcfce5d0d53dd,
+        type: 3}
       propertyPath: _descriptionPanel
       value: 
-      objectReference: {fileID: 1240255449}
+      objectReference: {fileID: 0}
     - target: {fileID: 3089651281601092207, guid: a08b72a04a31c644693bcfce5d0d53dd,
         type: 3}
       propertyPath: _listTransform
@@ -8603,26 +8596,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1371856852}
-    - target: {fileID: 2542884667975771802, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4320356420063746369, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 813157f4d51f9594b92d15231530e84b, type: 2}
-    - target: {fileID: 4320356420063746372, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -4.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 7039787419032466476, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -837
-      objectReference: {fileID: 0}
     - target: {fileID: 9024649322571340586, guid: 52571c9bf4d853144bd7f69e50d8f964,
         type: 3}
       propertyPath: m_Name
@@ -8738,45 +8711,5 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 9024649323737544492, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024649323737544492, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 26.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024649324372423867, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024649324504679133, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024649324504679133, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 26.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024649324567617596, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024649324567617598, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: dialogue.lines.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024649324567617598, guid: 52571c9bf4d853144bd7f69e50d8f964,
-        type: 3}
-      propertyPath: dialogue.script
-      value: INSTrap
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52571c9bf4d853144bd7f69e50d8f964, type: 3}

@@ -3,7 +3,9 @@
 public enum SoundType
 {
     Music = 0,
+
     Effect = 1,
+
     UI = 2
 }
 
@@ -38,18 +40,18 @@ public class Sound
     // Reference to the audio file
     public AudioClip Clip
     {
-        get { return _clip; }
+        get => _clip;
     }
 
     // Variables of the sound file
     public string Name
     {
-        get { return _name; }
+        get => _name;
     }
 
     public SoundType Type
     {
-        get { return _type; }
+        get => _type;
     }
 
     #endregion Public Properties

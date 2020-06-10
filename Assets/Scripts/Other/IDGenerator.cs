@@ -31,8 +31,8 @@ public class IDGenerator : MonoBehaviour
 
     public Vector2 InitialPosition
     {
-        get { return _originalPosition; }
-        set { _originalPosition = value; }
+        get => _originalPosition;
+        set => _originalPosition = value;
     }
 
     public IDGenerator Instance

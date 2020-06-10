@@ -28,13 +28,13 @@ public class RespawnManager : MonoBehaviour
 
     public List<CheckPoint> CheckPoints
     {
-        get { return _checkPoints; }
-        set { _checkPoints = value; }
+        get => _checkPoints;
+        set => _checkPoints = value;
     }
 
     public Vector2 CurrentCheckpoint
     {
-        get { return _currentCheckpoint; }
+        get => _currentCheckpoint;
     }
 
     #endregion Public Properties
@@ -104,11 +104,6 @@ public class RespawnManager : MonoBehaviour
     {
         _checkPointToGoTo = 0;
         return CheckPoints.Find(a => a.gameObject.name == id.ToString());
-    }
-
-    public void OnLevelWasLoaded(int level)
-    {
-        EventsManager.Instance.SceneChange();
     }
 
     public void SceneReload()

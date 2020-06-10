@@ -14,7 +14,7 @@ public class WarningScreen : MonoBehaviour
 
     public Animator Animator
     {
-        get { return GetComponent<Animator>(); }
+        get => GetComponent<Animator>();
     }
 
     public string Scene

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ARROW: {fileID: 501204988629294664, guid: f038156bef0f14546909d780a1b786de, type: 3}
+  _journal: {fileID: 0}
   _descriptionPanel: {fileID: 0}
   _listTransform: {fileID: 0}
   _numberOfQuests: {fileID: 0}

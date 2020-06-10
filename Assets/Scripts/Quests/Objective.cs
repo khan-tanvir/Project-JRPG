@@ -19,16 +19,11 @@ public class ActivateObjective : Objective
 {
     #region Private Fields
 
-    private bool _hasInteracted = false;
+    private bool _hasInteracted;
 
     #endregion Private Fields
 
     #region Public Constructors
-
-    public ActivateObjective()
-    {
-        ;
-    }
 
     public ActivateObjective(string desc, string objectToInteract)
     {
@@ -42,7 +37,7 @@ public class ActivateObjective : Objective
 
     public override bool Evaluate
     {
-        get { return _hasInteracted; }
+        get => _hasInteracted;
     }
 
     public override string Information
@@ -53,7 +48,7 @@ public class ActivateObjective : Objective
 
     public override GoalType ObjectiveType
     {
-        get { return GoalType.ACTIVATE; }
+        get => GoalType.ACTIVATE;
     }
 
     public string ObjectToInteractWith
@@ -103,10 +98,7 @@ public class DeliverObjective : Objective
 
     public override bool Evaluate
     {
-        get
-        {
-            return _itemDelivered;
-        }
+        get => _itemDelivered;
     }
 
     public override string Information
@@ -123,7 +115,7 @@ public class DeliverObjective : Objective
 
     public override GoalType ObjectiveType
     {
-        get { return GoalType.DELIVER; }
+        get => GoalType.DELIVER;
     }
 
     public string TargetName
@@ -174,10 +166,7 @@ public class EscortObjective : Objective
 
     public override bool Evaluate
     {
-        get
-        {
-            return _locationEntered;
-        }
+        get => _locationEntered;
     }
 
     public string FollowerName
@@ -206,7 +195,7 @@ public class EscortObjective : Objective
 
     public override GoalType ObjectiveType
     {
-        get { return GoalType.ESCORT; }
+        get => GoalType.ESCORT;
     }
 
     #endregion Public Properties
@@ -269,7 +258,7 @@ public class GatherObjective : Objective
 
     public override GoalType ObjectiveType
     {
-        get { return GoalType.GATHER; }
+        get => GoalType.GATHER;
     }
 
     public int RequiredAmount
@@ -338,8 +327,8 @@ public abstract class Objective
 
     public Quest Parent
     {
-        get { return _parent; }
-        set { _parent = value; }
+        get => _parent;
+        set => _parent = value;
     }
 
     #endregion Public Properties
@@ -369,10 +358,7 @@ public class SearchObjective : Objective
 
     public override bool Evaluate
     {
-        get
-        {
-            return _locationEntered;
-        }
+        get => _locationEntered;
     }
 
     public override string Information
@@ -389,7 +375,7 @@ public class SearchObjective : Objective
 
     public override GoalType ObjectiveType
     {
-        get { return GoalType.SEARCH; }
+        get => GoalType.SEARCH;
     }
 
     #endregion Public Properties

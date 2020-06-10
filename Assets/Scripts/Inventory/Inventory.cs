@@ -58,14 +58,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    #endregion Private Methods
-
-    #region Public Methods
-
     private void ReOrderSlots()
     {
         Slots.OrderByDescending(i => i.InvItem);
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
 
     public bool FillSlot(GameObject objectToInstantiate, string questItem = "")
     {

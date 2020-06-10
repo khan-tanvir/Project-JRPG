@@ -19,20 +19,20 @@ public class Sign : ItemMB
 
     public override bool EnabledInteraction
     {
-        get { return _enableInteraction; }
-        set { _enableInteraction = value; }
+        get => _enableInteraction;
+        set => _enableInteraction = value;
     }
 
     public override bool InfiniteUses
     {
-        get { return _infiniteUses; }
-        set { _infiniteUses = value; }
+        get => _infiniteUses;
+        set => _infiniteUses = value;
     }
 
     public override Item Item
     {
-        get { return _item; }
-        set { _item = value; }
+        get => _item;
+        set => _item = value;
     }
 
     #endregion Public Properties
