@@ -82,8 +82,6 @@ public class PauseMenu : MonoBehaviour
 
         Inventory.Instance.SaveInventory();
 
-        GameData.Instance.PlayerData.Cutscenes = CutSceneManager.Instance.Cutscenes;
-
         SceneManagerScript.Instance.SaveObjects();
 
         GameData.Instance.PlayerData.SceneObjectsList = SceneManagerScript.Instance.SceneObjects;

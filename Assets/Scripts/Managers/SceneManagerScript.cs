@@ -173,9 +173,11 @@ public class SceneManagerScript : MonoBehaviour
         switch (sceneName)
         {
             case "Menu":
+                AudioManager.Instance.PlayMusic("MainMenu");
                 break;
 
             case "Game":
+                AudioManager.Instance.PlayMusic("GameScene");
                 break;
 
             default:

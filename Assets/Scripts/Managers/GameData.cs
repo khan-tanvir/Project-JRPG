@@ -162,11 +162,6 @@ public class GameData : MonoBehaviour
             PlayerData.SceneObjectsList = new List<SceneObject>();
         }
 
-        if (PlayerData.Cutscenes == null)
-        {
-            PlayerData.Cutscenes = new List<Cutscene>();
-        }
-
         SceneManagerScript.Instance.SceneObjects = PlayerData.SceneObjectsList;
 
         //Track the save file

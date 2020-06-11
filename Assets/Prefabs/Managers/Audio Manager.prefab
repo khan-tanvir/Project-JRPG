@@ -44,22 +44,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: d28eac0885b914e45945bed1a7447c82, type: 2}
-  _effectSlider: {fileID: 0}
   _masterSlider: {fileID: 0}
   _musicSlider: {fileID: 0}
+  _effectSlider: {fileID: 0}
   _sounds:
-  - _clip: {fileID: 8300000, guid: 604e45c71d66b1c44bdeedf48c10c29c, type: 3}
+  - _clip: {fileID: 8300000, guid: 776d10120bc5e8a4ab51405a59c8d43f, type: 3}
     _name: MainMenu
     _type: 0
+    volume: 0.661
     source: {fileID: 0}
-    volume: 0.517
   - _clip: {fileID: 8300000, guid: 0c80dc3c8d9182f46bb87ca9c3c02c7a, type: 3}
     _name: FileSelection
     _type: 0
+    volume: 0.728
     source: {fileID: 0}
-    volume: 0
-  - _clip: {fileID: 8300000, guid: d57a72853e9f27d49bc4d6bd1db04314, type: 3}
+  - _clip: {fileID: 8300000, guid: 922ac5965708feb47b94c8965e8b9052, type: 3}
     _name: GameScene
     _type: 0
+    volume: 0.618
     source: {fileID: 0}
-    volume: 0.333
