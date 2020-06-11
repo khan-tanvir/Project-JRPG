@@ -7,6 +7,8 @@ public class PlayerData
 {
     #region Private Fields
 
+    private List<Cutscene> _cutscenes;
+
     [SerializeField]
     private float[] _position = { -6.96f, -2.52f };
 
@@ -18,6 +20,12 @@ public class PlayerData
     #endregion Private Fields
 
     #region Public Properties
+
+    public List<Cutscene> Cutscenes
+    {
+        get => _cutscenes;
+        set => _cutscenes = value;
+    }
 
     public List<InventoryItem> InventoryItems
     {

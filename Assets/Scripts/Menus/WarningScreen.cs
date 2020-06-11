@@ -35,7 +35,7 @@ public class WarningScreen : MonoBehaviour
         }
         else
         {
-            SceneManagerScript.Instance.SceneToGoTo("Game");
+            SceneManagerScript.Instance.SceneToGoTo("Station Entrance");
         }
     }
 
