@@ -7320,7 +7320,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6761688770014844677}
+      - m_Target: {fileID: 0}
         m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
@@ -7550,7 +7550,6 @@ GameObject:
   - component: {fileID: 8913482009356402591}
   - component: {fileID: 3756221370748746314}
   - component: {fileID: 332494930}
-  - component: {fileID: 6761688770014844677}
   m_Layer: 5
   m_Name: Graphic Menu
   m_TagString: Untagged
@@ -7573,7 +7572,6 @@ RectTransform:
   - {fileID: 7530847298121541964}
   - {fileID: 5365177619689815089}
   - {fileID: 7022680174141085637}
-  - {fileID: 8319700926529861295}
   m_Father: {fileID: 1122220170653319191}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7609,19 +7607,6 @@ MonoBehaviour:
   _backButton: {fileID: 6504654364523273422}
   _selected: {fileID: 0}
   ForceSet: {fileID: 0}
---- !u!114 &6761688770014844677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2315080586559094888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dad5d5de617e0a42a6cbb99b85f2229, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Dropdown: {fileID: 4199081046042394512}
 --- !u!1 &2579673731038466453
 GameObject:
   m_ObjectHideFlags: 0
@@ -8139,49 +8124,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &3923189043670361695
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8319700926529861295}
-  - component: {fileID: 6262197608686970316}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8319700926529861295
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3923189043670361695}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.9117, y: -24.673, z: -28.029312}
-  m_LocalScale: {x: 1.2770506, y: 1.2770506, z: 1.2770506}
-  m_Children: []
-  m_Father: {fileID: 8913482009356402591}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6262197608686970316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3923189043670361695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10475eab30ce83c43be2a4cda16e234f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3925580743677856296
 GameObject:
   m_ObjectHideFlags: 0
@@ -8895,7 +8837,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6262197608686970316}
+      - m_Target: {fileID: 0}
         m_MethodName: Graphics
         m_Mode: 1
         m_Arguments:
@@ -9200,7 +9142,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6262197608686970316}
+      - m_Target: {fileID: 0}
         m_MethodName: Graphics
         m_Mode: 1
         m_Arguments:
@@ -10580,7 +10522,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6262197608686970316}
+      - m_Target: {fileID: 0}
         m_MethodName: Graphics
         m_Mode: 1
         m_Arguments:

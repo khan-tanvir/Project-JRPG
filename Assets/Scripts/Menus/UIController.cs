@@ -29,7 +29,10 @@ public class UIController : MonoBehaviour, IPointerEnterHandler
 
     private void OnDisable()
     {
-        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     private void OnEnable()

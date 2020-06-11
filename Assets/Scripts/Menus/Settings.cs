@@ -1,43 +1,67 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
+    #region Private Fields
+
+    private Resolution[] _screenResolutions;
+
+    private int currentRes;
+
+    private List<string> values;
+
+    #endregion Private Fields
+
     #region Private Methods
 
-    private void setResolution()
+    private void LoadResolutions()
     {
-        // Getting the name of what is pressed
-        string index = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+        TMP_Dropdown dropdown = GetComponentInChildren<TMP_Dropdown>();
 
-        switch (index)
+        dropdown.ClearOptions();
+
+        values = new System.Collections.Generic.List<string>();
+
+        for (int i = 0; i < _screenResolutions.Length; i++)
         {
-            case "0":
-                Screen.SetResolution(1920, 1080, true, 60);
-                break;
+            if (_screenResolutions[i].refreshRate != 60)
+            {
+                continue;
+            }
 
-            case "1":
-                Screen.SetResolution(1680, 1050, true, 60);
-                break;
+            string option = _screenResolutions[i].width + " * " + _screenResolutions[i].height;
 
-            case "2":
-                Screen.SetResolution(960, 720, true, 60);
-                break;
+            values.Add(option);
+
+            if (_screenResolutions[i].width == Screen.currentResolution.width && _screenResolutions[i].height == Screen.currentResolution.height)
+            {
+                currentRes = i;
+            }
+        }
+
+        dropdown.AddOptions(values);
+        dropdown.value = currentRes;
+        dropdown.RefreshShownValue();
+    }
+
+    private void OnEnable()
+    {
+        _screenResolutions = Screen.resolutions;
+
+        LoadResolutions();
+    }
+
+    public void SetRes(int value)
+    {
+        if (values.Count != 0)
+        {
+            Resolution res = _screenResolutions[value];
+            Debug.Log(res);
+            Screen.SetResolution(res.width, res.height, Screen.fullScreen);
         }
     }
 
-    private void Update()
-    {
-        Graphics();
-    }
-
     #endregion Private Methods
-
-    #region Public Methods
-
-    public void Graphics()
-    {
-        setResolution();
-    }
-
-    #endregion Public Methods
 }
