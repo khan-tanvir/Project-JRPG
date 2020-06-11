@@ -2075,7 +2075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -169.1, y: -405}
+  m_AnchoredPosition: {x: -169.1, y: -837}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1907906053384196104
@@ -2516,7 +2516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.068, y: -4.41}
+  m_AnchoredPosition: {x: 11.068, y: -4.97}
   m_SizeDelta: {x: 217.88977, y: 98.660034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4320356420063746370
@@ -2566,7 +2566,7 @@ Animator:
   m_GameObject: {fileID: 4320356420063746373}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dca59ab1ef9b9164889c3821c3422286, type: 2}
+  m_Controller: {fileID: 9100000, guid: 813157f4d51f9594b92d15231530e84b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3972,7 +3972,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7682,8 +7682,8 @@ RectTransform:
   m_Father: {fileID: 9024649323340736057}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.011886895}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 178.9}
   m_SizeDelta: {x: 20, y: -342.84555}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8201,7 +8201,7 @@ PrefabInstance:
     - target: {fileID: 3919950722574489360, guid: 7941f254d9ad2e14596a559ce8b350fc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3919950722574489361, guid: 7941f254d9ad2e14596a559ce8b350fc,
         type: 3}
@@ -8371,6 +8371,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TriggerDialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 3919950723015578759, guid: 7941f254d9ad2e14596a559ce8b350fc,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 26.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3919950723015578759, guid: 7941f254d9ad2e14596a559ce8b350fc,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7941f254d9ad2e14596a559ce8b350fc, type: 3}
 --- !u!224 &9024649324372423866 stripped
@@ -8398,6 +8408,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9024649322571340590}
     m_Modifications:
+    - target: {fileID: 929917950029663503, guid: 230e45be133deba4a9c3363663a435b0,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 26.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 929917950029663503, guid: 230e45be133deba4a9c3363663a435b0,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 929917950084214764, guid: 230e45be133deba4a9c3363663a435b0,
+        type: 3}
+      propertyPath: dialogue.lines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 929917950084214764, guid: 230e45be133deba4a9c3363663a435b0,
+        type: 3}
+      propertyPath: dialogue.script
+      value: INSTrap
+      objectReference: {fileID: 0}
     - target: {fileID: 929917950084214765, guid: 230e45be133deba4a9c3363663a435b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8511,7 +8541,7 @@ PrefabInstance:
     - target: {fileID: 929917950084214766, guid: 230e45be133deba4a9c3363663a435b0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 230e45be133deba4a9c3363663a435b0, type: 3}

@@ -65,25 +65,25 @@ public class AIController : MonoBehaviour
 
     public string NPCName
     {
-        get { return _npcName; }
+        get => _npcName;
     }
 
     public float Speed
     {
-        get { return _movementSpeed; }
-        set { _movementSpeed = value; }
+        get => _movementSpeed;
+        set => _movementSpeed = value;
     }
 
     public State State
     {
-        get { return _state; }
-        set { _state = value; }
+        get => _state;
+        set => _state = value;
     }
 
     public Transform Target
     {
-        get { return _target; }
-        set { _target = value; }
+        get => _target;
+        set => _target = value;
     }
 
     #endregion Public Properties
@@ -194,13 +194,12 @@ public class AIController : MonoBehaviour
         // Clean this up
         if (Target == null)
             return;
-        
+
         direction = Target.position - _rigidBody.transform.position;
         direction.Normalize();
 
         _animator.SetFloat("Horizontal", direction.x);
         _animator.SetFloat("Vertical", direction.y);
-
 
         if (_moveAI && State != State.IDLE)
         {

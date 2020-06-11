@@ -48,6 +48,21 @@ public class SceneManagerScript : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoad;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoad;
+    }
+
+    private void OnSceneLoad(Scene scene, LoadSceneMode sceneMode)
+    {
+        EventsManager.Instance?.SceneChange();
+    }
+
     #endregion Private Methods
 
     #region Public Methods

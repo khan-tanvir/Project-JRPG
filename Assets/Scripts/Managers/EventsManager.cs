@@ -5,6 +5,8 @@ public class EventsManager : MonoBehaviour
 {
     #region Public Events
 
+    public event Action<int> OnCheckPointCall;
+
     public event Action<string> OnGatherObjectiveChange;
 
     public event Action<string> OnInteractionWithItem;
@@ -18,8 +20,6 @@ public class EventsManager : MonoBehaviour
     public event Action OnSceneChange;
 
     public event Action OnToggleFollower;
-
-    public event Action<int> OnCheckPointCall;
 
     #endregion Public Events
 
@@ -58,6 +58,11 @@ public class EventsManager : MonoBehaviour
 
     #region Public Methods
 
+    public void CheckPointCall(int point)
+    {
+        OnCheckPointCall?.Invoke(point);
+    }
+
     public void GatherObjectiveChange(string item)
     {
         OnGatherObjectiveChange?.Invoke(item);
@@ -91,11 +96,6 @@ public class EventsManager : MonoBehaviour
     public void ToggleFollower()
     {
         OnToggleFollower?.Invoke();
-    }
-
-    public void CheckPointCall(int point)
-    {
-        OnCheckPointCall?.Invoke(point);
     }
 
     #endregion Public Methods

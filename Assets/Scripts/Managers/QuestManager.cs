@@ -12,6 +12,7 @@ public class QuestManager : MonoBehaviour
 
     private Quest _currentSelectedQuest;
 
+    [SerializeField]
     private TMP_Text _descriptionPanel;
 
     private Transform _listTransform;
@@ -61,6 +62,8 @@ public class QuestManager : MonoBehaviour
 
     private void LoadQuestDatabase()
     {
+        Quests = new List<Quest>();
+
         QuestsDatabase database = new QuestsDatabase();
         database.ReadDatabase(GameData.Instance.CurrentSaveFile);
     }
@@ -72,8 +75,12 @@ public class QuestManager : MonoBehaviour
         _descriptionPanel = journal.Find("Selected").Find("Text Box").Find("Text").GetComponent<TMP_Text>();
         _listTransform = journal.Find("List").Find("Quest Area");
         _numberOfQuests = journal.Find("Capacity").Find("Text").GetComponent<TMP_Text>();
+    }
 
-        Quests = new List<Quest>();
+    private void OnDisable()
+    {
+        EventsManager.Instance.OnSceneChange -= LoadVariables;
+        EventsManager.Instance.OnSceneChange -= HandleQuests;
     }
 
     private void OnEscortObjectiveComplete(EscortObjective objective)
@@ -89,112 +96,6 @@ public class QuestManager : MonoBehaviour
 
         temp.EscortObjective = null;
     }
-
-    private void SetupDeliverObjective(DeliverObjective objective)
-    {
-        int index = Inventory.Instance.Slots.FindIndex(a => a.ObjectID == "Quest Item: " + objective.Item);
-
-        if (index != -1)
-        {
-            Inventory.Instance.Slots[index].GetComponentInChildren<IDroppable>().EnableDrop = false;
-        }
-        else
-        {
-            GameObject temp = Instantiate(_ARROW);
-
-            if (temp.GetComponent<IDroppable>() != null)
-            {
-                temp.GetComponent<IDroppable>().EnableDrop = false;
-            }
-
-            if (Inventory.Instance.FillSlot(temp, objective.Item))
-            {
-                Destroy(temp);
-            }
-        }
-    }
-
-    private void SetupEscortObjective(EscortObjective objective)
-    {
-        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
-
-        if (temp == null)
-        {
-            Debug.Log("No AIController component could be found with the given name, " + objective.FollowerName);
-        }
-
-        temp.EscortObjective = objective;
-
-        temp.State = State.IDLE;
-
-        temp.Target = FindObjectOfType<Player>().transform;
-
-        EventsManager.Instance.OnToggleFollower += temp.ToggleFollower;
-    }
-
-    private void Start()
-    {
-        LoadVariables();
-        LoadQuestDatabase();
-
-        EventsManager.Instance.OnSceneChange += HandleQuests;
-        HandleQuests();
-    }
-
-    private void SubscribeToEvent(Objective objective)
-    {
-        switch (objective.ObjectiveType)
-        {
-            case GoalType.GATHER:
-                var gatherCast = (GatherObjective)objective;
-                EventsManager.Instance.OnGatherObjectiveChange += gatherCast.UpdateCurrentAmount;
-                EventsManager.Instance.GatherObjectiveChange(gatherCast.Type);
-                break;
-
-            case GoalType.ESCORT:
-                var escortCast = (EscortObjective)objective;
-                EventsManager.Instance.OnLocationEntered += escortCast.ValidateLocation;
-
-                SetupEscortObjective(escortCast);
-                break;
-
-            case GoalType.DELIVER:
-                var deliverCast = (DeliverObjective)objective;
-                EventsManager.Instance.OnInteractionWithItem += deliverCast.InteractedWithWorld;
-
-                SetupDeliverObjective(deliverCast);
-                break;
-
-            case GoalType.ACTIVATE:
-                var activateCast = (ActivateObjective)objective;
-                EventsManager.Instance.OnInteractionWithItem += activateCast.CheckInteractedItem;
-                break;
-
-            case GoalType.SEARCH:
-                var searchCast = (SearchObjective)objective;
-                EventsManager.Instance.OnLocationEntered += searchCast.LocationEntered;
-                break;
-        }
-    }
-
-    private void UpdateQuestsCapacity()
-    {
-        int i = 0;
-
-        foreach (Quest Quest in Quests)
-        {
-            if (Quest.Status == QuestStatus.GIVEN)
-            {
-                i++;
-            }
-        }
-
-        _numberOfQuests.text = i.ToString() + "/-";
-    }
-
-    #endregion Private Methods
-
-    #region Public Methods
 
     private List<Objective> ReadObjectives(QuestEntry quest, Quest parent)
     {
@@ -252,22 +153,138 @@ public class QuestManager : MonoBehaviour
         return loadedObjectives;
     }
 
+    private void SetupDeliverObjective(DeliverObjective objective)
+    {
+        int index = Inventory.Instance.Slots.FindIndex(a => a.ObjectID == "Quest Item: " + objective.Item);
+
+        if (index != -1)
+        {
+            Inventory.Instance.Slots[index].GetComponentInChildren<IDroppable>().EnableDrop = false;
+        }
+        else
+        {
+            GameObject temp = Instantiate(_ARROW);
+
+            if (temp.GetComponent<IDroppable>() != null)
+            {
+                temp.GetComponent<IDroppable>().EnableDrop = false;
+            }
+
+            if (Inventory.Instance.FillSlot(temp, objective.Item))
+            {
+                Destroy(temp);
+            }
+        }
+    }
+
+    private void SetupEscortObjective(EscortObjective objective)
+    {
+        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
+
+        if (temp == null)
+        {
+            Debug.Log("No AIController component could be found with the given name, " + objective.FollowerName);
+        }
+
+        temp.EscortObjective = objective;
+
+        temp.State = State.IDLE;
+
+        temp.Target = FindObjectOfType<Player>().transform;
+
+        EventsManager.Instance.OnToggleFollower += temp.ToggleFollower;
+    }
+
+    private void Start()
+    {
+        LoadVariables();
+        LoadQuestDatabase();
+        HandleQuests();
+
+        EventsManager.Instance.OnSceneChange += LoadVariables;
+        EventsManager.Instance.OnSceneChange += HandleQuests;
+    }
+
+    private void SubscribeToEvent(Objective objective)
+    {
+        switch (objective.ObjectiveType)
+        {
+            case GoalType.GATHER:
+                var gatherCast = (GatherObjective)objective;
+                EventsManager.Instance.OnGatherObjectiveChange += gatherCast.UpdateCurrentAmount;
+                EventsManager.Instance.GatherObjectiveChange(gatherCast.Type);
+                break;
+
+            case GoalType.ESCORT:
+                var escortCast = (EscortObjective)objective;
+                EventsManager.Instance.OnLocationEntered += escortCast.ValidateLocation;
+
+                SetupEscortObjective(escortCast);
+                break;
+
+            case GoalType.DELIVER:
+                var deliverCast = (DeliverObjective)objective;
+                EventsManager.Instance.OnInteractionWithItem += deliverCast.InteractedWithWorld;
+
+                SetupDeliverObjective(deliverCast);
+                break;
+
+            case GoalType.ACTIVATE:
+                var activateCast = (ActivateObjective)objective;
+                EventsManager.Instance.OnInteractionWithItem += activateCast.CheckInteractedItem;
+                break;
+
+            case GoalType.SEARCH:
+                var searchCast = (SearchObjective)objective;
+                EventsManager.Instance.OnLocationEntered += searchCast.LocationEntered;
+                break;
+        }
+    }
+
+    private void UpdateQuestsCapacity()
+    {
+        int i = 0;
+
+        foreach (Quest Quest in Quests)
+        {
+            if (Quest.Status == QuestStatus.GIVEN)
+            {
+                i++;
+            }
+        }
+
+        _numberOfQuests.text = i.ToString() + "/-";
+    }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
     public void AddQuestToJournal(Quest quest)
     {
+        int index = Quests.FindIndex(a => a.Title == quest.Title);
+
+        if (index == -1)
+        {
+            return;
+        }
+
+        Quests[index].Status = quest.Status;
+
         GameObject questObject = Instantiate(_questPrefab, _listTransform);
 
         // Both questscript and non mb version need to have reference of each other
         QuestMB temp = questObject.GetComponent<QuestMB>();
-        quest.QuestMB = temp;
-        temp.Quest = quest;
+        Quests[index].QuestMB = temp;
+        temp.Quest = Quests[index];
 
-        quest.QuestMB.UpdateColor();
+        Quests[index].QuestMB.UpdateColor();
 
         questObject.GetComponent<TMP_Text>().text = quest.Title;
 
-        if (quest.Status == QuestStatus.GIVEN)
+        if (Quests[index].Status == QuestStatus.GIVEN)
         {
-            foreach (Objective objective in quest.Objectives)
+            foreach (Objective objective in Quests[index].Objectives)
             {
                 if (!objective.Complete)
                 {
@@ -275,11 +292,6 @@ public class QuestManager : MonoBehaviour
                     SubscribeToEvent(objective);
                 }
             }
-        }
-
-        if (!Quests.Contains(quest))
-        {
-            Quests.Add(quest);
         }
 
         UpdateQuestsCapacity();
@@ -296,6 +308,8 @@ public class QuestManager : MonoBehaviour
             loadedQuest.Title = quest.Title;
             loadedQuest.Description = quest.Description;
             loadedQuest.QuestGiverName = quest.Giver;
+
+            loadedQuest.Status = (QuestStatus)quest.Status;
 
             if (quest.ObjectivesEntry.Count == 0)
             {
@@ -342,7 +356,6 @@ public class QuestManager : MonoBehaviour
                 }
 
                 questGiver.CreateQuest(quest);
-                Debug.Log("Given " + quest.Title + " to " + quest.QuestGiverName);
             }
         }
     }

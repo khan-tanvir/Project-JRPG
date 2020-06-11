@@ -18,10 +18,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public bool InteractableObject
     {
-        get
-        {
-            return _currentInteractable != null;
-        }
+        get => _currentInteractable != null;
     }
 
     public Vector3 PlayerPosition
