@@ -550,6 +550,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3812052829543335492, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
+        type: 3}
+      propertyPath: m_text
+      value: This game is not suited for anyone under the age of 18.
+      objectReference: {fileID: 0}
     - target: {fileID: 5977365456663638386, guid: 40a1ec7382d25df4a8f61bcec6ac6bb9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -832,6 +837,11 @@ PrefabInstance:
       propertyPath: _musicSlider
       value: 
       objectReference: {fileID: 1655963180}
+    - target: {fileID: 7224573994153392752, guid: 0c4255d548f14e84e8c317ca1b4d3084,
+        type: 3}
+      propertyPath: _sounds.Array.data[1].volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7224573994153392753, guid: 0c4255d548f14e84e8c317ca1b4d3084,
         type: 3}
       propertyPath: m_LocalPosition.x

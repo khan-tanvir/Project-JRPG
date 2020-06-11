@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
 
     private void LoadPlayerPosition()
     {
+        RespawnManager.Instance.GetCheckPoints();
         transform.position = RespawnManager.Instance.CurrentCheckpoint;
     }
 
