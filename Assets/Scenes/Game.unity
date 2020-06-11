@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -216,18 +216,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e27579195a4a5c498034a075f7aa8c1, type: 3}
---- !u!114 &46566553 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9137197339400435281, guid: 4c78d1a6dac4ee945841d0901018b254,
-    type: 3}
-  m_PrefabInstance: {fileID: 1606802576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d368d0e9c25cd479d0b95f49a15cea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &112109308
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,29 +978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Functions:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2008700706}
-        m_MethodName: PlayMusic
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: GameScene
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 46566553}
-        m_MethodName: ExamineScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &846008915 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9024649324404411242, guid: 52571c9bf4d853144bd7f69e50d8f964,
@@ -7887,18 +7853,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 9024649323571648825}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2008700706 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7224573994153392752, guid: 0c4255d548f14e84e8c317ca1b4d3084,
-    type: 3}
-  m_PrefabInstance: {fileID: 1718208937}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e014120cbf5a17a43853450ab46203c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2030713512
 GameObject:
   m_ObjectHideFlags: 0

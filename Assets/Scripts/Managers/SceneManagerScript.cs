@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -51,6 +52,8 @@ public class SceneManagerScript : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoad;
+
+        EventsManager.Instance.OnSceneChange -= ExamineScene;
     }
 
     private void OnEnable()
@@ -61,6 +64,7 @@ public class SceneManagerScript : MonoBehaviour
     private void OnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
         EventsManager.Instance?.SceneChange();
+        ExamineScene();
     }
 
     #endregion Private Methods
@@ -97,7 +101,7 @@ public class SceneManagerScript : MonoBehaviour
 
     public void ExamineScene()
     {
-        if (GameData.Instance.PlayerData == null || GameData.Instance.PlayerData.SceneObjectsList == null || GameData.Instance.PlayerData.SceneObjectsList.Count == 0)
+        if (GameData.Instance.PlayerData == null)
         {
             return;
         }
@@ -109,31 +113,32 @@ public class SceneManagerScript : MonoBehaviour
                 continue;
             }
 
-            int index = GameData.Instance.PlayerData.SceneObjectsList.FindIndex(a => a.ID == idgen.ObjectID);
+            int index = SceneObjects.FindIndex(a => a.ID == idgen.ObjectID);
 
             // if a match is found
             if (index != -1)
             {
-                if (GameData.Instance.PlayerData.SceneObjectsList[index].IsDestroyed)
+                if (SceneObjects[index].IsDestroyed)
                 {
                     // check if its marked as destroyed
                     AddToSceneObjectList(idgen);
                     Destroy(idgen.gameObject);
                 }
-                else if (GameData.Instance.PlayerData.SceneObjectsList[index].InInventory)
+                else if (SceneObjects[index].InInventory)
                 {
-                    // Check if its not already in the list
-                    if (SceneObjects.FindIndex(a => a.ID == idgen.ObjectID) != -1)
-                    {
-                        Destroy(idgen.gameObject);
-                    }
+                    Destroy(idgen.gameObject);
+                    //// Check if its not already in the list
+                    //if (SceneObjects.FindIndex(a => a.ID == idgen.ObjectID) != -1)
+                    //{
+                    //    Destroy(idgen.gameObject);
+                    //}
 
-                    AddToSceneObjectList(idgen);
+                    //AddToSceneObjectList(idgen);
                 }
                 else
                 {
                     // If inventory and destroyed are false, that means its position has been changed
-                    idgen.gameObject.transform.position = new Vector3(GameData.Instance.PlayerData.SceneObjectsList[index].Position[0], GameData.Instance.PlayerData.SceneObjectsList[index].Position[1], -1.0f);
+                    idgen.gameObject.transform.position = new Vector3(SceneObjects[index].Position[0], SceneObjects[index].Position[1], -1.0f);
                 }
             }
         }
@@ -146,8 +151,23 @@ public class SceneManagerScript : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    public void SaveObjects()
+    {
+        foreach (IDGenerator idgen in Resources.FindObjectsOfTypeAll<IDGenerator>())
+        {
+            if (idgen == null || string.IsNullOrEmpty(idgen.ObjectID))
+            {
+                continue;
+            }
+
+            idgen.Save();
+        }
+    }
+
     public void SceneToGoTo(string sceneName)
     {
+        SaveObjects();
+
         SceneManager.LoadScene(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/" + sceneName + ".unity"));
 
         switch (sceneName)

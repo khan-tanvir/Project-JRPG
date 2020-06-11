@@ -82,15 +82,7 @@ public class PauseMenu : MonoBehaviour
 
         Inventory.Instance.SaveInventory();
 
-        foreach (IDGenerator idgen in Resources.FindObjectsOfTypeAll<IDGenerator>())
-        {
-            if (idgen == null || string.IsNullOrEmpty(idgen.ObjectID))
-            {
-                continue;
-            }
-
-            idgen.Save();
-        }
+        SceneManagerScript.Instance.SaveObjects();
 
         GameData.Instance.PlayerData.SceneObjectsList = SceneManagerScript.Instance.SceneObjects;
 

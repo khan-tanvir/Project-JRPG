@@ -157,6 +157,13 @@ public class GameData : MonoBehaviour
         // Load the variables
         PlayerData = data;
 
+        if (PlayerData.SceneObjectsList == null)
+        {
+            PlayerData.SceneObjectsList = new List<SceneObject>();
+        }
+
+        SceneManagerScript.Instance.SceneObjects = PlayerData.SceneObjectsList;
+
         //Track the save file
         CurrentSaveFile = pos;
 

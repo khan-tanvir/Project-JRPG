@@ -71,11 +71,9 @@ public class IDGenerator : MonoBehaviour
         string objectPos = transform.position.x.ToString() + "-" + transform.position.y.ToString() + "-" + transform.position.z.ToString();
         string objectRot = transform.rotation.x.ToString() + "-" + transform.rotation.y.ToString() + "-" + transform.rotation.z.ToString();
 
-        ObjectID = "-" + objectPos + "-" + objectRot + "-" + transform.position.magnitude.ToString();
+        ObjectID = SceneManagerScript.Instance.CurrentScene + "-" + objectPos + "-" + objectRot + "-" + transform.position.magnitude.ToString();
 
         _originalPosition = transform.position;
-
-        // _originalRotation = transform.rotation;
     }
 
     #endregion Private Methods

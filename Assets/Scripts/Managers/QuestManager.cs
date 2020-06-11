@@ -179,20 +179,28 @@ public class QuestManager : MonoBehaviour
 
     private void SetupEscortObjective(EscortObjective objective)
     {
-        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
+        AIController npc = null;
 
-        if (temp == null)
+        foreach (AIController ai in FindObjectsOfType<AIController>())
         {
-            Debug.Log("No AIController component could be found with the given name, " + objective.FollowerName);
+            if (ai.NPCName == objective.FollowerName)
+            {
+                npc = ai;
+            }
         }
 
-        temp.EscortObjective = objective;
+        if (npc == null)
+        {
+            return;
+        }
 
-        temp.State = State.IDLE;
+        npc.EscortObjective = objective;
 
-        temp.Target = FindObjectOfType<Player>().transform;
+        npc.State = State.IDLE;
 
-        EventsManager.Instance.OnToggleFollower += temp.ToggleFollower;
+        npc.Target = FindObjectOfType<Player>().transform;
+
+        EventsManager.Instance.OnToggleFollower += npc.ToggleFollower;
     }
 
     private void Start()
