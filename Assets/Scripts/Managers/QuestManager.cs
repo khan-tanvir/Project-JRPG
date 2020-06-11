@@ -17,6 +17,8 @@ public class QuestManager : MonoBehaviour
 
     private Transform _listTransform;
 
+    private string _npcID;
+
     private TMP_Text _numberOfQuests;
 
     [SerializeField]
@@ -85,16 +87,37 @@ public class QuestManager : MonoBehaviour
 
     private void OnEscortObjectiveComplete(EscortObjective objective)
     {
-        AIController temp = GameObject.Find("NPCs").transform.Find(objective.FollowerName).GetComponent<AIController>();
+        AIController npc = null;
 
-        EventsManager.Instance.OnToggleFollower -= temp.ToggleFollower;
+        foreach (AIController ai in FindObjectsOfType<AIController>())
+        {
+            if (ai.GetComponent<IDGenerator>().ObjectID == _npcID && ai.gameObject.scene.buildIndex == -1)
+            {
+                npc = ai;
+            }
+        }
 
-        temp.ResetSpeed();
+        if (npc == null)
+        {
+            return;
+        }
 
-        temp.State = State.IDLE;
-        temp.Target = null;
+        EventsManager.Instance.OnToggleFollower -= npc.ToggleFollower;
 
-        temp.EscortObjective = null;
+        npc.ResetSpeed();
+
+        npc.State = State.IDLE;
+        npc.Target = null;
+
+        npc.EscortObjective = null;
+
+        _npcID = "";
+
+        npc.GetComponent<IDGenerator>().IsDestroyed = true;
+
+        SceneManagerScript.Instance.AddToSceneObjectList(npc.GetComponent<IDGenerator>());
+
+        Destroy(npc.gameObject);
     }
 
     private List<Objective> ReadObjectives(QuestEntry quest, Quest parent)
@@ -181,11 +204,31 @@ public class QuestManager : MonoBehaviour
     {
         AIController npc = null;
 
-        foreach (AIController ai in FindObjectsOfType<AIController>())
+        if (!string.IsNullOrEmpty(_npcID))
         {
-            if (ai.NPCName == objective.FollowerName)
+            foreach (AIController ai in FindObjectsOfType<AIController>())
             {
-                npc = ai;
+                if (ai.GetComponent<IDGenerator>().ObjectID == _npcID)
+                {
+                    if (ai.gameObject.scene.buildIndex == -1)
+                    {
+                        npc = ai;
+                    }
+                    else
+                    {
+                        Destroy(ai.gameObject);
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach (AIController ai in FindObjectsOfType<AIController>())
+            {
+                if (ai.NPCName == objective.FollowerName)
+                {
+                    npc = ai;
+                }
             }
         }
 
@@ -199,8 +242,16 @@ public class QuestManager : MonoBehaviour
         npc.State = State.IDLE;
 
         npc.Target = FindObjectOfType<Player>().transform;
+        npc.GetComponent<Rigidbody2D>().position = RespawnManager.Instance.CurrentCheckpoint;
 
-        EventsManager.Instance.OnToggleFollower += npc.ToggleFollower;
+        if (string.IsNullOrEmpty(_npcID))
+        {
+            EventsManager.Instance.OnToggleFollower += npc.ToggleFollower;
+            _npcID = npc.GetComponent<IDGenerator>().ObjectID;
+        }
+
+        npc.transform.parent = null;
+        DontDestroyOnLoad(npc.gameObject);
     }
 
     private void Start()
