@@ -862,7 +862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!320 &204379113
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -1507,12 +1507,12 @@ PrefabInstance:
     - target: {fileID: 2330483888178094507, guid: 807c72ff7f14f5940869776909316e0b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 1.446
       objectReference: {fileID: 0}
     - target: {fileID: 2330483888178094507, guid: 807c72ff7f14f5940869776909316e0b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.2
+      value: 9.124
       objectReference: {fileID: 0}
     - target: {fileID: 2330483888178094507, guid: 807c72ff7f14f5940869776909316e0b,
         type: 3}
@@ -1562,17 +1562,17 @@ PrefabInstance:
     - target: {fileID: 2330483888178094507, guid: 807c72ff7f14f5940869776909316e0b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.6421784
+      value: 1.5337526
       objectReference: {fileID: 0}
     - target: {fileID: 2330483888178094507, guid: 807c72ff7f14f5940869776909316e0b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.6421784
+      value: 1.5337526
       objectReference: {fileID: 0}
     - target: {fileID: 2330483888178094507, guid: 807c72ff7f14f5940869776909316e0b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.6421784
+      value: 1.5337526
       objectReference: {fileID: 0}
     - target: {fileID: 2330483888178094512, guid: 807c72ff7f14f5940869776909316e0b,
         type: 3}
@@ -13343,7 +13343,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07181013, y: 0.2513247}
+  m_Offset: {x: 0.31149513, y: 0.2513247}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -13354,7 +13354,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.97746944, y: 1.2134097}
+  m_Size: {x: 0.23662436, y: 1.2134097}
   m_EdgeRadius: 0
 --- !u!1 &5344437034641620081
 GameObject:
@@ -13387,7 +13387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkPointID: 2
-  _scene: Station Entrance
+  _scene: Train
 --- !u!224 &5375786174872999922
 RectTransform:
   m_ObjectHideFlags: 0
