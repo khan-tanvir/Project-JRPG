@@ -78,7 +78,7 @@ public class Inventory : MonoBehaviour
         {
             if (Slots[i].InvItem == null)
             {
-                GameObject itemObject = Instantiate(objectToInstantiate, Slots[i].transform, false);
+                GameObject itemObject = Instantiate(objectToInstantiate, Slots[i].transform.GetChild(0), false);
 
                 itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
 
@@ -106,7 +106,7 @@ public class Inventory : MonoBehaviour
                 itemObject.GetComponent<IStoreable>().ImageComp.enabled = true;
                 itemObject.GetComponent<IStoreable>().SpriteRendererComp.enabled = false;
 
-                Slots[i].StoreItem(itemObject.GetComponent<ItemMB>().Item);
+                Slots[i].StoreItem(itemObject.GetComponent<ItemMB>().Item, itemObject.GetComponent<IDGenerator>().Instance);
 
                 SceneManagerScript.Instance.AddToSceneObjectList(itemObject.GetComponent<IDGenerator>().Instance);
 
@@ -164,13 +164,13 @@ public class Inventory : MonoBehaviour
             createdGameObject.gameObject.GetComponent<Image>().enabled = true;
             createdGameObject.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
-            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.ID));
+            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.ID), createdGameObject.gameObject.GetComponent<IDGenerator>().Instance);
         }
     }
 
     public void RemoveItem(string item)
     {
-        int index = Slots.FindIndex(slot => slot.ObjectID == "Quest Item: " + item);
+        int index = Slots.FindIndex(slot => slot.InvItem.Name == item);
 
         if (index == -1)
         {

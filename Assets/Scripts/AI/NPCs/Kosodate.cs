@@ -13,6 +13,21 @@ public class Kosodate : AIController
 
     public override void OnInteract()
     {
+        // TODO: Instantly hand out quests, scrap the quest giver panel
+
+        if (EnabledInteraction)
+        {
+            if (GetComponent<QuestGiver>().Quests.Count != 0)
+            {
+                GetComponent<QuestGiver>().OpenPanel();
+            }
+
+            if (QuestManager.Instance.Quests.Find(a => a.Title == "Find my Baby").Status == QuestStatus.COMPLETE)
+            {
+                Inventory.Instance.RemoveItem("Baby");
+                FindObjectOfType<Hand>().AddItemToInventory();
+            }
+        }
         base.OnInteract();
     }
 

@@ -57,15 +57,6 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
 
     #region Public Methods
 
-    public virtual void Awake()
-    {
-        Item = new Item(ItemDatabase.Instance.GetItemByID(_itemID));
-        Item.ItemMB = this;
-
-        defaultMat = gameObject.GetComponent<Renderer>().material;
-        _canInteract = true;
-    }
-
     public void CallItemChangeEvent()
     {
         // Calls the Gather Objective Change Event
@@ -96,6 +87,17 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
         {
             EventsManager.Instance.InteractionWithItem(Item.Name);
         }
+    }
+
+    public virtual void Start()
+    {
+        Item = new Item(ItemDatabase.Instance.GetItemByID(_itemID))
+        {
+            ItemMB = this
+        };
+
+        defaultMat = gameObject.GetComponent<Renderer>().material;
+        _canInteract = true;
     }
 
     public virtual void UnFocus()

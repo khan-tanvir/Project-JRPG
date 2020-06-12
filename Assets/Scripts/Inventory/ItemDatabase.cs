@@ -40,7 +40,9 @@ public class ItemDatabase : MonoBehaviour
         Items = new List<Item>()
         {
             new Item(1, "Test", "Test"),
-            new Item(2, "Arrow", "An arrow")
+            new Item(2, "Arrow", "An arrow"),
+            new Item(3, "Baby", "Wah wah wah"),
+            new Item(4, "Hand", "Seems menacing")
         };
     }
 

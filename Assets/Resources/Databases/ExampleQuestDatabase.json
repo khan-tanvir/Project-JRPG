@@ -78,6 +78,22 @@
           "SecondEntry": "Cave"
         }
       ]
+    },
+    {
+      "ID": 0,
+      "Title": "Find my Baby",
+      "Giver": "Kosodate",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "GATHER",
+          "Description": "Gather [Baby]  0/1",
+          "FirstEntry": "Baby",
+          "SecondEntry": "1",
+          "ThirdEntry": "0"
+        }
+      ]
     }
   ]
 }
