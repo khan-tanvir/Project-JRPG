@@ -7,7 +7,7 @@ public class PlayerData
 {
     #region Private Fields
 
-    private List<Cutscene> _cutscenes;
+    private List<Cutscene> _cutscenes = new List<Cutscene>();
 
     [SerializeField]
     private float[] _position = { -6.96f, -2.52f };

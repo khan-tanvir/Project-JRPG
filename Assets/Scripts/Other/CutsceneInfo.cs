@@ -12,15 +12,24 @@ public class Cutscene
     [HideInInspector]
     public string CSname;
 
+    [System.NonSerialized]
     public CutsceneInfo CutsceneMB;
 
     public bool HasPlayed;
+
+    public bool InfiniteUses;
 
     #endregion Public Fields
 }
 
 public class CutsceneInfo : MonoBehaviour
 {
+    #region Private Fields
+
+    private bool _isPlaying;
+
+    #endregion Private Fields
+
     #region Public Fields
 
     public Cutscene Cutscene;
@@ -29,17 +38,27 @@ public class CutsceneInfo : MonoBehaviour
 
     #region Private Methods
 
-    private void Start()
+    private void Awake()
     {
         Cutscene.CSname = GetComponent<PlayableDirector>().playableAsset.name;
         Cutscene.CutsceneMB = this;
+    }
 
-        CutSceneManager.Instance.PlayCutScene(Cutscene.CSname);
+    private void IsFinished(PlayableDirector director)
+    {
+        EventsManager.Instance.CutsceneFinish(Cutscene.CSname);
+
+        GetComponent<PlayableDirector>().stopped -= IsFinished;
     }
 
     public void PlayCS()
     {
-        GetComponent<PlayableDirector>().Play();
+        if (GetComponent<PlayableDirector>() != null && GetComponent<PlayableDirector>().playableAsset != null)
+        {
+            GetComponent<PlayableDirector>().Play();
+
+            GetComponent<PlayableDirector>().stopped += IsFinished;
+        }
     }
 
     #endregion Private Methods

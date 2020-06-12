@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6343678547320371466}
   - component: {fileID: 6343678547320371465}
   - component: {fileID: 6343678547320371507}
-  - component: {fileID: 6497023700187706255}
   - component: {fileID: 4817176136260548378}
-  m_Layer: 0
+  - component: {fileID: 5393995084222855357}
+  - component: {fileID: 6658734722549474555}
+  m_Layer: 8
   m_Name: Jigoku
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -111,22 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87948227, y: 0.25373673}
   m_EdgeRadius: 0
---- !u!114 &6497023700187706255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6343678547320371506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f2d81d09ed01a4495bcedb68fbbab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  radius: 1
 --- !u!95 &4817176136260548378
 Animator:
   serializedVersion: 3
@@ -146,3 +131,49 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &5393995084222855357
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343678547320371506}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &6658734722549474555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343678547320371506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6522a83539aebe4ca3b648a882b1988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableInteraction: 1
+  _movementSpeed: 0
+  _npcName: Jigoku
+  _state: 2
+  _target: {fileID: 0}
+  _interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
+  defaultMat: {fileID: 0}
+  maxX: 0
+  maxY: 0
+  minX: 0
+  minY: 0
+  moveSpot: {fileID: 0}
+  startWaitTime: 0

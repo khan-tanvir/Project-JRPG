@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6014747248949919835}
   - component: {fileID: 6014747248949919832}
   - component: {fileID: 6014747248949919842}
-  - component: {fileID: 5862554663997115102}
   - component: {fileID: 6409463001132758896}
-  m_Layer: 0
+  - component: {fileID: 8979117132887543845}
+  - component: {fileID: 9160152586654369186}
+  m_Layer: 8
   m_Name: Onryo
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -111,22 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87948227, y: 0.25373673}
   m_EdgeRadius: 0
---- !u!114 &5862554663997115102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014747248949919843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f2d81d09ed01a4495bcedb68fbbab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  radius: 1
 --- !u!95 &6409463001132758896
 Animator:
   serializedVersion: 3
@@ -146,3 +131,49 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &8979117132887543845
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014747248949919843}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &9160152586654369186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014747248949919843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8f842c932762e4fbfe10fdb3106e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableInteraction: 0
+  _movementSpeed: 0
+  _npcName: Onryo
+  _state: 2
+  _target: {fileID: 0}
+  _interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
+  defaultMat: {fileID: 0}
+  maxX: 0
+  maxY: 0
+  minX: 0
+  minY: 0
+  moveSpot: {fileID: 0}
+  startWaitTime: 0

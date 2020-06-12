@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     #region Private Fields
 
     [SerializeField]
-    private int _numberOfSlots;
+    private int _numberOfSlots = 25;
 
     [SerializeField]
     private Transform _slotContainer;
@@ -51,6 +51,11 @@ public class Inventory : MonoBehaviour
 
     private void CreateInventorySlots()
     {
+        if (_slotContainer == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < _numberOfSlots; i++)
         {
             GameObject temp = Instantiate(_slotObject, _slotContainer);

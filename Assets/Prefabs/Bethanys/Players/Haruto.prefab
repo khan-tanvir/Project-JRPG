@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 465324106447221256}
   - component: {fileID: 465324106447221261}
   - component: {fileID: 312577315421223089}
+  - component: {fileID: 1517358030}
   m_Layer: 0
   m_Name: Haruto
   m_TagString: Player
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465324106447221260}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 919961275
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8981869763922706688, guid: af21a864631865e478510b1b127dcdd5,
+  m_Sprite: {fileID: 6699669300967335251, guid: af21a864631865e478510b1b127dcdd5,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f93b7ff97bd6440bfdbe6b5ddeede4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 9024649322571340586, guid: 52571c9bf4d853144bd7f69e50d8f964, type: 3}
+  _cycleMenu: {fileID: 0}
+  _deathMenu: {fileID: 0}
   _inventory: {fileID: 0}
   _journal: {fileID: 0}
   _movementSpeed: 2
@@ -184,3 +188,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   radius: 1
+--- !u!114 &1517358030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465324106447221260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7320f0304876a8f4695bf4ef7aee6a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _numberOfSlots: 25
+  _slotContainer: {fileID: 0}
+  _slotObject: {fileID: 1832966433400925932, guid: 333e4bbea43afeb4aaf27b145df04310,
+    type: 3}
