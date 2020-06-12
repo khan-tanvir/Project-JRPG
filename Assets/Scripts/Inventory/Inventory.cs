@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     #region Private Fields
 
     [SerializeField]
-    private int _numberOfSlots;
+    private int _numberOfSlots = 25;
 
     [SerializeField]
     private Transform _slotContainer;
@@ -47,10 +47,18 @@ public class Inventory : MonoBehaviour
         {
             LoadInventory();
         }
+
+        EventsManager.Instance.OnBeforeSceneChange += SaveInventory;
+        EventsManager.Instance.OnSceneChange += LoadInventory;
     }
 
     private void CreateInventorySlots()
     {
+        if (_slotContainer == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < _numberOfSlots; i++)
         {
             GameObject temp = Instantiate(_slotObject, _slotContainer);
@@ -58,14 +66,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    #endregion Private Methods
-
-    #region Public Methods
-
     private void ReOrderSlots()
     {
         Slots.OrderByDescending(i => i.InvItem);
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
 
     public bool FillSlot(GameObject objectToInstantiate, string questItem = "")
     {
@@ -73,7 +81,7 @@ public class Inventory : MonoBehaviour
         {
             if (Slots[i].InvItem == null)
             {
-                GameObject itemObject = Instantiate(objectToInstantiate, Slots[i].transform, false);
+                GameObject itemObject = Instantiate(objectToInstantiate, Slots[i].transform.GetChild(0), false);
 
                 itemObject.GetComponent<ItemMB>().Item = objectToInstantiate.GetComponent<ItemMB>().Item;
 
@@ -98,12 +106,10 @@ public class Inventory : MonoBehaviour
                     Slots[i].InitialPosition = default;
                 }
 
-                itemObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-
                 itemObject.GetComponent<IStoreable>().ImageComp.enabled = true;
                 itemObject.GetComponent<IStoreable>().SpriteRendererComp.enabled = false;
 
-                Slots[i].StoreItem(itemObject.GetComponent<ItemMB>().Item);
+                Slots[i].StoreItem(itemObject.GetComponent<ItemMB>().Item, itemObject.GetComponent<IDGenerator>().Instance);
 
                 SceneManagerScript.Instance.AddToSceneObjectList(itemObject.GetComponent<IDGenerator>().Instance);
 
@@ -161,20 +167,20 @@ public class Inventory : MonoBehaviour
             createdGameObject.gameObject.GetComponent<Image>().enabled = true;
             createdGameObject.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
-            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.ID));
+            Slots[item.Position].StoreItem(ItemDatabase.Instance.GetItemByID(item.ID), createdGameObject.gameObject.GetComponent<IDGenerator>().Instance);
         }
     }
 
     public void RemoveItem(string item)
     {
-        int index = Slots.FindIndex(slot => slot.ObjectID == "Quest Item: " + item);
+        int index = Slots.FindIndex(slot => slot.InvItem.Name == item);
 
         if (index == -1)
         {
             Debug.LogError("Item not found.");
             return;
         }
-
+        Destroy(Slots[0].transform.GetChild(0).GetChild(0).gameObject);
         Slots.RemoveAt(index);
     }
 

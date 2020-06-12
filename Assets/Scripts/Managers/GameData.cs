@@ -22,7 +22,7 @@ public class GameData : MonoBehaviour
 
     public float EffectVolume
     {
-        get { return PlayerPrefs.GetFloat("Effects Volume", 0.3f); }
+        get => PlayerPrefs.GetFloat("Effects Volume", 0.3f);
     }
 
     public int[] ExistingSaveFiles
@@ -33,12 +33,12 @@ public class GameData : MonoBehaviour
 
     public float MasterVolume
     {
-        get { return PlayerPrefs.GetFloat("Master Volume", 0.42f); }
+        get => PlayerPrefs.GetFloat("Master Volume", 0.42f);
     }
 
     public float MusicVolume
     {
-        get { return PlayerPrefs.GetFloat("Music Volume", 0.18f); }
+        get => PlayerPrefs.GetFloat("Music Volume", 0.18f);
     }
 
     public PlayerData PlayerData
@@ -157,10 +157,22 @@ public class GameData : MonoBehaviour
         // Load the variables
         PlayerData = data;
 
+        if (PlayerData.SceneObjectsList == null)
+        {
+            PlayerData.SceneObjectsList = new List<SceneObject>();
+        }
+
+        if (PlayerData.Cutscenes == null)
+        {
+            PlayerData.Cutscenes = new List<Cutscene>();
+        }
+
+        SceneManagerScript.Instance.SceneObjects = PlayerData.SceneObjectsList;
+
         //Track the save file
         CurrentSaveFile = pos;
 
-        SceneManagerScript.Instance.SceneToGoTo("Game");
+        FindObjectOfType<Canvas>().transform.Find("Warning Pop-Up").gameObject.SetActive(true);
     }
 
     public void SaveData()
@@ -171,8 +183,6 @@ public class GameData : MonoBehaviour
         FileStream fileStream = File.Create(Application.persistentDataPath + "/playerInfo" + CurrentSaveFile + ".dat");
 
         Debug.Log("SAVING " + PlayerData.PlayerName + " to File " + CurrentSaveFile);
-
-        PlayerData.SceneObjectsList = SceneManagerScript.Instance.SceneObjects;
 
         // Serialise the data
         binaryFormatter.Serialize(fileStream, PlayerData);
@@ -187,93 +197,4 @@ public class GameData : MonoBehaviour
     }
 
     #endregion Public Methods
-}
-
-[System.Serializable]
-public class InventoryItem
-{
-    #region Public Constructors
-
-    public InventoryItem(int itemID, int pos, string objectID)
-    {
-        ID = itemID;
-        Position = pos;
-        ObjectID = objectID;
-    }
-
-    #endregion Public Constructors
-
-    #region Public Properties
-
-    public int ID
-    {
-        get;
-        internal set;
-    }
-
-    public string ObjectID
-    {
-        get;
-        internal set;
-    }
-
-    public int Position
-    {
-        get;
-        internal set;
-    }
-
-    #endregion Public Properties
-}
-
-[System.Serializable]
-public class PlayerData
-{
-    #region Private Fields
-
-    private List<InventoryItem> _inventoryItems = null;
-
-    [SerializeField]
-    private float[] _position = { -6.96f, -2.52f };
-
-    [SerializeField]
-    private int _questProgress;
-
-    private List<SceneObject> _sceneObjects = null;
-
-    #endregion Private Fields
-
-    #region Public Properties
-
-    public List<InventoryItem> InventoryItems
-    {
-        get;
-        set;
-    }
-
-    public string PlayerName
-    {
-        get;
-        set;
-    }
-
-    public float[] PlayerPosition
-    {
-        get { return _position; }
-        set { _position = value; }
-    }
-
-    public int PlayerQuestProgress
-    {
-        get { return _questProgress; }
-        set { _questProgress = value; }
-    }
-
-    public List<SceneObject> SceneObjectsList
-    {
-        get { return _sceneObjects; }
-        set { _sceneObjects = value; }
-    }
-
-    #endregion Public Properties
 }

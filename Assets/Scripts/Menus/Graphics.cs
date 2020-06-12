@@ -1,48 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+﻿//using System.Collections.Generic;
+//using TMPro;
+//using UnityEngine;
 
+//public class Graphics : MonoBehaviour
+//{
+//    #region Private Fields
 
-public class Graphics : MonoBehaviour
-{
-    // Start is called before the first frame update
-    public TMP_Dropdown tMP_Dropdown;
-    Resolution[] resolutions;
+//    private Resolution[] resolutionsArray;
 
-    void Start()
-    {
-        resolutions = Screen.resolutions;
-        tMP_Dropdown.ClearOptions();
+//    #endregion Private Fields
 
-        List<string> Resolution = new List<string>();
-        int currentResolutionIndex = 0;
+//    #region Public Fields
 
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string Resolutions = resolutions[i].width + "X" + resolutions[i].height;
-            Resolution.Add(Resolutions);
+//    public TMP_Dropdown _Dropdown;
 
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
-        }
+//    #endregion Public Fields
 
-        tMP_Dropdown.AddOptions(Resolution);
-        tMP_Dropdown.value = currentResolutionIndex;
-        tMP_Dropdown.RefreshShownValue();
+//    #region Private Methods
 
-    }
+//    private void Start()
+//    {
+//        resolutionsArray = Screen.resolutions;
+//        _Dropdown.ClearOptions();
 
-    public void setResolution(int resolutionIndex)
-    {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
+//        List<string> Options = new List<string>();
+//        int CurrentResolutionIndex = 0;
 
-    public void setGraphics(int graphicIndex)
-    {
-        QualitySettings.SetQualityLevel(graphicIndex);
-    }
-}
+//        for (int i = 0; i < resolutionsArray.Length; i++)
+//        {
+//            string displayOption = resolutionsArray[i].width + "X" + resolutionsArray[i].height;
+//            Options.Add(displayOption);
+//            if (resolutionsArray[i].width == Screen.currentResolution.width && resolutionsArray[i].height == Screen.currentResolution.height)
+//            {
+//                CurrentResolutionIndex = i;
+//            }
+//        }
+
+//        _Dropdown.AddOptions(Options);
+//        _Dropdown.value = CurrentResolutionIndex;
+//        _Dropdown.RefreshShownValue();
+//    }
+
+//    #endregion Private Methods
+
+//    #region Public Methods
+
+//    public void SetResolution(int ResolutionIndex)
+//    {
+//        Resolution resolution = resolutionsArray[ResolutionIndex];
+//        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+//    }
+
+//    #endregion Public Methods
+//}

@@ -57,8 +57,9 @@ public class PauseMenu : MonoBehaviour
         Destroy(EventsManager.Instance.gameObject);
         Destroy(RespawnManager.Instance.gameObject);
         Destroy(DialogueManager.Instance.gameObject);
+        Destroy(CutSceneManager.Instance.gameObject);
 
-        SceneManagerScript.Instance.SceneToGoTo("Menu");
+        SceneManagerScript.Instance.SceneToGoTo("Menu 1");
     }
 
     public void Resume()
@@ -76,23 +77,17 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
-        // Before saving make sure you have loaded a file first
-
         // Store the position
         GameData.Instance.PlayerData.PlayerPosition[0] = RespawnManager.Instance.CurrentCheckpoint.x;
         GameData.Instance.PlayerData.PlayerPosition[1] = RespawnManager.Instance.CurrentCheckpoint.y;
 
         Inventory.Instance.SaveInventory();
 
-        foreach (IDGenerator idgen in Resources.FindObjectsOfTypeAll<IDGenerator>())
-        {
-            if (idgen == null || string.IsNullOrEmpty(idgen.ObjectID))
-            {
-                continue;
-            }
+        SceneManagerScript.Instance.SaveObjects();
 
-            idgen.Save();
-        }
+        GameData.Instance.PlayerData.SceneObjectsList = SceneManagerScript.Instance.SceneObjects;
+
+        GameData.Instance.PlayerData.Cutscenes = CutSceneManager.Instance.Cutscenes;
 
         GameData.Instance.SaveData();
 

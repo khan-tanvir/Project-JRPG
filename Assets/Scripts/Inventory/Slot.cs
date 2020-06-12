@@ -72,17 +72,31 @@ public class Slot : MonoBehaviour
         }
     }
 
-    public void StoreItem(Item item)
+    public void StoreItem(Item item, IDGenerator ID)
     {
         InvItem = item;
 
-        foreach (Transform child in transform)
+        transform.GetChild(0).GetComponent<RectTransform>().sizeDelta.Set(1.6875f, 1.6875f);
+
+        foreach (Transform child in transform.GetChild(0).transform)
         {
             if (child.name != "Cross")
             {
                 child.name = InvItem.Name;
-                child.GetComponent<IDGenerator>().ObjectID = ObjectID;
-                child.GetComponent<IDGenerator>().InInventory = true;
+
+                child.GetComponent<RectTransform>().sizeDelta = new Vector2(1.0f, 1.0f);
+                child.GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, -1.0f);
+
+                if (child.GetComponent<IDGenerator>() == null)
+                {
+                    child.gameObject.AddComponent<IDGenerator>();
+                    child.GetComponent<IDGenerator>().Instance = ID.Instance;
+                }
+
+                child.GetComponent<IDGenerator>().Instance.ObjectID = ObjectID;
+                child.GetComponent<IDGenerator>().Instance.InInventory = true;
+
+                child.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0.0f, 0.0f, -1.0f);
             }
         }
     }

@@ -6,7 +6,7 @@ public class RespawnPoint : MonoBehaviour
 
     public CheckPoint CheckPoint
     {
-        get { return _checkPoint; }
+        get => _checkPoint;
     }
 
     #endregion Public Properties

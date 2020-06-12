@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4835841647475791443}
   - component: {fileID: 4835841647475791446}
   - component: {fileID: 4701488621489036522}
+  - component: {fileID: 1838949421002881716}
   m_Layer: 0
   m_Name: Mike
   m_TagString: Player
@@ -146,3 +147,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   radius: 1
+--- !u!114 &1838949421002881716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835841647475791447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a056d88e1c02b3d4882fceb26edc59c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inInventory: 0
+  _isDestroyed: 0
+  _objectID: 

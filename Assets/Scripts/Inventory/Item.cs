@@ -42,8 +42,8 @@ public class Item
 
     public ItemMB ItemMB
     {
-        get { return _itemMB; }
-        set { _itemMB = value; }
+        get => _itemMB;
+        set => _itemMB = value;
     }
 
     public string Name

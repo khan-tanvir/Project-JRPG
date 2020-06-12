@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1073044346538518896}
   - component: {fileID: 1073044346538518899}
   - component: {fileID: 1073044346538518857}
-  - component: {fileID: 920826159403099125}
   - component: {fileID: 1726467877402561030}
-  m_Layer: 0
+  - component: {fileID: 3382391956819623269}
+  - component: {fileID: -4151607821173170168}
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -111,22 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87948227, y: 0.25373673}
   m_EdgeRadius: 0
---- !u!114 &920826159403099125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073044346538518856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f2d81d09ed01a4495bcedb68fbbab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  radius: 1
 --- !u!95 &1726467877402561030
 Animator:
   serializedVersion: 3
@@ -146,3 +131,49 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &3382391956819623269
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073044346538518856}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &-4151607821173170168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073044346538518856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0c9b63ff469e24ca7f9c13a5060d79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableInteraction: 0
+  _movementSpeed: 0
+  _npcName: Shadow
+  _state: 2
+  _target: {fileID: 0}
+  _interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
+  defaultMat: {fileID: 0}
+  maxX: 0
+  maxY: 0
+  minX: 0
+  minY: 0
+  moveSpot: {fileID: 0}
+  startWaitTime: 0

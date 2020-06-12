@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestGiver : MonoBehaviour, IInteractable
+public class QuestGiver : MonoBehaviour
 {
     #region Private Fields
 
     [SerializeField]
-    private Material _defaultMat;
-
-    // Create a separate script for this
-    [SerializeField]
-    private Material _interactionMat;
+    private string _giverName;
 
     [SerializeField]
     private GameObject _questGiverPanel;
@@ -39,8 +35,8 @@ public class QuestGiver : MonoBehaviour, IInteractable
 
     public string NPCName
     {
-        get;
-        set;
+        get => _giverName;
+        set => _giverName = value;
     }
 
     public List<Quest> Quests
@@ -58,9 +54,10 @@ public class QuestGiver : MonoBehaviour, IInteractable
         Quests = new List<Quest>();
         EnabledInteraction = true;
 
-        // TODO: Prefab npcs for name
-        // Debug
-        NPCName = "NPC_NAME";
+        if (string.IsNullOrEmpty(_giverName))
+        {
+            _giverName = GetComponent<AIController>().NPCName;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -86,21 +83,10 @@ public class QuestGiver : MonoBehaviour, IInteractable
         Quests.Add(quest);
     }
 
-    public void Focus()
-    {
-        gameObject.GetComponent<Renderer>().material = _interactionMat;
-    }
-
-    public void OnInteract()
+    public void OpenPanel()
     {
         _questGiverPanel.SetActive(true);
         QuestGiverPanel.Instance.ShowQuests(this);
-    }
-
-    public void UnFocus()
-    {
-        if (EnabledInteraction)
-            gameObject.GetComponent<Renderer>().material = _defaultMat;
     }
 
     #endregion Public Methods

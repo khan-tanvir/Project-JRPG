@@ -4,7 +4,7 @@
       "ID": 0,
       "Title": "Gather Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver1",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -21,7 +21,7 @@
       "ID": 0,
       "Title": "Activate Test",
       "Description": "DESCRIPTION",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver1",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -36,7 +36,7 @@
       "ID": 0,
       "Title": "Escort Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver2",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -52,7 +52,7 @@
       "ID": 0,
       "Title": "Search Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver2",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -67,7 +67,7 @@
       "ID": 0,
       "Title": "Deliver Test",
       "Description": "Test Saving",
-      "Giver": "NPC_NAME",
+      "Giver": "Giver1",
       "Status": 0,
       "ObjectivesEntry": [
         {
@@ -76,6 +76,38 @@
           "Description": "Take [Arrow] to [Cave]",
           "FirstEntry": "Arrow",
           "SecondEntry": "Cave"
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Find my Baby",
+      "Giver": "Kosodate",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "GATHER",
+          "Description": "Gather [Baby]  0/1",
+          "FirstEntry": "Baby",
+          "SecondEntry": "1",
+          "ThirdEntry": "0"
+        }
+      ]
+    },
+    {
+      "ID": 0,
+      "Title": "Helping Hand",
+      "Giver": "Jorogumo",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "GATHER",
+          "Description": "Gather [Hand]  0/1",
+          "FirstEntry": "Hand",
+          "SecondEntry": "1",
+          "ThirdEntry": "0"
         }
       ]
     }

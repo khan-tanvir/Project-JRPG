@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     #region Private Fields
 
     [SerializeField]
+    private GameObject _canvas;
+
+    [SerializeField]
     private GameObject _cycleMenu;
 
     [SerializeField]
@@ -53,8 +56,8 @@ public class Player : MonoBehaviour
 
     public float MovementSpeed
     {
-        get { return _movementSpeed; }
-        set { _movementSpeed = value; }
+        get => _movementSpeed;
+        set => _movementSpeed = value;
     }
 
     public PlayerInputActions PlayerInput
@@ -115,23 +118,25 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void KillPlayer()
-    {
-        Time.timeScale = 0.0f;
-        _deathMenu.SetActive(true);
-        PlayerInput.Disable();
-    }
-
     private void LoadComponents()
     {
         RigidBody = gameObject.GetComponent<Rigidbody2D>();
         Animator = gameObject.GetComponentInChildren<Animator>();
         _playerInteraction = gameObject.GetComponent<PlayerInteraction>();
+
+        _cycleMenu = _canvas.transform.Find("Cycle Menu").gameObject;
+        _deathMenu = _canvas.transform.Find("Death Menu").gameObject;
+        _inventory = _canvas.transform.Find("Inventory").gameObject;
+        _journal = _canvas.transform.Find("Journal").gameObject;
     }
 
     private void LoadPlayerPosition()
     {
-        transform.position = RespawnManager.Instance.CurrentCheckpoint;
+        if (RespawnManager.Instance != null)
+        {
+            RespawnManager.Instance.GetCheckPoints();
+            transform.position = RespawnManager.Instance.CurrentCheckpoint;
+        }
     }
 
     private void OnDisable()
@@ -201,6 +206,13 @@ public class Player : MonoBehaviour
         Animator.SetFloat("Horizontal", FacingDirection.x);
         Animator.SetFloat("Vertical", FacingDirection.y);
         Animator.SetFloat("Speed", Direction.sqrMagnitude);
+    }
+
+    public void KillPlayer()
+    {
+        Time.timeScale = 0.0f;
+        _deathMenu.SetActive(true);
+        PlayerInput.Disable();
     }
 
     public void SwitchInput()

@@ -33,7 +33,7 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
 
     public Image ImageComp
     {
-        get { return gameObject.GetComponent<Image>(); }
+        get => gameObject.GetComponent<Image>();
     }
 
     public abstract bool InfiniteUses
@@ -50,21 +50,12 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
 
     public SpriteRenderer SpriteRendererComp
     {
-        get { return gameObject.GetComponent<SpriteRenderer>(); }
+        get => gameObject.GetComponent<SpriteRenderer>();
     }
 
     #endregion Public Properties
 
     #region Public Methods
-
-    public virtual void Awake()
-    {
-        Item = new Item(ItemDatabase.Instance.GetItemByID(_itemID));
-        Item.ItemMB = this;
-
-        defaultMat = gameObject.GetComponent<Renderer>().material;
-        _canInteract = true;
-    }
 
     public void CallItemChangeEvent()
     {
@@ -96,6 +87,17 @@ public abstract class ItemMB : MonoBehaviour, IInteractable
         {
             EventsManager.Instance.InteractionWithItem(Item.Name);
         }
+    }
+
+    public virtual void Start()
+    {
+        Item = new Item(ItemDatabase.Instance.GetItemByID(_itemID))
+        {
+            ItemMB = this
+        };
+
+        defaultMat = gameObject.GetComponent<Renderer>().material;
+        _canInteract = true;
     }
 
     public virtual void UnFocus()

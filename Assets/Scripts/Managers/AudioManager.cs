@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] Sounds
     {
-        get { return _sounds; }
+        get => _sounds;
     }
 
     #endregion Public Properties

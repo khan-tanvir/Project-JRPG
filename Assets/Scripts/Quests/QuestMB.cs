@@ -14,7 +14,7 @@ public class QuestMB : MonoBehaviour
 
     public TMP_Text TextComp
     {
-        get { return GetComponent<TMP_Text>(); }
+        get => GetComponent<TMP_Text>();
     }
 
     #endregion Public Properties

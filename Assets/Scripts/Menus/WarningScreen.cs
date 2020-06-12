@@ -14,7 +14,7 @@ public class WarningScreen : MonoBehaviour
 
     public Animator Animator
     {
-        get { return GetComponent<Animator>(); }
+        get => GetComponent<Animator>();
     }
 
     public string Scene
@@ -35,7 +35,14 @@ public class WarningScreen : MonoBehaviour
         }
         else
         {
-            SceneManagerScript.Instance.SceneToGoTo("Game");
+            if (GameData.Instance.PlayerData.Cutscenes.Count != 0)
+            {
+                SceneManagerScript.Instance.SceneToGoTo("Train");
+            }
+            else
+            {
+                SceneManagerScript.Instance.SceneToGoTo("Station Entrance");
+            }
         }
     }
 
