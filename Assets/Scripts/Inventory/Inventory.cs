@@ -47,6 +47,9 @@ public class Inventory : MonoBehaviour
         {
             LoadInventory();
         }
+
+        EventsManager.Instance.OnBeforeSceneChange += SaveInventory;
+        EventsManager.Instance.OnSceneChange += LoadInventory;
     }
 
     private void CreateInventorySlots()
@@ -177,7 +180,7 @@ public class Inventory : MonoBehaviour
             Debug.LogError("Item not found.");
             return;
         }
-
+        Destroy(Slots[0].transform.GetChild(0).GetChild(0).gameObject);
         Slots.RemoveAt(index);
     }
 

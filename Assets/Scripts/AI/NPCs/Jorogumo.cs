@@ -13,6 +13,21 @@ public class Jorogumo : AIController
 
     public override void OnInteract()
     {
+        if (EnabledInteraction)
+        {
+            if (GetComponent<QuestGiver>().Quests.Count != 0 && QuestManager.Instance.Quests.Find(a => a.Title == "Find my Baby").Status == QuestStatus.COMPLETE)
+            {
+                GetComponent<QuestGiver>().OpenPanel();
+            }
+
+            if (QuestManager.Instance.Quests.Find(a => a.Title == "Helping Hand").Status == QuestStatus.COMPLETE)
+            {
+                Inventory.Instance.RemoveItem("Hand");
+
+                //FindObjectOfType<Hand>().AddItemToInventory();
+            }
+        }
+
         base.OnInteract();
     }
 

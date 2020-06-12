@@ -21,6 +21,7 @@ public class TrainLimbo : MonoBehaviour
 
     private void Start()
     {
+        CutSceneManager.Instance.GetCutscenes();
         if (!CutSceneManager.Instance.GetCutsceneByName("TrainCutscene").HasPlayed)
         {
             CutSceneManager.Instance.PlayCutScene("TrainCutscene");

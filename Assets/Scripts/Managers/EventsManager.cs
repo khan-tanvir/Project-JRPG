@@ -5,6 +5,8 @@ public class EventsManager : MonoBehaviour
 {
     #region Public Events
 
+    public event Action OnBeforeSceneChange;
+
     public event Action<int> OnCheckPointCall;
 
     public event Action<string> OnCutsceneFinish;
@@ -59,6 +61,11 @@ public class EventsManager : MonoBehaviour
     #endregion Private Methods
 
     #region Public Methods
+
+    public void BeforeSceneChange()
+    {
+        OnBeforeSceneChange?.Invoke();
+    }
 
     public void CheckPointCall(int point)
     {

@@ -94,6 +94,22 @@
           "ThirdEntry": "0"
         }
       ]
+    },
+    {
+      "ID": 0,
+      "Title": "Helping Hand",
+      "Giver": "Jorogumo",
+      "Status": 0,
+      "ObjectivesEntry": [
+        {
+          "Complete": false,
+          "Type": "GATHER",
+          "Description": "Gather [Hand]  0/1",
+          "FirstEntry": "Hand",
+          "SecondEntry": "1",
+          "ThirdEntry": "0"
+        }
+      ]
     }
   ]
 }

@@ -28,6 +28,7 @@ public class Kosodate : AIController
                 FindObjectOfType<Hand>().AddItemToInventory();
             }
         }
+
         base.OnInteract();
     }
 
