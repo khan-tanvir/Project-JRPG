@@ -9,11 +9,14 @@ public enum State
     IDLE
 }
 
-public class AIController : MonoBehaviour
+public class AIController : MonoBehaviour, IInteractable
 {
     #region Private Fields
 
     private Animator _animator;
+
+    [SerializeField]
+    private bool _enableInteraction;
 
     private bool _moveAI;
 
@@ -37,7 +40,19 @@ public class AIController : MonoBehaviour
 
     #endregion Private Fields
 
+    #region Protected Fields
+
+    protected bool _canInteract;
+
+    [SerializeField]
+    protected Material _interactionMat;
+
+    #endregion Protected Fields
+
     #region Public Fields
+
+    [HideInInspector]
+    public Material defaultMat;
 
     [Header("Area of movement")]
     public float maxX;
@@ -57,10 +72,21 @@ public class AIController : MonoBehaviour
 
     #region Public Properties
 
+    public bool EnabledInteraction
+    {
+        get => _enableInteraction;
+        set => _enableInteraction = value;
+    }
+
     public EscortObjective EscortObjective
     {
         get;
         set;
+    }
+
+    public bool InfiniteUses
+    {
+        get => true;
     }
 
     public string NPCName
@@ -180,13 +206,9 @@ public class AIController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _rigidBody = GetComponent<Rigidbody2D>();
-    }
 
-    private void Start()
-    {
-        waitTime = startWaitTime;
-
-        SetupComponents();
+        defaultMat = gameObject.GetComponent<Renderer>().material;
+        _canInteract = true;
     }
 
     private void Update()
@@ -215,9 +237,43 @@ public class AIController : MonoBehaviour
 
     #region Public Methods
 
+    public virtual void Focus()
+    {
+        if (!_canInteract)
+        {
+            return;
+        }
+
+        if (EnabledInteraction)
+        {
+            gameObject.GetComponent<Renderer>().material = _interactionMat;
+        }
+    }
+
+    public virtual void OnInteract()
+    {
+        if (!_canInteract)
+        {
+            return;
+        }
+
+        if (EnabledInteraction)
+        {
+            EventsManager.Instance.InteractionWithItem(_npcName);
+            Debug.Log("Something happened");
+        }
+    }
+
     public void ResetSpeed()
     {
         _animator.SetFloat("Speed", 0.0f);
+    }
+
+    public virtual void Start()
+    {
+        waitTime = startWaitTime;
+
+        SetupComponents();
     }
 
     public void ToggleFollower()
@@ -231,6 +287,19 @@ public class AIController : MonoBehaviour
         {
             _state = State.IDLE;
             EscortObjective.IsFollowing = false;
+        }
+    }
+
+    public virtual void UnFocus()
+    {
+        if (!_canInteract)
+        {
+            return;
+        }
+
+        if (EnabledInteraction)
+        {
+            gameObject.GetComponent<Renderer>().material = defaultMat;
         }
     }
 

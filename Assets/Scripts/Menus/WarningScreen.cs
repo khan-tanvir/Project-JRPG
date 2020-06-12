@@ -35,7 +35,14 @@ public class WarningScreen : MonoBehaviour
         }
         else
         {
-            SceneManagerScript.Instance.SceneToGoTo("Station Entrance");
+            if ((GameData.Instance.PlayerData.Cutscenes[0].CSname == "TrainCutscene") && GameData.Instance.PlayerData.Cutscenes[0].HasPlayed)
+            {
+                SceneManagerScript.Instance.SceneToGoTo("Train");
+            }
+            else
+            {
+                SceneManagerScript.Instance.SceneToGoTo("Station Entrance");
+            }
         }
     }
 

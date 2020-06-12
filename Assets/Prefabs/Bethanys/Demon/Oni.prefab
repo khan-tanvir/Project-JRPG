@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 831565477035499494}
   - component: {fileID: 831565477035499493}
   - component: {fileID: 831565477035499487}
-  - component: {fileID: 696095056265565539}
   - component: {fileID: 2210698850228454581}
-  m_Layer: 0
+  - component: {fileID: 3391849202887377264}
+  - component: {fileID: 384603560061933573}
+  m_Layer: 8
   m_Name: Oni
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -111,22 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87948227, y: 0.25373673}
   m_EdgeRadius: 0
---- !u!114 &696095056265565539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831565477035499486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f2d81d09ed01a4495bcedb68fbbab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  radius: 1
 --- !u!95 &2210698850228454581
 Animator:
   serializedVersion: 3
@@ -146,3 +131,49 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &3391849202887377264
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831565477035499486}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &384603560061933573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831565477035499486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe6d95fbc139684b8c1881472831834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableInteraction: 1
+  _movementSpeed: 0
+  _npcName: Oni
+  _state: 2
+  _target: {fileID: 0}
+  _interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
+  defaultMat: {fileID: 0}
+  maxX: 0
+  maxY: 0
+  minX: 0
+  minY: 0
+  moveSpot: {fileID: 0}
+  startWaitTime: 0

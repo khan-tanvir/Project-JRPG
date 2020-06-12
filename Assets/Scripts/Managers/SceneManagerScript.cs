@@ -53,7 +53,10 @@ public class SceneManagerScript : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoad;
 
-        EventsManager.Instance.OnSceneChange -= ExamineScene;
+        if (EventsManager.Instance != null)
+        {
+            EventsManager.Instance.OnSceneChange -= ExamineScene;
+        }
     }
 
     private void OnEnable()

@@ -7,6 +7,8 @@ public class EventsManager : MonoBehaviour
 
     public event Action<int> OnCheckPointCall;
 
+    public event Action<string> OnCutsceneFinish;
+
     public event Action<string> OnGatherObjectiveChange;
 
     public event Action<string> OnInteractionWithItem;
@@ -61,6 +63,11 @@ public class EventsManager : MonoBehaviour
     public void CheckPointCall(int point)
     {
         OnCheckPointCall?.Invoke(point);
+    }
+
+    public void CutsceneFinish(string cutscene)
+    {
+        OnCutsceneFinish?.Invoke(cutscene);
     }
 
     public void GatherObjectiveChange(string item)

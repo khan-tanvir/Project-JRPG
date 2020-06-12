@@ -5,6 +5,29 @@ using UnityEngine.Playables;
 
 public class CutSceneManager : MonoBehaviour
 {
+    #region Private Fields
+
+    [HideInInspector]
+    private List<Cutscene> _cutscenes;
+
+    #endregion Private Fields
+
+    #region Public Properties
+
+    public static CutSceneManager Instance
+    {
+        get;
+        internal set;
+    }
+
+    public List<Cutscene> Cutscenes
+    {
+        get => _cutscenes;
+        set => _cutscenes = value;
+    }
+
+    #endregion Public Properties
+
     #region Private Methods
 
     private void Awake()
@@ -14,6 +37,25 @@ public class CutSceneManager : MonoBehaviour
         if (Cutscenes == null)
         {
             Cutscenes = new List<Cutscene>();
+        }
+    }
+
+    private void CompareToList(List<Cutscene> cutscenes)
+    {
+        if (cutscenes == null)
+        {
+            Debug.Log("cutscenes list is null");
+            return;
+        }
+
+        foreach (Cutscene cutscene in cutscenes)
+        {
+            int index = Cutscenes.FindIndex(a => a.CSname == cutscene.CSname);
+
+            if (index != -1)
+            {
+                Cutscenes[index].HasPlayed = cutscene.HasPlayed;
+            }
         }
     }
 
@@ -42,37 +84,11 @@ public class CutSceneManager : MonoBehaviour
 
     #endregion Private Methods
 
-    #region Public Properties
-
-    public static CutSceneManager Instance
-    {
-        get;
-        internal set;
-    }
-
-    public List<Cutscene> Cutscenes
-    {
-        get;
-        set;
-    }
-
-    #endregion Public Properties
-
     #region Public Methods
 
-    private void CompareToList(List<Cutscene> cutscenes)
+    public Cutscene GetCutsceneByName(string name)
     {
-        foreach (Cutscene cutscene in cutscenes)
-        {
-            Debug.Log(cutscene.CSname);
-
-            int index = Cutscenes.FindIndex(a => a.CSname == cutscene.CSname);
-
-            if (index != -1)
-            {
-                Cutscenes[index].HasPlayed = cutscene.HasPlayed;
-            }
-        }
+        return Cutscenes.Find(a => a.CSname == name);
     }
 
     // This function will be called on scene load
@@ -101,7 +117,11 @@ public class CutSceneManager : MonoBehaviour
             if (!Cutscenes[index].HasPlayed)
             {
                 Cutscenes[index].CutsceneMB.PlayCS();
-                Cutscenes[index].HasPlayed = true;
+
+                if (!Cutscenes[index].InfiniteUses)
+                {
+                    Cutscenes[index].HasPlayed = true;
+                }
             }
         }
     }

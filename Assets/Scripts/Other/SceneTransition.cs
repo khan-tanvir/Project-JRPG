@@ -20,7 +20,10 @@ public class SceneTransition : MonoBehaviour
     {
         SceneManagerScript.Instance.SceneToGoTo(_scene);
 
-        EventsManager.Instance.CheckPointCall(_checkPointID);
+        if (EventsManager.Instance != null)
+        {
+            EventsManager.Instance.CheckPointCall(_checkPointID);
+        }
     }
 
     #endregion Private Methods
