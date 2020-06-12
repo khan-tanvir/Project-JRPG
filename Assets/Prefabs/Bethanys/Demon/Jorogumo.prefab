@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1879469510489265220}
   - component: {fileID: 1817396545042625358}
   - component: {fileID: 3146668992916597461}
+  - component: {fileID: 6943441174506756018}
   m_Layer: 8
   m_Name: Jorogumo
   m_TagString: Player
@@ -151,7 +152,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 7
 --- !u!114 &3146668992916597461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,3 +178,18 @@ MonoBehaviour:
   minY: 0
   moveSpot: {fileID: 0}
   startWaitTime: 0
+--- !u!114 &6943441174506756018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4763807338818652086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c44677ac86de144913c305f60016bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _giverName: 
+  _questGiverPanel: {fileID: 0}
+  _questPrefab: {fileID: 0}

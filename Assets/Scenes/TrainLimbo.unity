@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6673,6 +6673,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57e13b641c6196247b00a9785582e43e, type: 3}
+--- !u!1 &727260793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9024649324186924886, guid: 52571c9bf4d853144bd7f69e50d8f964,
+    type: 3}
+  m_PrefabInstance: {fileID: 929701703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &751251325
 GameObject:
   m_ObjectHideFlags: 0
@@ -8474,11 +8480,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1817396545042625358, guid: edc911d4f2893244da8fb051305861b2,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4763807338818652046, guid: edc911d4f2893244da8fb051305861b2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8539,6 +8540,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jorogumo
       objectReference: {fileID: 0}
+    - target: {fileID: 6943441174506756018, guid: edc911d4f2893244da8fb051305861b2,
+        type: 3}
+      propertyPath: _questGiverPanel
+      value: 
+      objectReference: {fileID: 727260793}
+    - target: {fileID: 6943441174506756018, guid: edc911d4f2893244da8fb051305861b2,
+        type: 3}
+      propertyPath: _questPrefab
+      value: 
+      objectReference: {fileID: 2431174242114528358, guid: 591658479f3d7cb4299ad750672cc90a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edc911d4f2893244da8fb051305861b2, type: 3}
 --- !u!1001 &8727311126536094904

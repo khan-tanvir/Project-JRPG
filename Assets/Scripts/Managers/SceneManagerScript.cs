@@ -86,6 +86,7 @@ public class SceneManagerScript : MonoBehaviour
                 SceneObjects[index].IsDestroyed = idgen.IsDestroyed;
                 SceneObjects[index].InInventory = idgen.InInventory;
                 SceneObjects[index].Position = idgen.Position;
+                SceneObjects[index].IDGenComp = idgen;
             }
             else
             {
@@ -96,6 +97,7 @@ public class SceneManagerScript : MonoBehaviour
                 sceneObject.IsDestroyed = idgen.IsDestroyed;
                 sceneObject.InInventory = idgen.InInventory;
                 sceneObject.Position = idgen.Position;
+                sceneObject.IDGenComp = idgen;
 
                 SceneObjects.Add(sceneObject);
             }
@@ -167,9 +169,19 @@ public class SceneManagerScript : MonoBehaviour
         }
     }
 
+    public IDGenerator GetByID(string id)
+    {
+        return SceneObjects.Find(a => a.ID == id).IDGenComp;
+    }
+
     public void SceneToGoTo(string sceneName)
     {
         SaveObjects();
+
+        if (EventsManager.Instance != null)
+        {
+            EventsManager.Instance.BeforeSceneChange();
+        }
 
         SceneManager.LoadScene(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/" + sceneName + ".unity"));
 
@@ -225,7 +237,12 @@ public class SceneObject
 
     #endregion Private Properties
 
+    [System.NonSerialized]
+    public IDGenerator IDGenComp;
+
     #region Public Properties
+
+
 
     public string ID
     {

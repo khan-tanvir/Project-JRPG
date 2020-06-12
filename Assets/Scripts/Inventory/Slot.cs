@@ -87,7 +87,7 @@ public class Slot : MonoBehaviour
                 child.GetComponent<RectTransform>().sizeDelta = new Vector2(1.0f, 1.0f);
                 child.GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, -1.0f);
 
-                if (child.GetComponent<IDGenerator>() == null)
+                if (child.GetComponent<IDGenerator>().Instance == null)
                 {
                     child.gameObject.AddComponent<IDGenerator>();
                     child.GetComponent<IDGenerator>().Instance = ID.Instance;
@@ -96,6 +96,7 @@ public class Slot : MonoBehaviour
                 child.GetComponent<IDGenerator>().Instance.ObjectID = ObjectID;
                 child.GetComponent<IDGenerator>().Instance.InInventory = true;
 
+                child.GetComponent<RectTransform>().localPosition = new Vector3(0.0f, 0.0f, -1.0f);
                 child.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0.0f, 0.0f, -1.0f);
             }
         }

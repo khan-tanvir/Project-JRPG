@@ -49,7 +49,6 @@ public class Inventory : MonoBehaviour
         }
 
         EventsManager.Instance.OnBeforeSceneChange += SaveInventory;
-        EventsManager.Instance.OnSceneChange += LoadInventory;
     }
 
     private void CreateInventorySlots()
@@ -153,7 +152,7 @@ public class Inventory : MonoBehaviour
                 return;
             }
 
-            GameObject createdGameObject = Instantiate(loadedObject, Slots[item.Position].transform, false) as GameObject;
+            GameObject createdGameObject = Instantiate(loadedObject, Slots[item.Position].transform.GetChild(0), false) as GameObject;
 
             if (createdGameObject.GetComponent<ItemMB>().Item == null)
             {
@@ -162,6 +161,7 @@ public class Inventory : MonoBehaviour
 
             Slots[item.Position].ObjectID = item.ObjectID;
 
+            createdGameObject.transform.localPosition = new Vector2(0.0f, 0.0f);
             createdGameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             createdGameObject.gameObject.GetComponent<Image>().enabled = true;
@@ -180,6 +180,15 @@ public class Inventory : MonoBehaviour
             Debug.LogError("Item not found.");
             return;
         }
+
+        Debug.Log(SceneManagerScript.Instance.GetByID(Slots[index].ObjectID));
+
+        IDGenerator idgen = SceneManagerScript.Instance.GetByID(Slots[index].ObjectID);
+
+        idgen.IsDestroyed = true;
+
+        SceneManagerScript.Instance.AddToSceneObjectList(idgen);
+
         Destroy(Slots[0].transform.GetChild(0).GetChild(0).gameObject);
         Slots.RemoveAt(index);
     }
