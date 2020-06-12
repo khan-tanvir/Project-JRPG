@@ -260,7 +260,7 @@ public class AIController : MonoBehaviour, IInteractable
         if (EnabledInteraction)
         {
             EventsManager.Instance.InteractionWithItem(_npcName);
-            Debug.Log("Something happened");
+            GetComponent<QuestGiver>().OpenPanel();
         }
     }
 

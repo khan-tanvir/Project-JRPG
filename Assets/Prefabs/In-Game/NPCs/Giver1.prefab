@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3501765142421405547}
   - component: {fileID: 3501765142421405544}
   - component: {fileID: 3501765142421405541}
+  - component: {fileID: 3501765143821091791}
   m_Layer: 8
   m_Name: Giver1
   m_TagString: Untagged
@@ -51,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,9 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c44677ac86de144913c305f60016bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   _giverName: Giver1
-  _interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
   _questGiverPanel: {fileID: 0}
   _questPrefab: {fileID: 2431174242114528358, guid: 591658479f3d7cb4299ad750672cc90a,
     type: 3}
@@ -127,3 +126,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.875, y: 2}
   m_EdgeRadius: 0.51
+--- !u!114 &3501765143821091791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3501765142421405545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e0271bdb5347bd44a05578cec23f973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableInteraction: 1
+  _movementSpeed: 0
+  _npcName: Giver1
+  _state: 2
+  _target: {fileID: 0}
+  _interactionMat: {fileID: 2100000, guid: 25740540d8055ca44ac78f066e541e31, type: 2}
+  defaultMat: {fileID: 0}
+  maxX: 0
+  maxY: 0
+  minX: 0
+  minY: 0
+  moveSpot: {fileID: 0}
+  startWaitTime: 0

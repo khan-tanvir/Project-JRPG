@@ -395,7 +395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &330937640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,10 +460,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0271bdb5347bd44a05578cec23f973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableInteraction: 0
   _movementSpeed: 4.8
   _npcName: Test
   _state: 2
   _target: {fileID: 0}
+  _interactionMat: {fileID: 0}
+  defaultMat: {fileID: 0}
   maxX: 0
   maxY: 0
   minX: 0
@@ -488,7 +491,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1858,6 +1861,11 @@ PrefabInstance:
       objectReference: {fileID: 1488372686}
     - target: {fileID: 1797515301977936077, guid: e138cb2d7f880d740a7433b8dd8e7c55,
         type: 3}
+      propertyPath: _canvas
+      value: 
+      objectReference: {fileID: 9024649323571648830}
+    - target: {fileID: 1797515301977936077, guid: e138cb2d7f880d740a7433b8dd8e7c55,
+        type: 3}
       propertyPath: _cycleMenu
       value: 
       objectReference: {fileID: 403496420}
@@ -1936,11 +1944,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6240451137078560839, guid: e138cb2d7f880d740a7433b8dd8e7c55,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e138cb2d7f880d740a7433b8dd8e7c55, type: 3}
 --- !u!114 &1838211888 stripped
@@ -8260,11 +8263,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3501765142421405547, guid: c8ad5584d540eb240bdc3852d1b64719,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8ad5584d540eb240bdc3852d1b64719, type: 3}
 --- !u!1001 &3536795999165737720
@@ -8774,3 +8772,9 @@ MonoBehaviour:
   option1: {fileID: 9024649323571648828}
   option2: {fileID: 9024649323571648827}
   player: {fileID: 1838211888}
+--- !u!1 &9024649323571648830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9024649322571340586, guid: 52571c9bf4d853144bd7f69e50d8f964,
+    type: 3}
+  m_PrefabInstance: {fileID: 9024649323571648825}
+  m_PrefabAsset: {fileID: 0}

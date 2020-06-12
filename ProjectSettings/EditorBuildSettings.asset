@@ -38,4 +38,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DriverCarriage.unity
     guid: 354574504b7d20141a9eb092eccdc113
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 8d6e1f924807fbd4081d08e500cbb99b
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 63f0b75f0f3b21a40bca23a575e1678a
+  - enabled: 1
+    path: Assets/Scenes/Second.unity
+    guid: 2852b02f61dccbb4280b1f17ffb1120c
   m_configObjects: {}

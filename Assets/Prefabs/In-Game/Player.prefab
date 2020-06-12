@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _numberOfSlots: 25
   _slotContainer: {fileID: 0}
-  _slotObject: {fileID: 3140715029867624738, guid: 333e4bbea43afeb4aaf27b145df04310,
+  _slotObject: {fileID: 1832966433400925932, guid: 333e4bbea43afeb4aaf27b145df04310,
     type: 3}
 --- !u!114 &1797515301977936077
 MonoBehaviour:
@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f93b7ff97bd6440bfdbe6b5ddeede4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 0}
   _cycleMenu: {fileID: 0}
   _deathMenu: {fileID: 0}
   _inventory: {fileID: 0}
@@ -194,7 +195,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
